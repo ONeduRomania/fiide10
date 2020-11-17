@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Invite;
 use App\Teacher;
 use App\Request;
+use App\Student;
 use Carbon\Carbon;
 
 class InviteController extends Controller
@@ -14,8 +15,9 @@ class InviteController extends Controller
         // @todo: In momentul in care cineva este student la o clasa sau este profesor la acceeasi scoala sa nu se puna.
         $invite = Invite::where(['code' => $code])->firstOrFail();
         $teacher = Teacher::where(['user_id' => $request->user()->id, 'school_id' => $invite->school_id])->first();
+        $student = Student::where('user_id', $request->user()->id)->first();
 
-        if ($teacher) 
+        if ($teacher || $student)
             return redirect()->route('home');
 
         try {

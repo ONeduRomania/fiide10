@@ -22,6 +22,18 @@ clipboard.on('success', function(e) {
     e.clearSelection();
 });
 
+// Datetime picker script
+require('gemini-datepicker');
+$('#date').datepicker({
+    type: 'date',
+    placeholder: 'Please enter the date',
+    align: 'center'
+});
+$('#date_absence').datepicker({
+    type: 'date',
+    placeholder: 'Please enter the date',
+    align: 'center'
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

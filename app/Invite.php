@@ -10,6 +10,6 @@ class Invite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
+        'code', 'school_id', 'action', 'class_id'
     ];
 }

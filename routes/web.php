@@ -32,7 +32,7 @@ Auth::routes(['verify' => true]);
 Route::middleware(['verified', 'auth'])->group(function () {
     Route::get('/home', 'HomeController@index')
         ->name('home');
-    
+
     Route::get('/invite/{code}', 'InviteController@invite')->name('invite.link');
 
     Route::namespace('Admin')->prefix('/admin')->group(function () {
@@ -56,8 +56,14 @@ Route::middleware(['verified', 'auth'])->group(function () {
        Route::delete('/{school}/classes/{class}', 'ClassController@removeClass')->name('classes.destroy');
        Route::get('/{school}/classes/{class}/show', 'ClassController@classDetails')->name('classes.show');
        Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/show', 'ClassController@updateClass')->name('classes.update');
+       Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/renew', 'ClassController@updateCode')->name('classes.renew');
+       Route::delete('/{school}/classes/{class}/request/{request}', 'ClassController@removeRequest')->name('classes.removerequest');
+       Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/request/{request}', 'ClassController@acceptRequest')->name('classes.acceptrequest');
+       Route::get('/{school}/classes/{class}/log', 'LogController@showLogs')->name('classes.log');
+       Route::post('/{school}/classes/{class}/absence', 'LogController@createAbsenceLog')->name('classes.absence');
+       Route::post('/{school}/classes/{class}/mark', 'LogController@createMarkLog')->name('classes.mark');
 
-       // Rutele de a putea adauga profesori si de a selecta o materie
+        // Rutele de a putea adauga profesori si de a selecta o materie
        Route::get('/{school}/teachers', 'TeacherController@index')->name('teachers.index');
        Route::delete('/{school}/teachers/{teacher}', 'TeacherController@removeTeacher')->name('teachers.destroy');
        Route::get('/{school}/teachers/{teacher}/show', 'TeacherController@teacherDetails')->name('teachers.show');
@@ -73,7 +79,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
        Route::delete('/{school}/subjects/{subject}/destroy', 'SubjectsController@destroySubject')->name('subjects.destroy');
        Route::match(['PUT', 'PATCH'], '/{school}/subjects/{subject}/update', 'SubjectsController@updateSubject')->name('subjects.update');
 
-       // Rutele de catalog
-       Route::get('{id}/logs', 'LogsController@showLogs')->name('school.logs');
+       // Rutele de orar
+
     });
 });

@@ -3,24 +3,23 @@
 namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\InviteCodeRequest;
+use App\Http\Requests\Teacher\TeacherSubjectRequest;
 
 use App\Teacher;
 use App\School;
 use App\Request as InviteRequest;
 use App\Invite;
 use App\Subject;
+use App\TeacherSubject;
 
-use Str;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 
-class TeacherController extends Controller 
+class TeacherController extends Controller
 {
     private const PER_PAGE = 5;
-    private const DELETED_PER_PAGE = 10;
 
     public function index(School $school, Request $request) {
         $current_page = $request->get('page', '1');
@@ -36,7 +35,7 @@ class TeacherController extends Controller
     public function removeTeacher(School $school, Teacher $teacher) {
         try {
             $teacher->delete();
-        } catch(\Exception $e) {
+        } catch(\Exception $exception) {
             return redirect()->route('teachers.index', $school->id)->withError($exception->getMessage())->withInput();
         }
 
@@ -59,8 +58,19 @@ class TeacherController extends Controller
         return view('dashboard.school.teacher.show', compact('school', 'teacher', 'subjects'));
     }
 
-    public function updateTeacher(School $school, Teacher $teacher) {
-        
+    public function teacherUpdate(School $school, Teacher $teacher, TeacherSubjectRequest $request) {
+        try {
+            TeacherSubject::updateOrCreate(
+                ['teacher_id' => $teacher->id, 'subject_id' => $request->subject],
+                ['teacher_id' => $teacher->id, 'subject_id' => $request->subject]
+            );
+        } catch (\Exception $exception) {
+            return redirect()->route('teachers.show', ['school' => $school->id, 'teacher' => $teacher->id])->withError($exception->getMessage())->withInput();
+        }
+
+        return redirect()->route('teachers.show', ['school' => $school->id, 'teacher' => $teacher->id])->with([
+            'message' => __('The teacher was updated with success, congrats.')
+        ]);
     }
 
     public function deleteTeacher(School $school, Teacher $teacher) {

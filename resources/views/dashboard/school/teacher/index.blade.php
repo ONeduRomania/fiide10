@@ -58,13 +58,13 @@
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-success">{{ __('Accept') }}</button>
-                                    </form>    
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     @endforeach
 
-                    {{ $teachers->links() }}
+                    {{ $requests->links() }}
                 </div>
             </div>
 

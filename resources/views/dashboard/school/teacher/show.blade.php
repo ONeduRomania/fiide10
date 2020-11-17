@@ -41,7 +41,7 @@
                                         <label for="subject" class="text-md-left">{{ __('Select teacher\'s subject') }}</label>
                                         <select id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" required autofocus>
                                             @foreach($subjects as $subject)
-                                                <option value="{{ $subject->name }}">{{ $subject->name }}</option>
+                                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('subject')

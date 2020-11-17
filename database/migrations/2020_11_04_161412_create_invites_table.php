@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,10 +16,12 @@ class CreateInvitesTable extends Migration
         Schema::create('invites', function (Blueprint $table) {
             $table->id();
             $table->string('code', 128);
+            $table->foreignId('class_id')->nullable();
             $table->foreignId('school_id');
             $table->integer('action')->comment('Daca este 1->invite profesor, daca este 2->invite elev');
 
             $table->timestamps();
+            $table->foreign('class_id')->references('id')->on('classrooms');
             $table->foreign('school_id')->references('id')->on('schools');
         });
     }

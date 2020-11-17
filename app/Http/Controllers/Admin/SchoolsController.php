@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\SchoolsStoreRequest;
 use App\Http\Controllers\Controller;
 use App\School;
-use App\User;
+use App\Invite;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 
 class SchoolsController extends Controller
 {
@@ -16,7 +18,7 @@ class SchoolsController extends Controller
 
     /**
      * The method shows the index page
-     * 
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request) {
@@ -28,17 +30,18 @@ class SchoolsController extends Controller
 
     /**
      * This method stores a school
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(SchoolsStoreRequest $request) {
-        // @todo: Cand creez sa fac si codul de invite pentru astia
         try {
             $school = School::create([
                 'name' => $request->name,
                 'email_contact' => $request->email_contact,
                 'address' => json_encode(['address' => $request->address_type, 'phone_number' => $request->phone_number]),
             ]);
+            Invite::create(['school_id' => $school->id, 'code' => Str::substr(Crypt::encryptString($school->name . 'teacher'), 0, 127), 'action' => 1]);
+
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
@@ -51,7 +54,7 @@ class SchoolsController extends Controller
 
     /**
      * This method handles the editing process of a school in the admin dashboard
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(SchoolsStoreRequest $request, School $school) {
