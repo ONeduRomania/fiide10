@@ -34,6 +34,16 @@ $('#date_absence').datepicker({
     placeholder: 'Please enter the date',
     align: 'center'
 });
+$('#date_start').datepicker({
+    type: 'datetime',
+    placeholder: 'Please enter the date',
+    align: 'center'
+});
+$('#date_end').datepicker({
+    type: 'datetime',
+    placeholder: 'Please enter the date',
+    align: 'center'
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

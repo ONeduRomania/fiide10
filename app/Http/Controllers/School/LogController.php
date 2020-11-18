@@ -22,4 +22,27 @@ class LogController extends Controller
     public function createMarkLog(\App\School $school, \App\Classroom $class, \App\Student $student, StoreMarkRequest $request) {
         dd($request->all());
     }
+
+    public function removeStudent(\App\School $school, \App\Classroom $class, \App\Student $student) {
+        try {
+            $student->delete();
+        } catch (\Exception $exception) {
+            return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->withErrors($exception->getMessage())->withInput();
+        }
+        return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
+            'success' => __('The student has been deleted with success, congrats.')
+        ]);
+    }
+
+    public function deleteAbsLog(\App\School $school, \App\Classroom $class, \App\Student $student) {
+
+    }
+
+    public function deleteMarkLog(\App\School $school, \App\Classroom $class, \App\Student $student) {
+
+    }
+
+    public function studentShow(\App\School $school, \App\Classroom $class, \App\Student $student) {
+
+    }
 }

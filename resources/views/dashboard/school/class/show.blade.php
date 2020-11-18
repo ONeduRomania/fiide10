@@ -18,6 +18,7 @@
                 <div class="alert" role="alert">
                     <button type="button" class="btn btn-danger dismissible" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
@@ -75,7 +76,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="card shadow-lg">
                             <div class="card-body d-flex justify-content-center">
-                                <small class="text-muted">{{ __('If you want to edit more details about this school you can go right here: ') }}<a class="text-decoration-none text-primary" href="">Edit <i class="fas fa-edit"></i></a></small>
+                                <small class="text-muted">{{ __('If you want to edit the timetable about this class you can go right here: ') }}<a class="text-decoration-none text-primary" href="{{ route('timetable.show', ['school' => $school->id, 'class' => $class->id]) }}">Edit <i class="fas fa-edit"></i></a></small>
                             </div>
                         </div>
                     </div>
@@ -137,13 +138,13 @@
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <div>{{ $student->user->name }}</div>
                                     <div>
-                                        <form action="{{ route('teachers.destroy', ['school' => $school->id, 'teacher' => $teacher->id]) }}" method="POST" class="d-inline-flex mx-1">
+                                        <form action="{{ route('classes.student.destroy', ['school' => $school->id, 'class' => $class->id, 'student' => $student->id]) }}" method="POST" class="d-inline-flex mx-1">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">{{ __('Remove') }}</button>
                                         </form>
 
-                                        <a class="text-royal text-decoration-none mx-1" href="{{ route('teachers.show', ['school' => $school->id, 'teacher' => $teacher->id]) }}">{{ __('Edit') }}</a>
+                                        <a class="text-royal text-decoration-none mx-1" href="{{ route('classes.student.show', ['school' => $school->id, 'class' => $class->id, 'student' => $student->id]) }}">{{ __('Edit') }}</a>
                                     </div>
                                 </div>
                             </div>
