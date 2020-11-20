@@ -13,3 +13,4 @@ require('./bootstrap');
  */
 
 require('./components/Timetable');
+require('./components/Catalog');

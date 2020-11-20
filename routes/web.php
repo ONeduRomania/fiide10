@@ -50,7 +50,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
     });
 
     Route::namespace('School')->prefix('/school')->group(function () {
-        // Rutele pentru a adauga clase noi + modulul de orar.
+        // Rutele pentru a adauga clase noi + modulul de catalog.
         Route::get('/{school}/classes', 'ClassController@showClasses')->name('classes.index');
         Route::post('/{school}/classes', 'ClassController@submitClass')->name('classes.submit');
         Route::delete('/{school}/classes/{class}', 'ClassController@removeClass')->name('classes.destroy');
@@ -64,6 +64,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::post('/{school}/classes/{class}/mark', 'LogController@createMarkLog')->name('classes.mark');
         Route::delete('/{school}/classes/{class}/studentDelete/{student}', 'LogController@removeStudent')->name('classes.student.destroy');
         Route::get('/{school}/classes/{class}/student/{student}', 'LogController@studentShow')->name('classes.student.show');
+        Route::delete('/{school}/classes/{class}/log/{log}', 'LogController@deleteLog')->name('log.delete');
 
         // Rutele de a putea adauga profesori si de a selecta o materie
         Route::get('/{school}/teachers', 'TeacherController@index')->name('teachers.index');

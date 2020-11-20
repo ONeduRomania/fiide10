@@ -18,7 +18,6 @@
                 <div class="alert" role="alert">
                     <button type="button" class="btn btn-danger dismissible" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
@@ -77,6 +76,12 @@
                         <div class="card shadow-lg">
                             <div class="card-body d-flex justify-content-center">
                                 <small class="text-muted">{{ __('If you want to edit the timetable about this class you can go right here: ') }}<a class="text-decoration-none text-primary" href="{{ route('timetable.show', ['school' => $school->id, 'class' => $class->id]) }}">Edit <i class="fas fa-edit"></i></a></small>
+                            </div>
+                        </div>
+
+                        <div class="my-3 card shadow-lg">
+                            <div class="card-body d-flex justify-content-center">
+                                <small class="text-muted">{{ __('If you want to go to insert a new log go: ') }}<a class="text-decoration-none text-primary" href="{{ route('classes.log', ['school' => $school->id, 'class' => $class->id]) }}">Here <i class="fas fa-link"></i></a></small>
                             </div>
                         </div>
                     </div>

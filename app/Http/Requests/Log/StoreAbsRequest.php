@@ -24,8 +24,9 @@ class StoreAbsRequest extends FormRequest
     public function rules()
     {
         return [
+            'subject' => ['required', 'numeric', 'exists:subjects,id'],
             'term' => ['required', 'numeric', 'between:1,2'],
-            'student' => ['required', 'numeric', 'exists:students,id'],
+            'student' => ['required', 'numeric', 'exists:students,user_id'],
             'date_absence' => ['required', 'date'],
         ];
     }

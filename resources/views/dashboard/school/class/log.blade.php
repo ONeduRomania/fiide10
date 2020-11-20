@@ -152,7 +152,19 @@
                                         </span>
                                         @enderror
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="subject" class="text-md-left">{{ __('Select the subject') }}</label>
+                                        <select id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" required autofocus>
+                                            @foreach($subjects as $subject)
+                                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('subject')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <label for="date_absence" class="text-md-left">{{ __('Enter the date') }}</label>
 

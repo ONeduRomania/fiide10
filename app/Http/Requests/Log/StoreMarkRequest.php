@@ -28,8 +28,8 @@ class StoreMarkRequest extends FormRequest
             'mark' => ['required', 'numeric', 'between:1,10'],
             'subject' => ['required', 'numeric', 'exists:subjects,id'],
             'term' => ['required', 'numeric', 'between:1,2'],
-            'student' => ['required', 'numeric', 'exists:students,id'],
-            'date_absence' => ['required', 'date'],
+            'student' => ['required', 'numeric', 'exists:students,user_id'],
+            'date' => ['required', 'date'],
         ];
     }
 }
