@@ -1,6 +1,9 @@
 <?php
 
 //echo 'We come back soon';
+
+define('LARAVEL_START', microtime(true));
+
 /*
 |--------------------------------------------------------------------------
 | Register composer
