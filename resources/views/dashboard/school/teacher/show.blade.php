@@ -21,14 +21,13 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare: </strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
             @endif
             <div class="container">
-                <h5>{{ __('Show teacher data') }}: {{ $teacher->user->name }}</h5>
-                <p class="text-muted">{{ __('From here you can edit the subject\'s data or see the subject\'s data.') }}</p>
+                <h5>Profesorul: {{ $teacher->user->name }}</h5>
 
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
@@ -38,7 +37,7 @@
                                 @method('PATCH')
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="subject" class="text-md-left">{{ __('Select teacher\'s subject') }}</label>
+                                        <label for="subject" class="text-md-left">Introdu materia profesorului:</label>
                                         <select id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" required autofocus>
                                             @foreach($subjects as $subject)
                                                 <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -52,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-gray">{{ __('Edit') }}</button>
+                                    <button type="submit" class="btn btn-gray">Editează</button>
                                 </div>
                             </form>
                         </div>
@@ -61,7 +60,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="card shadow-lg">
                             <div class="card-body d-flex justify-content-center">
-                                <small class="text-muted">{{ __('If you want to edit more details about this school you can go right here: ') }}<a class="text-decoration-none text-primary" href="">Edit <i class="fas fa-edit"></i></a></small>
+                                <small class="text-muted">Dacă vrei să vezi mai multe despre școală: <a class="text-decoration-none text-primary" href="">click aici.<i class="fas fa-edit"></i></a></small>
                             </div>
                         </div>
                     </div>
