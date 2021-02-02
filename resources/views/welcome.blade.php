@@ -9,10 +9,10 @@
 @section('content')
     <x-navbar-component class="navbar navbar-expand-md fixed-top navbar-dark bg-transparent">
         <li class="nav-item">
-            <a class="nav-link" href="#despre">Despre</a>
+            <a class="nav-link" href="https://onedu.ro/fiide10/about">Despre platformă</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#scoala">Înscrie școala</a>
+            <a class="nav-link" href="#scoala">Ești director?</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -21,11 +21,9 @@
 
     <section class="section-main d-flex align-items-center">
         <div class="container text-center">
-               <img loading="lazy" class="aligncenter wp-image-55" src="https://onedu.ro/wp-content/uploads/2020/12/Platforma-Fii-de-10-03.png" alt="" width="200" height="200">
-            <h3 class="text-white"><strong>Platforma Fii de 10!</strong></h3>
-            <h6 class="text-white">{{ __('Viitorul educației românești să în mâinile tale!') }}</h6>
+               <img loading="lazy" class="aligncenter wp-image-55" src="https://onedu.ro/wp-content/uploads/2020/12/Platforma-Fii-de-10-03.png" alt="" width="300" height="300">
+            <h4>Viitorul educației românești stă în mâinile tale!</h4>
             <a class="mt-2 btn btn-royal @auth d-none @endauth" href="{{ route('login') }}">Loghează-te acum!</a>   
-            <a class="mt-2 btn btn-royal @auth d-none @endauth" href="https://onedu.ro/doneaza">Donează</a>
         </div>
     </section>
 
