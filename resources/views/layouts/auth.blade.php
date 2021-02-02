@@ -7,21 +7,21 @@
 
     {{-- Primary Meta Tags --}}
     <title>Platforma Fii de 10!</title>
-    <meta name="title" content="{{ config('app.name', 'FiiDe10.EduManager') }}">
+    <meta name="title" content="{{ config('app.name', 'Fii De 10!') }}">
     <meta name="description" content="Viitorul educației românești e în mâinile tale!">
 
     {{--  Open Grapgh / Facebook  --}}
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ env('APP_URL', 'localhost:8000') }}">
-    <meta property="og:title" content="{{ config('app.name', 'FiiDe10.EduManager') }}">
-    <meta property="og:description" content="Education management tool based on modules to help school staff, teachers and students.">
+    <meta property="og:title" content="{{ config('app.name', 'Fii De 10!') }}">
+    <meta property="og:description" content="Instrument de management al educației bazat pe module pentru a ajuta personalul școlii, profesorii și elevii.">
     <meta property="og:image" content="">
 
     {{--  Twitter  --}}
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ env('APP_URL', 'localhost:8000') }}">
-    <meta property="twitter:title" content="{{ config('app.name', 'FiiDe10.EduManager') }}">
-    <meta property="twitter:description" content="Education management tool based on modules to help school staff, teachers and students.">
+    <meta property="twitter:title" content="{{ config('app.name', 'Fii De 10!') }}">
+    <meta property="twitter:description" content="Instrument de management al educației bazat pe module pentru a ajuta personalul școlii, profesorii și elevii.">
     <meta property="twitter:image" content="">
 
     {{--  Scripts  --}}
