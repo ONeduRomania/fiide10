@@ -21,7 +21,7 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare: </strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
@@ -29,8 +29,7 @@
 
 
             <div class="container">
-                <h5>{{ __('Show student data') }}: {{ $student->user->name }}</h5>
-                <p class="text-muted">{{ __('From here you can delete / see the logs.') }}</p>
+                <h5>Vezi data elevului: {{ $student->user->name }}</h5>
                 <div id="catalog-component"
                      data-logs="{{ $logs }}"
                      data-class="{{ $class->id }}"
