@@ -10,25 +10,25 @@
                     </span>
                 </button>
                 <p class="my-1">
-                    {{ __('A fresh e-mail with the verification link was sent. Check your SPAM if you can\'t find it.')}}
+                  Un mail a fost trimis la tine pentru a-ți valida contul. Nu uita să verifici și folderul Spam.
                 </p>
             </div>
         @endif
 
         <div class="mb-5 text-center">
             <h5 class="text-royal">
-                <strong>FiiDe10</strong>.EduManager.{{ __('Email.Verify') }}
+                <strong>Platforma Fii de 10</strong>
             </h5>
         </div>
 
         <div class="card text-white bg-royal mb-3">
-            <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+            <div class="card-header">Validează-ți contul!</div>
 
             <div class="card-body text-center">
-                {{ __('Before proceeding, please check your email for a verification link.') }}
+               Înainte de a-ți accesa contul, confirmă adresa de e-mail.
                 <form class="mt-2" method="POST" action="{{ route('verification.resend') }}">
                     @csrf
-                    <button type="submit" class="btn btn-outline-white">{{ __('Click here to request another verification link') }}</button>
+                    <button type="submit" class="btn btn-outline-white"> Cere un alt mail...</button></button>
                 </form>
             </div>
         </div>
