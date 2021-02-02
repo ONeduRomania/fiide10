@@ -28,7 +28,7 @@
                Înainte de a-ți accesa contul, confirmă adresa de e-mail.
                 <form class="mt-2" method="POST" action="{{ route('verification.resend') }}">
                     @csrf
-                    <button type="submit" class="btn btn-outline-white"> Cere un alt mail...</button></button>
+                    <button type="submit" class="btn btn-outline-white"> Cere un alt mail...</button>
                 </form>
             </div>
         </div>
