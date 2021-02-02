@@ -6,9 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Primary Meta Tags --}}
-    <title>{{ config('app.name', 'FiiDe10') }}</title>
+    <title>Platforma Fii de 10!</title>
     <meta name="title" content="{{ config('app.name', 'FiiDe10.EduManager') }}">
-    <meta name="description" content="Education management tool based on modules to help school staff, teachers and students.">
+    <meta name="description" content="Viitorul educației românești e în mâinile tale!">
 
     {{--  Open Grapgh / Facebook  --}}
     <meta property="og:type" content="website">
@@ -38,11 +38,11 @@
             <div class="col-md-12 col-lg-7 login-section d-none d-lg-block">
                 <div class="h-100 d-flex flex-column justify-content-between">
                     <div class="container my-4 d-flex flex-row justify-content-between">
-                        <a class="text-decoration-none" href="{{ route('welcome') }}"><h4 class="text-white"><strong>FiiDe10</strong>.EduManager</h4></a>
+                        <a class="text-decoration-none" href="{{ route('welcome') }}"><h4 class="text-white"><strong>Platforma Fii de 10</strong></h4></a>
                         @yield('link')
                     </div>
                     <div class="container my-4 text-center">
-                        <small class="text-white-50">{{ __('Be aware of your account data, we are not responsible for lost accounts!') }}</small>
+                        <small class="text-white-50">{{ __('Viitorul educației românești e în mâinile tale!') }}</small>
                     </div>
                 </div>
             </div>
