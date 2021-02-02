@@ -56,7 +56,7 @@
 
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  required autocomplete="new-password">
             </div>
-
+            <p> Prin crearea contului confirm că am luat la cunoștință <a href="https://fiide10.ro/legal/terms"> Termenii și condițiile </a> și <a href="https://fiide10.ro/legal/privacy"> Politica de confidențialitate</a></p>
             <button type="submit" class="btn btn-outline-royal btn-block">
                 Creează contul
             </button>
