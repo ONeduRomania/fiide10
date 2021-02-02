@@ -21,7 +21,7 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare: </strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-6">
-                    <h5>{{ __('Add a new class') }}</h5>
-                    <p class="text-muted">{{ __('Here you can add a new class to the platform acording to your details.') }}</p>
+                    <h5>Adaugă o nouă clasă</h5>
+                    <p class="text-muted">De aici poți adăuga o clasă nouă, raportată la datele tale.</p>
                 </div>
 
                 <div class="col-md-12 col-lg-6">
@@ -39,9 +39,9 @@
                             <div class="card-body">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name" class="text-md-left">{{ __('Name of the class') }}</label>
+                                    <label for="name" class="text-md-left">Numele clasei:</label>
 
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="{{ __('Enter class name...') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Introdu numărul și litera clasei..." required autocomplete="name" autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
 
                                 
                                 <div class="form-group">
-                                    <label for="master_teacher" class="text-md-left">{{ __('Select class\' master teacher ') }}</label>
+                                    <label for="master_teacher" class="text-md-left">Selectează dirigintele clasei:</label>
                                     <select id="master_teacher" name="master_teacher" class="form-control @error('master_teacher') is-invalid @enderror" required autofocus>
                                         @foreach($teachers as $teacher)
                                             <option value="{{ $teacher->user->id }}">{{ $teacher->user->name }}</option>
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-gray">{{ __('Add') }}</button>
+                                <button type="submit" class="btn btn-gray">Adaugă</button>
                             </div>
                         </form>
                     </div>
@@ -75,8 +75,8 @@
             <hr class="my-3" />
             <div class="row">
                 <div class="col-md-12 col-lg-6">
-                    <h5>{{ __('Manage your classes') }}</h5>
-                    <p class="text-muted">{{ __('If you want to manage your classes you can do it right here, change their options, their master teachers, etc...') }}</p>
+                    <h5>Gestionează clasele</h5>
+                    <p class="text-muted">De aici poți edita clasele deja existente.</p>
                 </div>
 
                 <div class="col-md-12 col-lg-6">
@@ -92,10 +92,10 @@
                                     <form action="{{ route('classes.destroy', ['school' => $school->id, 'class' => $class->id]) }}" method="POST" class="d-inline-flex mx-1">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                        <button type="submit" class="btn btn-danger">Elimină</button>
                                     </form>
 
-                                    <a class="text-royal text-decoration-none mx-1" href="{{ route('classes.show', ['school' => $school->id, 'class' => $class->id]) }}">{{ __('More details') }}</a>
+                                    <a class="text-royal text-decoration-none mx-1" href="{{ route('classes.show', ['school' => $school->id, 'class' => $class->id]) }}">Mai multe detalii</a>
                                 </div>
                             </div>
                         </div>
