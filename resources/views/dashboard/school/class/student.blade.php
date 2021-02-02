@@ -29,7 +29,7 @@
 
 
             <div class="container">
-                <h5>Vezi data elevului: {{ $student->user->name }}</h5>
+                <h5>Vezi datele elevului: {{ $student->user->name }}</h5>
                 <div id="catalog-component"
                      data-logs="{{ $logs }}"
                      data-class="{{ $class->id }}"
