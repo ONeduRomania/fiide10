@@ -23,7 +23,7 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare: </strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
@@ -32,9 +32,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-lg-12 text-center">
-                        <h5>{{ __('Add new subject') }}</h5>
-                        <p class="text-muted">{{ __('Here you can add a new subject to your school.') }}</p>
-                        <button type="button" class="btn btn-block btn-royal" data-toggle="modal" data-target="#subjectModal">{{ __('Add the new subject') }} <i class="fas fa-swatchbook"></i></button>
+                        <h5>Adaugă o nouă materie</h5>
+                        <p class="text-muted">De aici se pot adăuga materiile școlare.</p>
+                        <button type="button" class="btn btn-block btn-royal" data-toggle="modal" data-target="#subjectModal">Adaugă o nouă materie <i class="fas fa-swatchbook"></i></button>
                     </div>
                 </div>
 
@@ -48,8 +48,8 @@
                 <hr class="my-3" />
                 <div class="row">
                     <div class="col-md-12 col-lg-12 text-center">
-                        <h5>{{ __('Check your timetable') }}</h5>
-                        <p class="text-muted">{{ __('Here you can see your timetable for your class.') }}</p>
+                        <h5>Verifică orarul</h5>
+                        <p class="text-muted">De aici poți vedea orarul clasei.</p>
                         @foreach ($timetables as $timetable)
                             <div class="card shadow-lg my-1">
                                 <div class="card-body d-flex justify-content-between align-items-center">
@@ -64,10 +64,10 @@
                                         <form action="{{ route('timetable.delete', ['school' => $school->id, 'class' => $class->id, 'timetable' => $timetable->id]) }}" method="POST" class="d-inline-flex mx-1">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">{{ __('Remove') }}</button>
+                                            <button type="submit" class="btn btn-danger">Elimină</button>
                                         </form>
 
-                                        <a class="text-royal text-decoration-none mx-1" href="{{ route('timetable.check', ['school' => $school->id, 'class' => $class->id, 'timetable' => $timetable->id]) }}">{{ __('Edit') }}</a>
+                                        <a class="text-royal text-decoration-none mx-1" href="{{ route('timetable.check', ['school' => $school->id, 'class' => $class->id, 'timetable' => $timetable->id]) }}">Editează</a>
                                     </div>
                                 </div>
                             </div>
@@ -84,14 +84,14 @@
                 <form action="{{ route('timetable.create', ['school' => $school->id, 'class' => $class->id]) }}" method="POST">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Add a new subject to timetable') }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Adaugă o nouă materie în orar.</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="subject" class="text-md-left">{{ __('Select subject') }}</label>
+                            <label for="subject" class="text-md-left">Selectează materia</label>
                             <select id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" required autofocus>
                                 @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="date_start" class="text-md-left">{{ __('Enter the start date & time') }}</label>
+                            <label for="date_start" class="text-md-left">Introdu ora la care începe ora:</label>
 
                             <input id="date_start" type="datetime" class="form-control @error('date_start') is-invalid @enderror" name="date_start" value="{{ old('date_start') }}" placeholder="{{ __('Enter here the start date...') }}" required>
                             @error('date_start')
@@ -115,9 +115,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="date_end" class="text-md-left">{{ __('Enter the finish date & time') }}</label>
+                            <label for="date_end" class="text-md-left">Introdu ora la care se finalizează ora:</label>
 
-                            <input id="date_end" type="datetime" class="form-control @error('date_end') is-invalid @enderror" name="date_end" value="{{ old('date_end') }}" placeholder="{{ __('Enter here the finish date...') }}" required>
+                            <input id="date_end" type="datetime" class="form-control @error('date_end') is-invalid @enderror" name="date_end" value="{{ old('date_end') }}" placeholder="Introdu aici ziua..." required>
                             @error('date_end')
                             <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-royal">{{ __('Create') }}  <i class="fas fa-check"></i></button>
+                        <button type="submit" class="btn btn-royal">Crează <i class="fas fa-check"></i></button>
                     </div>
                 </form>
             </div>
