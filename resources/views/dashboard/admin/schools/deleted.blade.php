@@ -21,14 +21,14 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare:</strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
             @endif
             <div class="container">
-                <h5>{{ __('Deleted schools') }}</h5>
-                <p class="text-muted">{{ __('From here you can restore some schools or delete their accounts permanently, after 30 days their accounts are deleted forever.') }}</p>
+                <h5>Școli eliminate:</h5>
+                <p class="text-muted">Poți să restaurezi școala sau să o ștergi definitiv. Nu uita, ai doar 30 de zile să te răzgândești.</p>
 
                 @foreach ($schools as $school)
                     <div class="card shadow-lg my-1">
@@ -42,13 +42,13 @@
                                 <form action="{{ route('schools.force', $school->id) }}" method="POST" class="d-inline-flex mx-1">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">{{ __('Recycle') }}</button>
+                                    <button type="submit" class="btn btn-danger">Șterge definitiv</button>
                                 </form>
 
                                 <form action="{{ route('schools.restore', $school->id) }}" method="POST" class="d-inline-flex mx-1">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn-link text-royal text-decoration-none">{{ __('Restore') }}</button>
+                                    <button type="submit" class="btn btn-link text-royal text-decoration-none">Restaurează</button>
                                 </form>
                             </div>
                         </div>
