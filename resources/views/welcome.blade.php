@@ -11,9 +11,19 @@
         <li class="nav-item">
             <a class="nav-link" href="https://onedu.ro/fiide10/about">Despre platformă</a>
         </li>
+        
         <li class="nav-item">
             <a class="nav-link" href="#scoala">Ești director?</a>
         </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="https://onedu.ro/wp-content/uploads/2021/01/acord-parteneriat.docx">Acord de parteneriat</a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="https://youtube.com/playlist?list=PLKUQqACKsU5Wukb5myc1iDhMscgKYkKKR">Tutoriale video</a>
+        </li>
+        
         <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
         </li>
@@ -65,7 +75,7 @@
                 <p class="text-white-50">
                     Suntem transparenți cu privire la toate datele utilizate și cum facem lucrurile. Ne dorim să fim un sprijin real pentru profesori și elevi, tocmai de aceea ar trebui să te alături și tu! Numai prin utilizarea platformei în mai multe școli putem să facem lucrurile să devină realitate. Totul gratuit!
                 </p>
-                <a class="mt-2 btn btn-royal @auth d-none @endauth" href="https://10.onedu.ro/inscrie-scoala">Înscrie școala!</a>
+            <a class="mt-2 btn btn-royal @auth d-none @endauth" href="{{ route('register') }}">Creează-ți cont acum!</a> 
             </div>
         </section>
 
@@ -78,7 +88,7 @@
                         <p class="text-muted">
                            Ne poți scrie la fiide10@onedu.ro sau poți completa un formular de contact. 
                         </p>
-                        <a class="mt-2 btn btn-royal @auth d-none @endauth" href="https://10.onedu.ro/contact">Completează formularul</a>
+                        <a class="mt-2 btn btn-royal @auth d-none @endauth" href="https://onedu.ro/fiide10/contact">Completează formularul</a>
                     </div>
                     <div class="col-md-12 col-lg-6 text-center">
                         <img src="{{ asset('images/programming.svg') }}" height="100" />
