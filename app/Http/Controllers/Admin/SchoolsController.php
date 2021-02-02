@@ -47,7 +47,7 @@ class SchoolsController extends Controller
         }
 
         return back()->with([
-            'success' => __('The school has been created with success, congrats.'),
+            'success' => __('Școala a fost creată cu succes.'),
             'school' => $school
         ]);
     }
@@ -69,7 +69,7 @@ class SchoolsController extends Controller
         }
 
         return back()->with([
-            'success' => __('The school has been updated with success, congrats.'),
+            'success' => __('Școala a fost actualizată cu succes.'),
             'school' => $schoolUpdated
         ]);
     }
@@ -98,7 +98,7 @@ class SchoolsController extends Controller
         }
 
         return back()->with([
-            'success' => __('The school has been deleted with success, congrats.')
+            'success' => __('Școala a fost ștearsă cu succes.')
         ]);
     }
 
@@ -129,7 +129,7 @@ class SchoolsController extends Controller
         $school->forceDelete();
 
         return back()->with([
-            'success' => __('The user has been permanently deleted with success, congrats.')
+            'success' => __('Utilizatorul a fost complet eliminat.')
         ]);
     }
 
@@ -149,7 +149,7 @@ class SchoolsController extends Controller
         $school->restore();
 
         return back()->with([
-            'success' => __('The school has been restored with success, congrats.')
+            'success' => __('Școala a fost restaurată cu succes.')
         ]);
     }
 }
