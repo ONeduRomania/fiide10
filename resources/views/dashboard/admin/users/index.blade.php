@@ -21,7 +21,7 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare: </strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
@@ -29,8 +29,7 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-6">
-                    <h5>{{ __('Add a new user') }}</h5>
-                    <p class="text-muted">{{ __('Here you can add a new user to the platform acording to your details.') }}</p>
+                    <h5>Adaugă un utilizator nou</h5>
                 </div>
 
                 <div class="col-md-12 col-lg-6">
@@ -39,9 +38,9 @@
                             <div class="card-body">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name" class="text-md-left">{{ __('Full name') }}</label>
+                                    <label for="name" class="text-md-left">Numele elevului:</label>
 
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="{{ __('Enter user\'s full name...') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,9 +49,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email" class="text-md-left">{{ __('E-Mail Address') }}</label>
+                                    <label for="email" class="text-md-left">Adresa de e-mail:</label>
 
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="{{ __('Enter user\'s e-mail address...') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  required autocomplete="email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,7 +60,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="role" class="text-md-left">{{ __('Select user\'s role') }}</label>
+                                    <label for="role" class="text-md-left">Selectează rolul:</label>}</label>
                                     <select id="role" name="role" class="form-control @error('role') is-invalid @enderror" id="role" required autofocus>
                                         @foreach($roles as $role)
                                             <option value="{{ $role->name }}">{{ $role->name }}</option>
@@ -76,10 +75,10 @@
 
                                 <div class="form-group">
                                     <label for="password" class="text-md-left">
-                                        {{ __('Password') }}
+                                        Parola:
                                     </label>
 
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{ __('Enter user\'s password...') }}" required autocomplete="current-password">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  required autocomplete="current-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -89,14 +88,14 @@
 
                                 <div class="form-group">
                                     <label for="password-confirm" class="text-md-left">
-                                        {{ __('Confirm your password') }}
+                                        Confirmă parola:
                                     </label>
 
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="{{ __('Enter user\'s password again...') }}" required autocomplete="new-password">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-gray">{{ __('Add') }}</button>
+                                <button type="submit" class="btn btn-gray">Adaugă</button>
                             </div>
                         </form>
                     </div>
@@ -105,13 +104,13 @@
             <hr class="my-3" />
             <div class="row">
                 <div class="col-md-12 col-lg-6">
-                    <h5>{{ __('Manage your users') }}</h5>
-                    <p class="text-muted">{{ __('If you want to manage your users you can do it right here, change their roles, their permissions, etc...') }}</p>
+                    <h5>Gestionează utilizatorii</h5>
+                    <p class="text-muted">Poți modifica detalii, roluri, etc.</p>
                 </div>
 
                 <div class="col-md-12 col-lg-6">
                     <a href="{{ route('users.deleted') }}" class="btn btn-danger mb-1">
-                        {{ __('Deleted users') }} <i class="fas fa-user-times"></i>
+                        Utilizatori eliminați <i class="fas fa-user-times"></i>
                     </a>
                     @foreach ($users as $user)
                         <div class="card shadow-lg my-1">
@@ -125,10 +124,10 @@
                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline-flex mx-1">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                        <button type="submit" class="btn btn-danger">Șterge</button>
                                     </form>
 
-                                    <a class="text-royal text-decoration-none mx-1" href="{{ route('users.show', $user->id) }}">{{ __('Edit') }}</a>
+                                    <a class="text-royal text-decoration-none mx-1" href="{{ route('users.show', $user->id) }}">Editează</a>
                                 </div>
                             </div>
                         </div>
