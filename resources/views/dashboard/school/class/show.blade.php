@@ -80,7 +80,7 @@
 
                         <div class="my-3 card shadow-lg">
                             <div class="card-body d-flex justify-content-center">
-                                <small class="text-muted">{{ __('If you want to go to insert a new log go: ') }}<a class="text-decoration-none text-primary" href="{{ route('classes.log', ['school' => $school->id, 'class' => $class->id]) }}">click aici <i class="fas fa-link"></i></a></small>
+                                <small class="text-muted">Dacă dorești să inserezi un jurnal nou: <a class="text-decoration-none text-primary" href="{{ route('classes.log', ['school' => $school->id, 'class' => $class->id]) }}">click aici <i class="fas fa-link"></i></a></small>
                             </div>
                         </div>
                     </div>
