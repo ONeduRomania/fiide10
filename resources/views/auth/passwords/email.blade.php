@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('link')
-    <a class="btn btn-outline-white" href="{{ route('login') }}">{{ __('Take me to login page') }} <i class="fas fa-user"></i></a>
+    <a class="btn btn-outline-white" href="{{ route('login') }}">{{ __('Pagina de logare') }} <i class="fas fa-user"></i></a>
 @endsection
 
 @section('content')
@@ -21,14 +21,14 @@
 
         <div class="mb-5 text-center">
             <h5 class="text-royal">
-                <strong>FiiDe10</strong>.EduManager.{{ __('Password.Reset') }}
+                <strong>Platforma Fii de 10!</strong>
             </h5>
         </div>
 
         <form class="mb-1" method="POST" action="{{ route('password.email') }}">
             @csrf
             <div class="form-group">
-                <label for="email" class="text-md-left">{{ __('E-Mail Address') }}</label>
+                <label for="email" class="text-md-left">Adresa de e-mail</label>
 
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
@@ -39,7 +39,7 @@
             </div>
 
             <button type="submit" class="btn btn-outline-royal btn-block">
-                {{ __('Send Password Reset Link') }}
+                Trimite link-ul de resetare
             </button>
         </form>
     </div>
