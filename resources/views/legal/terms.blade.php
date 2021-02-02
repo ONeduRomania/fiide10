@@ -6,94 +6,110 @@
     <section class="section-info my-5">
         <div class="container">
             <div class="px-5 py-5">
-                <h2 class="text-center font-weight-bold">TERMS AND CONDITIONS</h2>
-                <p>Last updated: 2020-08-23</p>
-                <p>1. <b>Introduction</b></p>
-                <p>Welcome to <b>FiiDe10.EduManager</b> (“Company”, “we”, “our”, “us”)!</p>
-                <p>These Terms of Service (“Terms”, “Terms of Service”) govern your use of our website located at <b>fiide10.ro</b> (together or individually “Service”) operated by <b>FiiDe10.EduManager</b>.</p>
-                <p>Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages.</p>
-                <p>Your agreement with us includes these Terms and our Privacy Policy (“Agreements”). You acknowledge that you have read and understood Agreements, and agree to be bound of them.</p>
-                <p>If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at <b>support@fiide10.ro</b> so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.</p>
-                <p>2. <b>Communications</b></p>
-                <p>By using our Service, you agree to subscribe to newsletters, marketing or promotional materials and other information we may send. However, you may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at support@fiide10.ro.</p>
+                <h2 class="text-center font-weight-bold">Termenii și condițiile</h2
+                <p>Ultima actualizare: 02.02.2021</p>
+               <p><b> Bun venit la platforma Fii de 10</b></p>
+<p>Vă mulțumim pentru utilizarea produselor și a serviciilor noastre (&quot;Serviciile&quot;). Serviciile sunt oferite de
+Comunitatea ONedu România, structură a Asociației pentru Copii cu Dizabilități- Mă Bucur de Viață, cu
+sediul social în Galați, strada Bld. Siderurgiștilor, nr. 22, bl. SD8A, ap. 6, județul Galați, înregistrată în
+Registrul Asociațiilor și Fundațiilor cu numărul 37 din data de 26.11.2018, CIF 40484090, reprezentată
+legal de Cosmin Andrei în calitate de președinte. Prin utilizarea Serviciilor noastre, sunteți de acord cu prezenții Termeni și condiții. Vă rugăm să îi citiți cu
+atenție. Serviciile noastre sunt dedicate mediului educațional, ce implică și prelucrarea de date ale minorilor și,
+prin urmare, este posibil ca uneori să se aplice Termeni și condiții suplimentare sau cerințe suplimentare
+pentru produse, ce vor fi aduse la cunoștință în mod prompt înainte de accesarea acestor produse. În
+cazul anumitor Servicii,care vor fi expres menționate de către platforma Fii de 10, pot exista Termeni și
+condiții suplimentare, iar, dacă utilizați acele Servicii, Termenii și condițiile suplimentare respective s-ar
+putea să facă parte din contractul între unitatea școlară din care face parte copilul dumneavoastra și
+platforma Fii de 10 sau să fie publicate pe website-ul Fii de 10 – www.fiide10.ro .</p>
+<p><b>Utilizarea Serviciilor noastre</b></p>
+<p>Trebuie să respectați toate politicile puse la dispoziție în cadrul Serviciilor.
+Utilizarea Serviciilor nu vă oferă niciun drept de proprietate intelectuală asupra acestora sau
+asupra conținutului pe care îl accesați. Dumneavoastră ca utilizatori Fii de 10,
+accesați servicii de informare, servicii de management școlar informațional, servicii
+de dotare cu echipamente și internet sau servicii de asistență. Nu aveți dreptul să utilizați
+conținutul din cadrul Serviciilor noastre, cu excepția cazului în care prin contractarea de către
+unitatea școlară a licenței asupra sistemului Fii de 10, deveniți utilizatori ai serviciilor noastre.
+Serviciile noastre afișează un anumit conținut care nu aparține platformei Fii de 10.
+Responsabilitatea pentru acest conținut revine exclusiv entității care îl pune la dispoziție și
+anume unitații școlare precum și utilizatorilor, în ceea ce privește modulul de mesagerie. În
+ceea ce privește utilizarea Serviciilor de către dvs., putem să vă trimitem anunțuri privind
+serviciile, mesaje administrative și alte informații. Puteți renunța la unele dintre aceste
+comunicări sau la toate, prin bifarea/debifarea acestora din Setările contului dumneavoastră Fii
+de 10.</p>
+<p>La momentul începerii utilizării serviciilor platformei Fii de 10 puteți opta să fiți de acord sau nu
+ca Fii de 10 să realizeze sondaje de opinie, campanii de fidelizare și campanii de promovare în
+rândul utilizatorilor folosind ca mijloace de comunicare contul de utilizator, adresa de email sau
+numărul de telefon, dezabonarea putând fi solicitată oricând la adresa de e-
+mail: fiide10@onedu.ro.</p>
+<p><b>Contul dvs. Fii de 10</b></p>
+<p>Pentru a utiliza serviciile platformei Fii de 10, este necesar un Cont Fii de 10. Prin contractarea
+sistemului Fii de 10 de către unitatea şcolară, deveniți una din următoarele categorii de
+utilizatori: cadru didactic, personal secretariat, personal conducere, părinte sau elev.</p>
 
-                <p>3. <b>Contests, Sweepstakes and Promotions</b></p>
-                <p>Any contests, sweepstakes or other promotions (collectively, “Promotions”) made available through Service may be governed by rules that are separate from these Terms of Service. If you participate in any Promotions, please review the applicable rules as well as our Privacy Policy. If the rules for a Promotion conflict with these Terms of Service, Promotion rules will apply.</p>
+<p>Politicile de confidențialitate Fii de 10 explică modul în care tratăm datele dvs. cu caracter
+personal și în care vă protejăm confidențialitatea atunci când utilizați Serviciile noastre.</p>
+<p><b>Conținutul dvs. în cadrul Serviciilor noastre</b></p>
+<p>Anumite Servicii vă permit să trimiteți conținut. Fii de 10 administrează platforma de
+management școlar interactiv și modulele integrate în această platformă: catalog școlar
+electronic, mesagerie, modului dedicat secretariatului, modulul dedicat directorilor, modulul
+pentru profesor și nu intervine asupra datelor conținute de sistem.
+Anumite Servicii vă pot oferi modalități de accesare și de eliminare a conținutului furnizat către
+respectivul Serviciu. De asemenea, anumite Servicii au Termeni și condiții sau setări care
+restrâng domeniul de utilizare a conținutului trimis în cadrul respectivelor Servicii. Asigurați-vă
+că dețineți drepturile necesare pentru a putea accesa modulele corespunzătoare pentru
+întregul conținut pe care îl trimiteți către Serviciile noastre.
+Puteți afla mai multe informații despre modul în care Fii de 10 utilizează şi stochează conținutul
+în politica de confidențialitate sau în Termenii și condițiile suplimentare pentru anumite Servicii
+care vor fi puse la dispoziția dumneavoastră pe website-ul  www.fiide10.ro . Dacă trimiteți
+feedback sau sugestii despre Servicii, putem utiliza feedbackul sau sugestiile respective fără a se
+încălca legislația privind protecția datelor cu caracter personal.</p>
+<p><b>Despre programele software din cadrul Serviciilor</b></p>
+<p>Nu aveți dreptul să copiați, să modificați, să distribuiți, să vindeți sau să închiriați nicio parte a
+Serviciilor și a programelor software incluse; nu aveți dreptul să refaceți sau să încercați să
+extrageți codul sursă al respectivului program software, cu excepția cazurilor în care aveți
+permisiunea scrisă din partea noastră.</p>
+<p><b>Modificarea și încetarea furnizării Serviciilor</b></p>
+<p>Modificăm și îmbunătățim în mod constant Serviciile. Putem să adăugăm sau să eliminăm
+funcționalități ori funcții, iar aceste modificări vor fi notificate în prealabil astfel încat furnizarea
+de servicii către dumneavoastră să nu sufere.</p>
+<p><b>Garanții și declinarea responsabilității</b></p>
+<p>Furnizăm Serviciile la un nivel de aptitudine și atenție rezonabil din punct de vedere comercial,
+cu respectarea securității, integrității și confidențialității datelor și sperăm că vă va face plăcere
+să le utilizați. Dar, există anumite lucruri pe care nu le putem promite în legătură cu Serviciile.
+Unitatea școlară este responsabilă de actualitatea și integralitatea datelor cu privire la absențe,
+note discilpine/materii predate din sistem. Pentru claritate, Fii de 10 nu are dreptul de a
+interveni în niciun fel asupra datelor din sistem furnizate către unitatea școlară, cu excepția
+cazurilor în care Fii de 10 se angajează în mod explicit să realizeze aceasta acțiune prin contract,
+cu respectarea prevederilor legale. În orice altă situație, Fii de 10 nu este responsabil de lipsa
+datelor din sistem ce ar trebui să fie furnizate de către unitatea școlară sau întârzieri privind
+completarea datelor de către unitatea școlară.</p>
+<p><b>Răspunderea pentru Serviciile noastre</b></p>
 
+<p>Fii de 10 nu va fi în niciun caz respnsabil pentru nicio pierdere sau pagubă care intră în categoria
+forței majore.</p>
 
-                <p>4. <b>Content</b></p><p>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material (“Content”). You are responsible for Content that you post on or through Service, including its legality, reliability, and appropriateness.</p><p>By posting Content on or through Service, You represent and warrant that: (i) Content is yours (you own it) and/or you have the right to use it and the right to grant us the rights and license as provided in these Terms, and (ii) that the posting of your Content on or through Service does not violate the privacy rights, publicity rights, copyrights, contract rights or any other rights of any person or entity. We reserve the right to terminate the account of anyone found to be infringing on a copyright.</p><p>You retain any and all of your rights to any Content you submit, post or display on or through Service and you are responsible for protecting those rights. We take no responsibility and assume no liability for Content you or any third party posts on or through Service. However, by posting Content using Service you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such Content on and through Service. You agree that this license includes the right for us to make your Content available to other users of Service, who may also use your Content subject to these Terms.</p><p>FiiDe10.EduManager has the right but not the obligation to monitor and edit all Content provided by users.</p><p>In addition, Content found on or through this Service are the property of FiiDe10.EduManager or used with permission. You may not distribute, modify, transmit, reuse, download, repost, copy, or use said Content, whether in whole or in part, for commercial purposes or for personal gain, without express advance written permission from us.</p>
-                <p>5. <b>Prohibited Uses</b></p>
-                <p>You may use Service only for lawful purposes and in accordance with Terms. You agree not to use Service:</p>
-                <p>0.1. In any way that violates any applicable national or international law or regulation.</p>
-                <p>0.2. For the purpose of exploiting, harming, or attempting to exploit or harm minors in any way by exposing them to inappropriate content or otherwise.</p>
-                <p>0.3. To transmit, or procure the sending of, any advertising or promotional material, including any “junk mail”, “chain letter,” “spam,” or any other similar solicitation.</p>
-                <p>0.4. To impersonate or attempt to impersonate Company, a Company employee, another user, or any other person or entity.</p>
-                <p>0.5. In any way that infringes upon the rights of others, or in any way is illegal, threatening, fraudulent, or harmful, or in connection with any unlawful, illegal, fraudulent, or harmful purpose or activity.</p>
-                <p>0.6. To engage in any other conduct that restricts or inhibits anyone’s use or enjoyment of Service, or which, as determined by us, may harm or offend Company or users of Service or expose them to liability.</p>
-                <p>Additionally, you agree not to:</p>
-                <p>0.1. Use Service in any manner that could disable, overburden, damage, or impair Service or interfere with any other party’s use of Service, including their ability to engage in real time activities through Service.</p>
-                <p>0.2. Use any robot, spider, or other automatic device, process, or means to access Service for any purpose, including monitoring or copying any of the material on Service.</p>
-                <p>0.3. Use any manual process to monitor or copy any of the material on Service or for any other unauthorized purpose without our prior written consent.</p>
-                <p>0.4. Use any device, software, or routine that interferes with the proper working of Service.</p>
-                <p>0.5. Introduce any viruses, trojan horses, worms, logic bombs, or other material which is malicious or technologically harmful.</p>
-                <p>0.6. Attempt to gain unauthorized access to, interfere with, damage, or disrupt any parts of Service, the server on which Service is stored, or any server, computer, or database connected to Service.</p>
-                <p>0.7. Attack Service via a denial-of-service attack or a distributed denial-of-service attack.</p>
-                <p>0.8. Take any action that may damage or falsify Company rating.</p>
-                <p>0.9. Otherwise attempt to interfere with the proper working of Service.</p>
-                <p>6. <b>Analytics</b></p>
-                <p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>
-                <p>7. <b>No Use By Minors</b></p>
-                <p>Service is intended only for access and use by individuals at least eighteen (18) years old. By accessing or using Service, you warrant and represent that you are at least eighteen (18) years of age and with the full authority, right, and capacity to enter into this agreement and abide by all of the terms and conditions of Terms. If you are not at least eighteen (18) years old, you are prohibited from both the access and usage of Service.</p>
-                <p>8. <b>Accounts</b></p><p>When you create an account with us, you guarantee that you are above the age of 18, and that the information you provide us is accurate, complete, and current at all times. Inaccurate, incomplete, or obsolete information may result in the immediate termination of your account on Service.</p><p>You are responsible for maintaining the confidentiality of your account and password, including but not limited to the restriction of access to your computer and/or account. You agree to accept responsibility for any and all activities or actions that occur under your account and/or password, whether your password is with our Service or a third-party service. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.</p><p>You may not use as a username the name of another person or entity or that is not lawfully available for use, a name or trademark that is subject to any rights of another person or entity other than you, without appropriate authorization. You may not use as a username any name that is offensive, vulgar or obscene.</p><p>We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders in our sole discretion.</p>
-                <p>9. <b>Intellectual Property</b></p>
-                <p>Service and its original content (excluding Content provided by users), features and functionality are and will remain the exclusive property of FiiDe10.EduManager and its licensors. Service is protected by copyright, trademark, and other laws of  and foreign countries. Our trademarks may not be used in connection with any product or service without the prior written consent of FiiDe10.EduManager.</p>
-                <p>10. <b>Copyright Policy</b></p>
-                <p>We respect the intellectual property rights of others. It is our policy to respond to any claim that Content posted on Service infringes on the copyright or other intellectual property rights (“Infringement”) of any person or entity.</p>
-                <p>If you are a copyright owner, or authorized on behalf of one, and you believe that the copyrighted work has been copied in a way that constitutes copyright infringement, please submit your claim via email to support@fiide10.ro, with the subject line: “Copyright Infringement” and include in your claim a detailed description of the alleged Infringement as detailed below, under “DMCA Notice and Procedure for Copyright Infringement Claims”</p>
-                <p>You may be held accountable for damages (including costs and attorneys’ fees) for misrepresentation or bad-faith claims on the infringement of any Content found on and/or through Service on your copyright.</p>
-                <p>11. <b>DMCA Notice and Procedure for Copyright Infringement Claims</b></p>
-                <p>You may submit a notification pursuant to the Digital Millennium Copyright Act (DMCA) by providing our Copyright Agent with the following information in writing (see 17 U.S.C 512(c)(3) for further detail):</p>
-                <p>0.1. an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright’s interest;</p>
-                <p>0.2. a description of the copyrighted work that you claim has been infringed, including the URL (i.e., web page address) of the location where the copyrighted work exists or a copy of the copyrighted work;</p>
-                <p>0.3. identification of the URL or other specific location on Service where the material that you claim is infringing is located;</p>
-                <p>0.4. your address, telephone number, and email address;</p>
-                <p>0.5. a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;</p>
-                <p>0.6. a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner’s behalf.</p>
-                <p>You can contact our Copyright Agent via email at support@fiide10.ro.</p>
-                <p>12. <b>Error Reporting and Feedback</b></p>
-                <p>You may provide us either directly at support@fiide10.ro or via third party sites and tools with information and feedback concerning errors, suggestions for improvements, ideas, problems, complaints, and other matters related to our Service (“Feedback”). You acknowledge and agree that: (i) you shall not retain, acquire or assert any intellectual property right or other right, title or interest in or to the Feedback; (ii) Company may have development ideas similar to the Feedback; (iii) Feedback does not contain confidential information or proprietary information from you or any third party; and (iv) Company is not under any obligation of confidentiality with respect to the Feedback. In the event the transfer of the ownership to the Feedback is not possible due to applicable mandatory laws, you grant Company and its affiliates an exclusive, transferable, irrevocable, free-of-charge, sub-licensable, unlimited and perpetual right to use (including copy, modify, create derivative works, publish, distribute and commercialize) Feedback in any manner and for any purpose.</p>
-                <p>13. <b>Links To Other Web Sites</b></p>
-                <p>Our Service may contain links to third party web sites or services that are not owned or controlled by FiiDe10.EduManager.</p>
-                <p>FiiDe10.EduManager has no control over, and assumes no responsibility for the content, privacy policies, or practices of any third party web sites or services. We do not warrant the offerings of any of these entities/individuals or their websites.</p>
-                <p>YOU ACKNOWLEDGE AND AGREE THAT COMPANY SHALL NOT BE RESPONSIBLE OR LIABLE, DIRECTLY OR INDIRECTLY, FOR ANY DAMAGE OR LOSS CAUSED OR ALLEGED TO BE CAUSED BY OR IN CONNECTION WITH USE OF OR RELIANCE ON ANY SUCH CONTENT, GOODS OR SERVICES AVAILABLE ON OR THROUGH ANY SUCH THIRD PARTY WEB SITES OR SERVICES.</p>
-                <p>WE STRONGLY ADVISE YOU TO READ THE TERMS OF SERVICE AND PRIVACY POLICIES OF ANY THIRD PARTY WEB SITES OR SERVICES THAT YOU VISIT.</p>
-                <p>14. <b>Disclaimer Of Warranty</b></p>
-                <p>THESE SERVICES ARE PROVIDED BY COMPANY ON AN “AS IS” AND “AS AVAILABLE” BASIS. COMPANY MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THEIR SERVICES, OR THE INFORMATION, CONTENT OR MATERIALS INCLUDED THEREIN. YOU EXPRESSLY AGREE THAT YOUR USE OF THESE SERVICES, THEIR CONTENT, AND ANY SERVICES OR ITEMS OBTAINED FROM US IS AT YOUR SOLE RISK.</p>
-                <p>NEITHER COMPANY NOR ANY PERSON ASSOCIATED WITH COMPANY MAKES ANY WARRANTY OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, QUALITY, ACCURACY, OR AVAILABILITY OF THE SERVICES. WITHOUT LIMITING THE FOREGOING, NEITHER COMPANY NOR ANYONE ASSOCIATED WITH COMPANY REPRESENTS OR WARRANTS THAT THE SERVICES, THEIR CONTENT, OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SERVICES WILL BE ACCURATE, RELIABLE, ERROR-FREE, OR UNINTERRUPTED, THAT DEFECTS WILL BE CORRECTED, THAT THE SERVICES OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS OR THAT THE SERVICES OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SERVICES WILL OTHERWISE MEET YOUR NEEDS OR EXPECTATIONS.</p>
-                <p>COMPANY HEREBY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, AND FITNESS FOR PARTICULAR PURPOSE.</p>
-                <p>THE FOREGOING DOES NOT AFFECT ANY WARRANTIES WHICH CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW.</p>
-                <p>15. <b>Limitation Of Liability</b></p>
-                <p>EXCEPT AS PROHIBITED BY LAW, YOU WILL HOLD US AND OUR OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS HARMLESS FOR ANY INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGE, HOWEVER IT ARISES (INCLUDING ATTORNEYS’ FEES AND ALL RELATED COSTS AND EXPENSES OF LITIGATION AND ARBITRATION, OR AT TRIAL OR ON APPEAL, IF ANY, WHETHER OR NOT LITIGATION OR ARBITRATION IS INSTITUTED), WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, OR ARISING OUT OF OR IN CONNECTION WITH THIS AGREEMENT, INCLUDING WITHOUT LIMITATION ANY CLAIM FOR PERSONAL INJURY OR PROPERTY DAMAGE, ARISING FROM THIS AGREEMENT AND ANY VIOLATION BY YOU OF ANY FEDERAL, STATE, OR LOCAL LAWS, STATUTES, RULES, OR REGULATIONS, EVEN IF COMPANY HAS BEEN PREVIOUSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. EXCEPT AS PROHIBITED BY LAW, IF THERE IS LIABILITY FOUND ON THE PART OF COMPANY, IT WILL BE LIMITED TO THE AMOUNT PAID FOR THE PRODUCTS AND/OR SERVICES, AND UNDER NO CIRCUMSTANCES WILL THERE BE CONSEQUENTIAL OR PUNITIVE DAMAGES. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF PUNITIVE, INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE PRIOR LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.</p>
-                <p>16. <b>Termination</b></p>
-                <p>We may terminate or suspend your account and bar access to Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of Terms.</p>
-                <p>If you wish to terminate your account, you may simply discontinue using Service.</p>
-                <p>All provisions of Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.</p>
-                <p>17. <b>Governing Law</b></p>
-                <p>These Terms shall be governed and construed in accordance with the laws of Romania, which governing law applies to agreement without regard to its conflict of law provisions.</p>
-                <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service and supersede and replace any prior agreements we might have had between us regarding Service.</p>
-                <p>18. <b>Changes To Service</b></p>
-                <p>We reserve the right to withdraw or amend our Service, and any service or material we provide via Service, in our sole discretion without notice. We will not be liable if for any reason all or any part of Service is unavailable at any time or for any period. From time to time, we may restrict access to some parts of Service, or the entire Service, to users, including registered users.</p>
-                <p>19. <b>Amendments To Terms</b></p>
-                <p>We may amend Terms at any time by posting the amended terms on this site. It is your responsibility to review these Terms periodically.</p>
-                <p>Your continued use of the Platform following the posting of revised Terms means that you accept and agree to the changes. You are expected to check this page frequently so you are aware of any changes, as they are binding on you.</p>
-                <p>By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use Service.</p>
-                <p>20. <b>Waiver And Severability</b></p>
-                <p>No waiver by Company of any term or condition set forth in Terms shall be deemed a further or continuing waiver of such term or condition or a waiver of any other term or condition, and any failure of Company to assert a right or provision under Terms shall not constitute a waiver of such right or provision.</p>
-                <p>If any provision of Terms is held by a court or other tribunal of competent jurisdiction to be invalid, illegal or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of Terms will continue in full force and effect.</p>
-                <p>21. <b>Acknowledgement</b></p>
-                <p>BY USING SERVICE OR OTHER SERVICES PROVIDED BY US, YOU ACKNOWLEDGE THAT YOU HAVE READ THESE TERMS OF SERVICE AND AGREE TO BE BOUND BY THEM.</p>
-                <p>22. <b>Contact Us</b></p>
-                <p>Please send your feedback, comments, requests for technical support by email: <b>support@fiide10.ro</b>.</p>
+<p><b>Despre prezenții Termeni și condiții</b></p>
+<p>Putem să modificăm prezenții Termeni și Condiții și Termenii și Condițiile suplimentare care se
+aplică unui Serviciu, de exemplu, pentru a corespunde schimbărilor survenite la nivelul
+legislației sau al Serviciilor noastre. Consultați periodic Termenii și condițiile.
+Pe această pagină vom posta notificările privind modificările prezenţilor Termeni şi Condiţii.
+Vom posta notificările cu privire la modificarea Termenilor și condițiilor suplimentare în cadrul
+Serviciului în cauză. Modificările nu se vor aplica retroactiv și vor intra în vigoare în termen de
+minimum paisprezece zile după postare. Totuși, modificările aferente funcțiilor noi ale unui
+Serviciu și cele din motive legale vor intra în vigoare imediat. Dacă nu sunteți de acord cu
+modificările aduse Termenilor și Condiţiilor aferente unui Serviciu, vă sugerăm să întrerupeți
+utilizarea Serviciului respectiv.<br/>
+ În cazul unei discrepanțe între prezenții Termeni și Condiții și Termenii și condițiile
+suplimentare, vor prevala Termenii și condiţiile suplimentare.<br/>
+ Prezenții Termeni și Condiții reglementează relația dintre Fii de 10 și dvs. Aceștia nu creează
+niciun fel de drepturi pentru terți beneficiari.<br/>
+ Dacă nu respectați prezenții Termeni și Condiții și nu luăm măsuri imediate, nu înseamnă că
+renunțăm la drepturile pe care le avem (de exemplu, dreptul de a lua măsuri pe viitor).<br/>
+ Dacă anumiți termeni și anumite condiții se dovedesc a fi inaplicabili, aceasta nu va afecta
+restul Termenilor și Condițiilor.<br/>
+Pentru informații despre modul în care puteți să contactați Fii de 10, accesați pagina noastră de
+contact.</p>
+             
             </div>
         </div>
     </section>
