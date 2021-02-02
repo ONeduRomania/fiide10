@@ -6,7 +6,7 @@
     <section class="section-info">
         <div class="container my-5">
             <div class="px-5 py-5">
-                <h2 class="text-center font-weight-bold">PRIVACY AND COOKIES POLICIES</h2>
+                <h2 class="text-center font-weight-bold">Politica de confidențialitate</h2>
             </div>
         </div>
     </section>
