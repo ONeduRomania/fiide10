@@ -1,23 +1,23 @@
 @extends('layouts.auth')
 
 @section('link')
-    <a class="btn btn-outline-white" href="{{ route('login') }}">{{ __('You have an account? Go and login!') }} <i class="fas fa-user"></i></a>
+    <a class="btn btn-outline-white" href="{{ route('login') }}">Deții un cont? <i class="fas fa-user"></i></a>
 @endsection
 
 @section('content')
     <div class="container-fluid px-5 py-5">
         <div class="mb-5 text-center">
             <h5 class="text-royal">
-                <strong>FiiDe10</strong>.EduManager.{{ __('Register') }}
+                <strong>Platforma Fii de 10!</strong>
             </h5>
         </div>
 
         <form class="mb-1" method="POST" action="{{ route('register') }}">
             @csrf
             <div class="form-group">
-                <label for="name" class="text-md-left">{{ __('Full name') }}</label>
+                <label for="name" class="text-md-left">Numele tău:</label>
 
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="{{ __('Enter your full name...') }}" required autocomplete="name" autofocus>
+                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  required autocomplete="name" autofocus>
                 @error('name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -26,9 +26,9 @@
             </div>
 
             <div class="form-group">
-                <label for="email" class="text-md-left">{{ __('E-Mail Address') }}</label>
+                <label for="email" class="text-md-left">Adresa de e-mail:</label>
 
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="{{ __('Enter your e-mail address...') }}" required autocomplete="email" autofocus>
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  required autocomplete="email" autofocus>
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -38,10 +38,10 @@
 
             <div class="form-group">
                 <label for="password" class="text-md-left">
-                    {{ __('Password') }}
+                Parola
                 </label>
 
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{ __('Enter your password...') }}" required autocomplete="current-password">
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  required autocomplete="current-password">
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -51,14 +51,14 @@
 
             <div class="form-group">
                 <label for="password-confirm" class="text-md-left">
-                    {{ __('Confirm your password') }}
+                   Confirmă parola:
                 </label>
 
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="{{ __('Enter your password again...') }}" required autocomplete="new-password">
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  required autocomplete="new-password">
             </div>
 
             <button type="submit" class="btn btn-outline-royal btn-block">
-                {{ __('Submit') }}
+                Creează contul
             </button>
         </form>
 
@@ -67,13 +67,13 @@
         <div class="row">
             <div class="col-md-12 col-lg-6 mt-1">
                 <a class="btn btn-royal btn-block">
-                    {{ __('Login with your Facebook account') }}
+                    Creează cu Facebook
                     <i class="fab fa-facebook-f"></i>
                 </a>
             </div>
             <div class="col-md-12 col-lg-6 mt-1">
                 <a class="btn btn-royal btn-block">
-                    {{ __('Login with your Google account') }}
+                    Creează cu Google
                     <i class="fab fa-google"></i>
                 </a>
             </div>
