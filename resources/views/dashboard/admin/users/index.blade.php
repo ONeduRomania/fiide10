@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="role" class="text-md-left">Selectează rolul:</label>}</label>
+                                    <label for="role" class="text-md-left">Selectează rolul:</label>
                                     <select id="role" name="role" class="form-control @error('role') is-invalid @enderror" id="role" required autofocus>
                                         @foreach($roles as $role)
                                             <option value="{{ $role->name }}">{{ $role->name }}</option>
