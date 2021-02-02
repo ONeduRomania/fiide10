@@ -107,10 +107,10 @@ export default class Catalog extends Component {
                                     <span className="text-muted">Nume</span>
                                 </div>
                                 <div className="col-md-12 col-lg-3 text-center">
-                                    <span className="text-muted">Numar de note</span>
+                                    <span className="text-muted">Număr de note</span>
                                 </div>
                                 <div className="col-md-12 col-lg-3 text-center">
-                                    <span className="text-muted">Numar de absente</span>
+                                    <span className="text-muted">Număr de absențe</span>
                                 </div>
                                 <div className="col-md-12 col-lg-3 text-center">
                                     <span className="text-muted">Media</span>
@@ -194,7 +194,7 @@ export default class Catalog extends Component {
                                 </div>
                             </div>
                         </div>
-                        : <small className="text-muted">There is no log for this</small>
+                        : <small className="text-muted">Nu există nicio înregistrare.</small>
                     }
                 </div>
             </div>
