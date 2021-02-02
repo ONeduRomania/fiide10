@@ -98,7 +98,7 @@ class UsersController extends Controller
         }
 
         return back()->with([
-            'success' => __('The user has been deleted with success, congrats.')
+            'success' => __('Utilizatorul a fost șters cu succes.')
         ]);
     }
 
@@ -129,7 +129,7 @@ class UsersController extends Controller
         $user->forceDelete();
 
         return back()->with([
-            'success' => __('The user has been permanently deleted with success, congrats.')
+            'success' => __('Utilizatorul a fost șters definitiv.')
         ]);
     }
 
@@ -149,7 +149,7 @@ class UsersController extends Controller
         $user->restore();
 
         return back()->with([
-            'success' => __('The user has been restored with success, congrats.')
+            'success' => __('Utilizatorul a fost restaurat.')
         ]);
     }
 }
