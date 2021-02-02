@@ -6,9 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Primary Meta Tags --}}
-    <title>{{ config('app.name', 'FiiDe10') }}</title>
-    <meta name="title" content="{{ config('app.name', 'FiiDe10.EduManager') }}">
-    <meta name="description" content="Education management tool based on modules to help school staff, teachers and students.">
+    <title>Platforma Fii de 10!</title>
+    <meta name="title" content="Platforma Fii de 10!">
+    <meta name="description" content="Digitalizăm Educație Împreună!">
 
     {{--  Open Grapgh / Facebook  --}}
     <meta property="og:type" content="website">
@@ -39,3 +39,4 @@
     </div>
 </body>
 </html>
+
