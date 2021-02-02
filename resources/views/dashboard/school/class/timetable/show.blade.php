@@ -21,14 +21,14 @@
                     </button>
                     <div class="my-1 text-center">
                         <p class="text-white">
-                            <strong>{{ __('Error: ') }}</strong> {{ session('error') }}
+                            <strong>Eroare: </strong> {{ session('error') }}
                         </p>
                     </div>
                 </div>
             @endif
             <div class="container">
-                <h5>{{ __('Show timetable data') }}: {{ $timetable->subjects->name }}</h5>
-                <p class="text-muted">{{ __('From here you can edit the timetable\'s data set the subject\'s data.') }}</p>
+                <h5> Ziua: {{ $timetable->subjects->name }}</h5>
+                <p class="text-muted">De aici poți edita ziua materiei.</p>
 
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="date_start" class="text-md-left">{{ __('Enter the start date & time') }}</label>
+                                        <label for="date_start" class="text-md-left">Introdu ziua și ora la care începe ora:</label>
 
                                         <input id="date_start" type="datetime" class="form-control @error('date_start') is-invalid @enderror" name="date_start" value="{{ old('date_start') }}" placeholder="{{ __('Enter here the start date...') }}" required>
                                         @error('date_start')
@@ -62,7 +62,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="date_end" class="text-md-left">{{ __('Enter the finish date & time') }}</label>
+                                        <label for="date_end" class="text-md-left">Introdu ziua și ora la care ia final ora:</label>
 
                                         <input id="date_end" type="datetime" class="form-control @error('date_end') is-invalid @enderror" name="date_end" value="{{ old('date_end') }}" placeholder="{{ __('Enter here the finish date...') }}" required>
                                         @error('date_end')
@@ -72,7 +72,7 @@
                                         @enderror
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-gray">{{ __('Edit') }}</button>
+                                        <button type="submit" class="btn btn-gray">Editează</button>
                                     </div>
                                 </form>
                             </div>
