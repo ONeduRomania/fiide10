@@ -29,9 +29,6 @@
                     <br/>
                                     <p class="text-white-50">
                     {!!  __('&copy; 2021 Comunitatea ONedu România') !!}
-                </p>
-                    <a class="text-white text-decoration-none" href="">{{ __('Change language to Romanian') }}</a>
-                </p>
             </div>
         </div>
     </div>
