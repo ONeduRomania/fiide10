@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-royal">Crează <i class="fas fa-check"></i></button>
+                        <button type="submit" class="btn btn-royal">Creează <i class="fas fa-check"></i></button>
                     </div>
                 </form>
             </div>
