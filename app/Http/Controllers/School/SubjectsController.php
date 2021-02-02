@@ -34,7 +34,7 @@ class SubjectsController extends Controller
         }
 
         return back()->with([
-            'success' => __('The subject has been created with success, congrats.'),
+            'success' => __('Materia a fost adăugată cu succes.'),
             'user' => $subject
         ]);
     }
@@ -51,7 +51,7 @@ class SubjectsController extends Controller
         }
 
         return redirect()->route('subjects.index',  $school->id)->with([
-            'success' => __('The subject has been updated with success, congrats.'),
+            'success' => __('Materia a fost actualizată cu succes.'),
             'user' => $subject
         ]);
     }
@@ -65,7 +65,7 @@ class SubjectsController extends Controller
         }
 
         return redirect()->route('subjects.index',  $school->id)->with([
-            'success' => __('The subject has been deleted with success, congrats.')
+            'success' => __('Această materie a fost eliminată.')
         ]);
     }
 }
