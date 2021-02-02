@@ -35,7 +35,7 @@ class TimetableController extends Controller
         }
 
         return redirect()->route('timetable.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The timetable was updated with success.')
+            'success' => __('Orarul a fost actualizat cu succes.')
         ]);
     }
 
@@ -53,7 +53,7 @@ class TimetableController extends Controller
         }
 
         return redirect()->route('timetable.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The timetable was updated with success.')
+            'success' => __('Orarul a fost actualizat cu succes.')
         ]);
     }
 
@@ -68,7 +68,7 @@ class TimetableController extends Controller
         }
 
         return redirect()->route('timetable.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The timetable was deleted with success.')
+            'success' => __('Orarul a fost șters cu succes.')
         ]);
     }
 }
