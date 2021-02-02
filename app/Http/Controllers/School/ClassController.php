@@ -41,7 +41,7 @@ class ClassController extends Controller
         }
 
         return back()->with([
-            'success' => __('The classroom has been created with success, congrats.'),
+            'success' => __('Clasa a fost creată cu succes.'),
         ]);
     }
 
@@ -53,7 +53,7 @@ class ClassController extends Controller
         }
 
         return redirect()->route('classes.index', $school->id)->with([
-            'success' => __('The classroom has been deleted with success, congrats.')
+            'success' => __('Clasa a fost ștearsă.')
         ]);
     }
 
@@ -74,7 +74,7 @@ class ClassController extends Controller
         $invite->update(['code' => Str::substr(Crypt::encryptString($school->name . 'student'), 0, 127)]);
 
         return redirect()->route('classes.show',  ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The code has been renewed with success, congrats.')
+            'success' => __('Codul a fost reînoit.')
         ]);
     }
 
@@ -86,7 +86,7 @@ class ClassController extends Controller
         }
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The classroom has been updated with success, congrats.')
+            'success' => __('Clasa a fost actualizată cu succes.')
         ]);
     }
 
@@ -98,7 +98,7 @@ class ClassController extends Controller
         }
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The request for this student has been declined with success, congrats.')
+            'success' => __('Solicitarea elevului de a se alătura clasei a fost eliminată definitiv.')
         ]);
     }
 
@@ -112,7 +112,7 @@ class ClassController extends Controller
         Student::create(['user_id' => $request->user_id, 'class_id' => $class->id]);
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The request for this student has been answered with success, congrats.')
+            'success' => __('Felicitări! Ai un nou elev :)')
         ]);
     }
 }
