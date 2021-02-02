@@ -11,11 +11,9 @@
             <ul class="navbar-nav mx-auto text-center">{{ $slot }}</ul>
             <ul class="navbar-nav text-center">
                 @guest
-                      <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('register') }}">Creează un cont</a>
-                    </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-white btn-action" href="{{ route('login') }}">Loghează-te</a>
+                        <a class="nav-link text-white btn-action" href="https://onedu.ro/doneaza">Donează</a>
                     </li>
                 
                 @else
