@@ -32,6 +32,7 @@
     <section class="section-main d-flex align-items-center">
         <div class="container text-center">
                <img loading="lazy" class="aligncenter wp-image-55" src="https://onedu.ro/wp-content/uploads/2020/12/Platforma-Fii-de-10-03.png" alt="" width="300" height="300">
+            <br/>
             <a class="mt-2 btn btn-royal @auth d-none @endauth" href="{{ route('login') }}">Loghează-te acum!</a>   
         </div>
     </section>
