@@ -78,6 +78,7 @@
                 </a>
             </div>
         </div>
+        <br/>
           <p> Notă: Pentru ca contul să fie valid, în calitate de director sau director adjunct, trebuie încheiat <a href="https://fiide10.ro/acord-scoala.docx"> Acordul de parteneriat</a> între noi și școala dvs. </p>
           <p> Vă rugăm să trimiteți acordul semnat de către dvs. pe fiide10@onedu.ro, scanat. Mai multe instrucțiuni se regăsesc în acord.</p>
     </div>
