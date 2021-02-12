@@ -17555,7 +17555,7 @@ body {
 .section-main {
   min-height: 100vh;
   min-width: 100%;
-  background: url(/images/books-collection.jpg?006b6a220463e43a9c911847b6d24674) no-repeat center;
+  background: url(/images/main-back.png?6250c7e41f6ee6e6ecef758eeab783f7) no-repeat center;
   background-size: cover;
 }
 
@@ -17587,7 +17587,7 @@ body {
 
 .login-section {
   min-height: 100vh;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url(/images/login-background.jpg?bd5df3010b6b19d65eabeec8e58fdaff) no-repeat center;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url(/images/login-back.jpg?6cb4eb0cf8317e1fc30616883980685f) no-repeat center;
   background-size: cover;
 }
 
