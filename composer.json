@@ -16,6 +16,7 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "matthewbdaly/laravel-azure-storage": "^1.6",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
