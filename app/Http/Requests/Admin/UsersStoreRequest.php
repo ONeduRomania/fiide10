@@ -14,8 +14,8 @@ class UsersStoreRequest extends FormRequest
     public function authorize()
     {
         // @todo when done with permissions update this...
-        @can('manage-users');
-       // return true;
+    $user->givePermissionTo('manage-users', 'delete articles');
+     //  return true;
     }
 
     /**
