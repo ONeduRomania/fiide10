@@ -15,7 +15,7 @@ class UsersStoreRequest extends FormRequest
     {
         // @todo when done with permissions update this...
         $user->can('manage-users');
-        return true;
+        return view('dashboard.admin.users.index');
     }
 
     /**
