@@ -15,7 +15,7 @@ class UsersStoreRequest extends FormRequest
     {
         // @todo when done with permissions update this...
         $user->can('manage-users');
-        return view('dashboard.admin.users.index');
+        return true;
     }
 
     /**
@@ -23,19 +23,6 @@ class UsersStoreRequest extends FormRequest
      *
      * @return array
      */
-      public function store(UsersStoreRequest $request) {
-        try {
-            $user = User::create($request->only(['name', 'email', 'password']));
-        } catch (\Exception $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
-        $user->assignRole($request->role);
-
-        return back()->with([
-                'success' => __('The user has been created with success, congrats.'),
-                'user' => $user
-            ]);
-    }
 
     public function rules()
     {
