@@ -27,7 +27,7 @@ class BreadcrumbComponent extends Component
     public function render()
     {
         $route = Route::current();
-        $initialUris = Str::of(Route::current()->uri)->explode('/');
+        $initialUris = Str::of($route->uri)->explode('/');
         $uris = [];
         foreach ($initialUris as $uri) {
             if (Str::startsWith($uri, "{") && Str::endsWith($uri, "}")) {
