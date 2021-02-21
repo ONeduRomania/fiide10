@@ -43,7 +43,7 @@ class BreadcrumbComponent extends Component
                 }
             } else {
                 // If it is not a parameter, at least make it uppercase
-                $uris[] = Str::upper(Str::substr($uri, 0, 1)) . Str::substr($uri, 1, strlen($uri) - 1);
+                $uris[] = Str::ucfirst($uri);
             }
 
         }
