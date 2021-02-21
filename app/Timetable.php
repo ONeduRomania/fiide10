@@ -11,7 +11,7 @@ class Timetable extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['class_id', 'subject_id'];
+    protected $fillable = ['class_id', 'subject_id', 'data'];
 
     public static function allWithCache(Carbon $datetime, int $perpage, int $whichpage, int $classId) {
         return Cache::tags('timetables')->remember('timetables_page_' . $whichpage, $datetime, function () use ($perpage, $classId) {
@@ -19,7 +19,11 @@ class Timetable extends Model
         });
     }
 
-    public function timetable() {
+    public function classes() {
         return $this->belongsTo('App\Classroom', 'class_id');
+    }
+
+    public function subjects() {
+        return $this->belongsTo('App\Subject', 'subject_id');
     }
 }
