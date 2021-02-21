@@ -42,8 +42,8 @@ class BreadcrumbComponent extends Component
                     $uris[] = $uri;
                 }
             } else {
-                // If it is not a parameter, at least make it uppercase
-                $uris[] = Str::ucfirst($uri);
+                // If it is not a parameter, add it as is
+                $uris[] = $uri;
             }
 
         }
