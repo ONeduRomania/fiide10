@@ -3,6 +3,7 @@ FROM ubuntu:20.04
 LABEL maintainer="Taylor Otwell"
 
 ARG WWWGROUP
+ARG XDEBUG
 
 WORKDIR /var/www/html
 
@@ -27,8 +28,20 @@ RUN apt-get update \
        php7.4-xml php7.4-zip php7.4-bcmath php7.4-soap \
        php7.4-intl php7.4-readline php7.4-pcov \
        php7.4-msgpack php7.4-igbinary php7.4-ldap \
-       php7.4-redis php7.4-apcu \
-    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+       php7.4-redis php7.4-apcu
+
+RUN if [ ${XDEBUG} ] ; then \
+    apt-get install -y php7.4-xdebug \
+    && echo "[XDebug]" > /etc/php/7.4/cli/php.ini \
+    && echo "zend_extension="$(find /usr/lib/php/20190902/ -name xdebug.so)" > /etc/php/7.4/cli/php.ini" \
+    && echo "xdebug.mode = debug" >> /etc/php/7.4/cli/php.ini \
+    && echo "xdebug.start_with_request = yes" >> /etc/php/7.4/cli/php.ini \
+    && echo "xdebug.discover_client_host = true" >> /etc/php/7.4/cli/php.ini \
+    && echo "xdebug.idekey = PHPSTORM" >> /etc/php/7.4/cli/php.ini \
+    && echo "xdebug.client_port = 9000" >> /etc/php/7.4/cli/php.ini ;\
+fi;
+
+RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
     && apt-get install -y nodejs \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
