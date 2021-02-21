@@ -12,7 +12,7 @@ class Log extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['data'];
+    protected $fillable = ['data', 'subject', 'type', 'student', 'teacher'];
 
     public static function allWithCache(Carbon $datetime, int $perpage, int $whichpage, int $schoolId) {
         return Cache::tags('classrooms')->remember('classrooms_page_' . $whichpage, $datetime, function () use ($perpage, $schoolId) {
