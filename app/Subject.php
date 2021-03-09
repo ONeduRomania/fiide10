@@ -7,6 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * App\Subject
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $school_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereSchoolId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Subject extends Model
 {
     use HasFactory;
