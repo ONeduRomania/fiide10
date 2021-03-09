@@ -96,6 +96,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
 
         //region Rutele de teme
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework', 'HomeworkController@getHomeworkForSubject')->name('homework.show_all');
+        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework', 'HomeworkController@createHomeworkForSubject')->name('homework.create');
         //endregion
     });
 });
