@@ -6,6 +6,13 @@ use App\Teacher;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class StoreHomeworkRequest
+ * @package App\Http\Requests\Homework
+ *
+ * @property string $name
+ * @property string $due_date
+ */
 class StoreHomeworkRequest extends FormRequest
 {
     /**

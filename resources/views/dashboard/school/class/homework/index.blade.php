@@ -58,14 +58,15 @@
                                             teme trimise</small>
                                     </div>
                                     <div>
-                                        <form class="d-inline-flex mx-1">
+{{--                                        TODO: Intreaba persoana inainte de a sterge tema --}}
+                                        <form action="{{ route('homework.delete', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}" method="POST" class="d-inline-flex mx-1">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Elimină</button>
                                         </form>
 
                                         <a class="text-royal text-decoration-none mx-1"
-                                           href="{{ route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id]) }}">Editează</a>
+                                           href="{{ route('homework.check', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}">Editează</a>
                                     </div>
                                 </div>
                             </div>
@@ -90,33 +91,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name" class="text-md-left">{{ __('Homework name') }}</label>
-
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                   name="name" value="{{ old('name') }}"
-                                   placeholder="{{ __('Enter a name for this homework...') }}" required autofocus>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="due_date" class="text-md-left">Introdu data până când trebuie trimisă
-                                tema:</label>
-
-                            <input id="due_date" type="date"
-                                   class="form-control @error('due_date') is-invalid @enderror" name="due_date"
-                                   value="{{ old('due_date') }}" placeholder="{{ __('Enter the due date...') }}"
-                                   required>
-                            @error('due_date')
-                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        <x-homework-form></x-homework-form>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-royal">Creează <i class="fas fa-check"></i></button>

@@ -52,6 +52,49 @@ class HomeworkController extends Controller
         ]);
     }
 
+    public function updateHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, StoreHomeworkRequest $request) {
+        try {
+            if ($request->due_date != null) {
+                $homework->due_date = $request->due_date;
+                // TODO: Trimite notificare pentru data schimbată dacă e cazul
+            }
+
+            if ($request->name != null) {
+                $homework->name = $request->name;
+            }
+
+            $homework->save();
+        } catch (\Exception $exception) {
+            return redirect()
+                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->withErrors($exception->getMessage())
+                ->withInput();
+        }
+
+        return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([
+            'success' => __('Tema a fost editată cu succes.')
+        ]);
+    }
+
+    public function deleteHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework) {
+        try {
+            $homework->delete();
+        } catch (\Exception $exception) {
+            return redirect()
+                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->withErrors($exception->getMessage())
+                ->withInput();
+        }
+
+        return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([
+            'success' => __('Tema a fost ștearsă cu succes.')
+        ]);
+    }
+
+    public function checkHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework) {
+        return view('dashboard.school.class.homework.show', compact('school', 'classroom', 'homework', 'subject'));
+    }
+
     public function getHomeworkForStudent(School $school, Classroom $classroom, Request $request)
     {
         // TODO: Implement
