@@ -6,12 +6,16 @@ use App\Classroom;
 use App\Homework;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
+use App\Http\Requests\SubmitHomeworkRequest;
 use App\School;
+use App\Student;
 use App\Subject;
+use App\SubmittedHomework;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HomeworkController extends Controller
 {
@@ -111,11 +115,54 @@ class HomeworkController extends Controller
 
     }
 
-    public function turnIn(School $school, Classroom $classroom, Request $request)
+    public function submitHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
     {
-        // TODO: Implement
-        $subjectId = $request->get('subject');
-        return view('dashboard.school.class.index');
+        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject'));
+
+    }
+
+    public function turnIn(School $school, Classroom $classroom, Subject $subject, Homework $homework, SubmitHomeworkRequest $request)
+    {
+        // TODO: Limit file size and count
+        /** @var User $currentUser */
+        $currentUser = $request->user();
+        /** @var Student|null $studentEntity */
+        $studentEntity = Student::where('user_id', $currentUser->id)->get()->first();
+        if ($studentEntity == null) {
+            // TODO: Complain
+            return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject'));
+        }
+
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        try {
+            $successful = \Storage::cloud()->putFileAs('student-' . $studentEntity->id, $file, Str::random(5) . $fileName);
+            $uploadUrl = \Storage::cloud()->url($successful);
+
+            /** @var SubmittedHomework|null $submission */
+            $submission = SubmittedHomework::where('homework_id', $homework->id)->get()->first();
+            if ($submission == null) {
+                $submission = new SubmittedHomework();
+                $submission->student_id = $studentEntity->id;
+                $submission->homework_id = $homework->id;
+                $submission->uploaded_urls = [];
+            }
+
+            $uploadedUrls = $submission->uploaded_urls;
+            $uploadedUrls[$fileName] = [
+                "name" => $fileName,
+                "url" => $uploadUrl,
+                "uploadTime" => time()
+            ];
+            $submission->uploaded_urls = json_encode($uploadedUrls);
+
+            $submission->save();
+        } catch (\Exception $e) {
+            $successful = false;
+            // TODO: Show error to user
+        }
+
+        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject'));
 
     }
 }

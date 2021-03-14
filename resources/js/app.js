@@ -14,3 +14,19 @@ require('./bootstrap');
 
 require('./components/Timetable');
 require('./components/Catalog');
+
+/**
+ * Import Dropzone for file uploads
+ */
+import Dropzone from 'dropzone';
+Dropzone.options.homeworkSubmitForm = {
+    dictDefaultMessage: "Trage un fișier sau dă click pentru a selecta unul.",
+    dictRemoveFileConfirmation: "Ești sigur(ă) că vrei să ștergi acest fișier?",
+    addRemoveLinks: true,
+    init: function() {
+        this.on("removedfile", function (file) {
+            // TODO: Șterge fișierul din db
+            console.log("Removed file " + file);
+        })
+    }
+}
