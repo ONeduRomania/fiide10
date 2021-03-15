@@ -26,3 +26,28 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script defer>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.Dropzone.options.homeworkSubmitForm = {
+                dictDefaultMessage: "Trage un fișier sau dă click pentru a selecta unul.",
+                dictRemoveFileConfirmation: "Ești sigur(ă) că vrei să ștergi acest fișier?",
+                addRemoveLinks: true,
+                maxFilesize: {{ env("MAX_HOMEWORK_FILESIZE_KB", 51200) / 1024 }}, // This is in megabytes
+                acceptedFiles: {!! stripcslashes($mimeTypes) !!},
+                init: function() {
+                    this.on("removedfile", function (file) {
+                        // TODO: Șterge fișierul din db
+                        console.log("Removed file " + file);
+                    })
+                }
+            }
+
+
+        })
+
+
+    </script>
+@endsection

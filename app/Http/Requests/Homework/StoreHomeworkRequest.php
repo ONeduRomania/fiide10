@@ -12,6 +12,11 @@ use Illuminate\Foundation\Http\FormRequest;
  *
  * @property string $name
  * @property string $due_date
+ * @property string accept_word_upload
+ * @property string accept_pdf_upload
+ * @property string accept_image_upload
+ * @property string accept_code_upload
+ * @property string accept_archive_upload
  */
 class StoreHomeworkRequest extends FormRequest
 {

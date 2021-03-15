@@ -109309,17 +109309,6 @@ __webpack_require__(/*! ./components/Catalog */ "./resources/js/components/Catal
 
 
 
-dropzone__WEBPACK_IMPORTED_MODULE_0___default.a.options.homeworkSubmitForm = {
-  dictDefaultMessage: "Trage un fișier sau dă click pentru a selecta unul.",
-  dictRemoveFileConfirmation: "Ești sigur(ă) că vrei să ștergi acest fișier?",
-  addRemoveLinks: true,
-  init: function init() {
-    this.on("removedfile", function (file) {
-      // TODO: Șterge fișierul din db
-      console.log("Removed file " + file);
-    });
-  }
-};
 
 /***/ }),
 

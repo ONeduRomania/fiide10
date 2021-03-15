@@ -13,6 +13,7 @@ use App\Subject;
 use App\SubmittedHomework;
 use App\Teacher;
 use App\User;
+use GuzzleHttp\Psr7\MimeType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -42,6 +43,9 @@ class HomeworkController extends Controller
             $homework->teacher_id = $teacher->id;
             $homework->due_date = $request->due_date;
             $homework->name = $request->name;
+
+            $formats = $this->populateFormatArray($request, []);
+            $homework->filetypes = json_encode($formats);
             $homework->save();
 
         } catch (\Exception $exception) {
@@ -56,7 +60,8 @@ class HomeworkController extends Controller
         ]);
     }
 
-    public function updateHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, StoreHomeworkRequest $request) {
+    public function updateHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, StoreHomeworkRequest $request)
+    {
         try {
             if ($request->due_date != null) {
                 $homework->due_date = $request->due_date;
@@ -66,6 +71,11 @@ class HomeworkController extends Controller
             if ($request->name != null) {
                 $homework->name = $request->name;
             }
+
+            $formats = json_decode($homework->filetypes, true);
+            $formats = $this->populateFormatArray($request, $formats);
+
+            $homework->filetypes = json_encode($formats);
 
             $homework->save();
         } catch (\Exception $exception) {
@@ -80,7 +90,8 @@ class HomeworkController extends Controller
         ]);
     }
 
-    public function deleteHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework) {
+    public function deleteHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
+    {
         try {
             $homework->delete();
         } catch (\Exception $exception) {
@@ -95,7 +106,9 @@ class HomeworkController extends Controller
         ]);
     }
 
-    public function checkHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework) {
+    public function checkHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
+    {
+        // TODO: Show submitted homework
         return view('dashboard.school.class.homework.show', compact('school', 'classroom', 'homework', 'subject'));
     }
 
@@ -117,26 +130,40 @@ class HomeworkController extends Controller
 
     public function submitHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
     {
-        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject'));
+        $mimeTypes = [];
+        $fileTypes = json_decode($homework->filetypes, true);
+        foreach ($fileTypes as $type) {
+            $mime = MimeType::fromExtension($type);
+            $mimeTypes[] = $mime;
+        }
+        $mimeTypes = json_encode($mimeTypes);
+        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject', 'mimeTypes'));
 
     }
 
     public function turnIn(School $school, Classroom $classroom, Subject $subject, Homework $homework, SubmitHomeworkRequest $request)
     {
-        // TODO: Limit file size and count
-        /** @var User $currentUser */
-        $currentUser = $request->user();
-        /** @var Student|null $studentEntity */
-        $studentEntity = Student::where('user_id', $currentUser->id)->get()->first();
-        if ($studentEntity == null) {
-            // TODO: Complain
-            return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject'));
-        }
+
+        /**
+         * We get the student in the authorize() method of the request.
+         *
+         * @var Student $studentEntity
+         */
+        $studentEntity = $request->student;
 
         $file = $request->file('file');
+        if ($file == null) {
+            return redirect()
+                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->withErrors(__("Te rugăm să te asiguri că ai încărcat fișierele și să încerci din nou."));
+        }
         $fileName = $file->getClientOriginalName();
         try {
             $successful = \Storage::cloud()->putFileAs('student-' . $studentEntity->id, $file, Str::random(5) . $fileName);
+            if (!$successful) {
+                // TODO: Report
+                throw new \Exception("Failed file upload");
+            }
             $uploadUrl = \Storage::cloud()->url($successful);
 
             /** @var SubmittedHomework|null $submission */
@@ -158,11 +185,54 @@ class HomeworkController extends Controller
 
             $submission->save();
         } catch (\Exception $e) {
-            $successful = false;
-            // TODO: Show error to user
+            // TODO: Log
+            return redirect()
+                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->withErrors("A apărut o eroare la încărcarea temei. Promitem că ne vom ocupa de ea și revenim!")
+                ->withInput();
         }
 
-        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject'));
+        return view('dashboard.school.class.homework.show', compact('school', 'classroom', 'homework', 'subject'));
 
+    }
+
+    /**
+     * @param StoreHomeworkRequest $request
+     * @return StoreHomeworkRequest
+     */
+    public function populateFormatsArray(StoreHomeworkRequest $request): StoreHomeworkRequest
+    {
+        return $request;
+    }
+
+    /**
+     * @param StoreHomeworkRequest $request
+     * @param array $formats
+     * @return mixed
+     * @throws \Exception
+     */
+    public function populateFormatArray(StoreHomeworkRequest $request, array $formats)
+    {
+        if ($request->accept_word_upload === "on") {
+            $formats = array_merge($formats, ["doc", "docx", "odt"]);
+        }
+        if ($request->accept_pdf_upload === "on") {
+            $formats = array_merge($formats, ["pdf"]);
+        }
+        if ($this->populateFormatsArray($request)->accept_image_upload === "on") {
+            $formats = array_merge($formats, ["png", "jpg", "bmp", "jpeg"]);
+        }
+        if ($request->accept_code_upload === "on") {
+            $formats = array_merge($formats, ["c", "cpp", "cs", "pas", "dart", "r", "rb", "dart", "js", "ts", "php", "m", "kt", "swift", "java"]);
+        }
+        if ($request->accept_archive_upload === "on") {
+            $formats = array_merge($formats, ["rar", "zip", "7z", "gz"]);
+        }
+
+        $formats = array_unique($formats);
+        if (count($formats) == 0) {
+            throw new \Exception(__("Selectează măcar un tip de fișiere!"));
+        }
+        return $formats;
     }
 }
