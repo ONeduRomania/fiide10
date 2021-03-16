@@ -109366,6 +109366,11 @@ $('#date_end').datepicker({
   placeholder: 'Please enter the date',
   align: 'center'
 });
+$('#due_date').datepicker({
+  type: 'datetime',
+  placeholder: 'Please enter the date',
+  align: 'left'
+});
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

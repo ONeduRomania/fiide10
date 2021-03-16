@@ -18,7 +18,8 @@
         "laravel/ui": "^3.0",
         "matthewbdaly/laravel-azure-storage": "^1.6",
         "spatie/laravel-permission": "^3.17",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-zip": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

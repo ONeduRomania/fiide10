@@ -14,6 +14,7 @@ use App\SubmittedHomework;
 use App\Teacher;
 use App\User;
 use GuzzleHttp\Psr7\MimeType;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -108,8 +109,56 @@ class HomeworkController extends Controller
 
     public function checkHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
     {
-        // TODO: Show submitted homework
+        $submittedHomeworks = $homework->submissions;
+        foreach ($submittedHomeworks as $submission) {
+            $submission->student = Student::whereId($submission->student_id)->first();
+        }
         return view('dashboard.school.class.homework.show', compact('school', 'classroom', 'homework', 'subject'));
+    }
+
+    public function downloadHomeworkFiles(School $school, Classroom $classroom, Subject $subject, Homework $homework, SubmittedHomework $submission)
+    {
+        $urls = json_decode($submission->uploaded_urls, true);
+        if (count($urls) == 0) {
+            return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->withErrors('Nu există niciun fișier de descărcat.');
+        }
+
+        if (count($urls) > 1) {
+            $student = Student::whereId($submission->student_id)->first();
+            if ($student != null) {
+                $fName = $homework->name . " - " . $student->user->name;
+            } else {
+                $fName = $homework->name . " - " . $submission->id;
+            }
+
+            $zip = new \ZipArchive();
+            $fileName = tempnam(sys_get_temp_dir(), 'fiidezece_');
+            if ($zip->open($fileName, \ZipArchive::CREATE) !== TRUE) {
+                // TODO: Report
+                return redirect()
+                    ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                    ->withErrors("A apărut o eroare în descărcarea temei. Te rugăm să contactezi echipa de suport.")
+                    ->withInput();
+            }
+            foreach ($urls as $downloadedFileName => $fileData) {
+                try {
+                    $fileContents = \Storage::cloud()->get($fileData["path"]);
+                    $zip->addFromString($downloadedFileName, $fileContents);
+                } catch (FileNotFoundException $e) {
+                    // TODO: Report
+                    return redirect()
+                        ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                        ->withErrors("A apărut o eroare în descărcarea temei. Te rugăm să contactezi echipa de suport.")
+                        ->withInput();
+                }
+            }
+            $zip->close();
+            return \Storage::disk('root')->download("/" . $fileName, $fName . ".zip");
+        }
+
+        $fileName = array_key_first($urls);
+        return \Storage::cloud()->download($urls[$fileName]["path"], $fileName);
+
     }
 
     public function getHomeworkForStudent(School $school, Classroom $classroom, Request $request)
@@ -130,11 +179,11 @@ class HomeworkController extends Controller
 
     public function submitHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
     {
-        $mimeTypes = [];
+        $mimeTypes = "";
         $fileTypes = json_decode($homework->filetypes, true);
         foreach ($fileTypes as $type) {
             $mime = MimeType::fromExtension($type);
-            $mimeTypes[] = $mime;
+            $mimeTypes = $mimeTypes . "," . $mime;
         }
         $mimeTypes = json_encode($mimeTypes);
         return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject', 'mimeTypes'));
@@ -175,10 +224,11 @@ class HomeworkController extends Controller
                 $submission->uploaded_urls = [];
             }
 
-            $uploadedUrls = $submission->uploaded_urls;
+            $uploadedUrls = json_decode($submission->uploaded_urls, true);
             $uploadedUrls[$fileName] = [
                 "name" => $fileName,
                 "url" => $uploadUrl,
+                "path" => $successful,
                 "uploadTime" => time()
             ];
             $submission->uploaded_urls = json_encode($uploadedUrls);

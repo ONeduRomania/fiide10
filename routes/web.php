@@ -101,6 +101,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::delete('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'deleteHomework'])->name('homework.delete');
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'checkHomework'])->name('homework.check');
         Route::match(['PUT', 'PATCH'],'/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'updateHomework'])->name('homework.update');
+        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submissions/{submission}/download', [HomeworkController::class, 'downloadHomeworkFiles'])->name('homework.download_submission');
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'submitHomework'])->name('homework.submit_get');
         Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'turnIn'])->name('homework.submit_post');
         //endregion
