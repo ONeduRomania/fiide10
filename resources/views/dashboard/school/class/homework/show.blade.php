@@ -35,7 +35,9 @@
                             <div class="card shadow-lg my-1">
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <div>
+                                        @if ($submittedHomework->student != null)
                                         {{ $submittedHomework->student->user->name }}
+                                        @endif
                                         <br/>
                                         <small class="text-muted">Data trimiterii:
                                             <strong>{{ $submittedHomework->created_at  }}</strong></small>

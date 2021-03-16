@@ -177,8 +177,14 @@ class HomeworkController extends Controller
 
     }
 
-    public function submitHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
+    public function submitHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, Request $request)
     {
+        $currentUser = $request->user();
+        $studentEntity = Student::where('user_id', $currentUser->id)->first();
+        if ($studentEntity == null) {
+            return redirect('welcome');
+        }
+
         $mimeTypes = "";
         $fileTypes = json_decode($homework->filetypes, true);
         foreach ($fileTypes as $type) {
@@ -186,7 +192,19 @@ class HomeworkController extends Controller
             $mimeTypes = $mimeTypes . "," . $mime;
         }
         $mimeTypes = json_encode($mimeTypes);
-        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject', 'mimeTypes'));
+
+        /** @var SubmittedHomework|null $submission */
+        $submission = SubmittedHomework::where('homework_id', $homework->id)->where('student_id', $studentEntity->id)->get()->first();
+        $uploadedUrls = [];
+        if ($submission != null) {
+            foreach (json_decode($submission->uploaded_urls, true) as $fileName => $fileData) {
+                $uploadedUrls[]['name'] = $fileName;
+
+            }
+        }
+        $uploadedUrls = json_encode($uploadedUrls);
+
+        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject', 'mimeTypes', 'uploadedUrls'));
 
     }
 
@@ -216,7 +234,7 @@ class HomeworkController extends Controller
             $uploadUrl = \Storage::cloud()->url($successful);
 
             /** @var SubmittedHomework|null $submission */
-            $submission = SubmittedHomework::where('homework_id', $homework->id)->get()->first();
+            $submission = SubmittedHomework::where('homework_id', $homework->id)->where('student_id', $studentEntity->id)->get()->first();
             if ($submission == null) {
                 $submission = new SubmittedHomework();
                 $submission->student_id = $studentEntity->id;
@@ -242,7 +260,7 @@ class HomeworkController extends Controller
                 ->withInput();
         }
 
-        return view('dashboard.school.class.homework.show', compact('school', 'classroom', 'homework', 'subject'));
+        return response("ok");
 
     }
 

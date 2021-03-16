@@ -58,11 +58,14 @@
                                             teme trimise</small>
                                     </div>
                                     <div>
-{{--                                        TODO: Intreaba persoana inainte de a sterge tema --}}
-                                        <form action="{{ route('homework.delete', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}" method="POST" class="d-inline-flex mx-1">
+                                        <form
+                                            action="{{ route('homework.delete', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}"
+                                            method="POST" class="d-inline-flex mx-1">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Elimină</button>
+                                            <button type="submit" class="btn btn-danger">
+                                                Elimină
+                                            </button>
                                         </form>
 
                                         <a class="text-royal text-decoration-none mx-1"
@@ -103,12 +106,17 @@
 
 @endsection
 @section('scripts')
-    {{--  Show the modal again if there was an error, so the user knows the operation is not successful.  --}}
     <script type="text/javascript">
-        @if (count($errors) > 0)
         window.addEventListener('load', function () {
+            @if (count($errors) > 0)
+            // Show the modal if an error occurred, so the user knows the operation is not successful.
             window.$('#homeworkModal').modal('show');
+            @endif
+
+            // Ask before deleting the homework.
+            window.$(document).on("submit", "form", function () {
+                return confirm("Ești sigur că vrei să ștergi această temă?");
+            });
         });
-        @endif
     </script>
 @endsection
