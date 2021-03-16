@@ -5,6 +5,7 @@ namespace App\Http\Controllers\School;
 use App\Classroom;
 use App\Homework;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteFileFromSubmission;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
 use App\Http\Requests\SubmitHomeworkRequest;
 use App\School;
@@ -262,6 +263,28 @@ class HomeworkController extends Controller
 
         return response("ok");
 
+    }
+
+    public function deleteFileFromSubmission(School $school, Classroom $classroom, Subject $subject, Homework $homework, DeleteFileFromSubmission $request) {
+        $currentValues = json_decode($request->submission->uploaded_urls, true);
+        $valueToDelete = $request->file_name;
+
+        // Verify that the file exists
+        if (!array_key_exists($valueToDelete, $currentValues)) {
+            return redirect()
+                ->route('homework.sunmit', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id])
+                ->withErrors("Fișierul care a fost speicifcat nu există.");
+        }
+
+        // Delete the file from storage
+        \Storage::cloud()->delete($currentValues[$valueToDelete]["path"]);
+
+        // Delete the file from the database
+        unset($currentValues[$valueToDelete]);
+        $request->submission->uploaded_urls = json_encode($currentValues);
+        $request->submission->save();
+
+        return response("ok");
     }
 
     /**

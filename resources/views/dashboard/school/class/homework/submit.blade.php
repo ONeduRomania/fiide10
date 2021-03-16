@@ -41,8 +41,13 @@
                 init: function () {
                     const thDr = this;
                     this.on("removedfile", function (file) {
-                        // TODO: Șterge fișierul din db
-                        console.log("Removed file " + file);
+                        const data = new FormData();
+                        data.append("file_name", file.name);
+                        window.axios.post("{{ route('homework.submit_delete_file', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}", data).catch(e => {
+                            // TODO: Report
+                            alert("Fișierul nu a putut fi șters.")
+                            window.location.reload();
+                        })
                     });
 
                     uploadedFiles.forEach(function (mockFile) {
