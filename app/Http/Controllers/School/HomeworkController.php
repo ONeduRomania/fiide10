@@ -5,7 +5,7 @@ namespace App\Http\Controllers\School;
 use App\Classroom;
 use App\Homework;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeleteFileFromSubmission;
+use App\Http\Requests\Homework\DeleteFileFromSubmission;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
 use App\Http\Requests\SubmitHomeworkRequest;
 use App\School;
@@ -265,7 +265,8 @@ class HomeworkController extends Controller
 
     }
 
-    public function deleteFileFromSubmission(School $school, Classroom $classroom, Subject $subject, Homework $homework, DeleteFileFromSubmission $request) {
+    public function deleteFileFromSubmission(School $school, Classroom $classroom, Subject $subject, Homework $homework, DeleteFileFromSubmission $request)
+    {
         $currentValues = json_decode($request->submission->uploaded_urls, true);
         $valueToDelete = $request->file_name;
 
