@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\MimeType;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class HomeworkController extends Controller
@@ -164,17 +165,40 @@ class HomeworkController extends Controller
 
     public function getHomeworkForStudent(School $school, Classroom $classroom, Request $request)
     {
-        // TODO: Implement
-        $subjectId = $request->get('subject');
-        return view('dashboard.school.class.index');
+        // This parameter controls whether we should show all the homeworks or only the unsubmitted ones.
+        $shouldShowAll = $request->query('all');
 
-    }
+        if ($shouldShowAll) {
+            $homeworks = Homework::where('class_id', $classroom->id)->get();
+        } else {
+            /** @var User|null $currentUser */
+            $currentUser = $request->user();
+            if ($currentUser == null) {
+                return redirect('welcome');
+            }
 
-    public function getDueHomeworkFromStudent(School $school, Classroom $classroom, Request $request)
-    {
-        // TODO: Implement
-        $subjectId = $request->get('subject');
-        return view('dashboard.school.class.index');
+            $studentEntity = Student::where('user_id', $currentUser->id)->first();
+            if ($studentEntity == null) {
+                return redirect('welcome');
+            }
+
+            $homeworks = Homework::whereNotExists(function ($query) use ($studentEntity) {
+                $tableName = app(SubmittedHomework::class)->getTable(); // Get the table name in case it changes
+                $homeworkTableName = app(Homework::class)->getTable();
+                $query->select(DB::raw(1))
+                    ->from($tableName)
+                    ->where("$tableName.student_id", $studentEntity->id)
+                    ->whereColumn("$tableName.homework_id", "$homeworkTableName.id");
+            })->get();
+        }
+
+
+        foreach ($homeworks as $homework) {
+            $homework->subject = Subject::whereId($homework->subject_id)->first();
+        }
+        unset($homework);
+
+        return view('dashboard.school.class.homework.student_index', compact('homeworks', 'school', 'classroom', 'shouldShowAll'));
 
     }
 
@@ -290,15 +314,6 @@ class HomeworkController extends Controller
 
     /**
      * @param StoreHomeworkRequest $request
-     * @return StoreHomeworkRequest
-     */
-    public function populateFormatsArray(StoreHomeworkRequest $request): StoreHomeworkRequest
-    {
-        return $request;
-    }
-
-    /**
-     * @param StoreHomeworkRequest $request
      * @param array $formats
      * @return mixed
      * @throws \Exception
@@ -311,7 +326,7 @@ class HomeworkController extends Controller
         if ($request->accept_pdf_upload === "on") {
             $formats = array_merge($formats, ["pdf"]);
         }
-        if ($this->populateFormatsArray($request)->accept_image_upload === "on") {
+        if ($request->accept_image_upload === "on") {
             $formats = array_merge($formats, ["png", "jpg", "bmp", "jpeg"]);
         }
         if ($request->accept_code_upload === "on") {

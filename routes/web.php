@@ -96,6 +96,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //endregion
 
         //region Rutele de teme
+        Route::get('/{school}/classes/{classroom}/homework', [HomeworkController::class, 'getHomeworkForStudent'])->name('homework.show_student_homework');
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'getHomeworkForSubject'])->name('homework.show_all');
         Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'createHomeworkForSubject'])->name('homework.create');
         Route::delete('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'deleteHomework'])->name('homework.delete');

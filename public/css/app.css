@@ -17711,3 +17711,7 @@ body {
   border: none;
 }
 
+small.text-muted {
+  float: left;
+}
+
