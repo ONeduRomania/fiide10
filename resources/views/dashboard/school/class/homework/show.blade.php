@@ -36,7 +36,7 @@
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <div>
                                         @if ($submittedHomework->student != null)
-                                        {{ $submittedHomework->student->user->name }}
+                                            {{ $submittedHomework->student->user->name }}
                                         @endif
                                         <br/>
                                         <small class="text-muted">Data trimiterii:
@@ -62,5 +62,22 @@
             </div>
         </div>
     </div>
+
+    <div id="snackbar">Descărcarea fișierelor va începe în curând...</div>
+@endsection
+
+@section('scripts')
+    <script>
+        window.addEventListener('load', function () {
+            // Announce to the user that the download will start
+            window.$(document).on("submit", "form", function () {
+                const snackbarRef = window.$('#snackbar');
+                snackbarRef.addClass('show');
+                setTimeout(function () {
+                    snackbarRef.removeClass('show')
+                }, 3000);
+            });
+        });
+    </script>
 @endsection
 

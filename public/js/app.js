@@ -109369,7 +109369,8 @@ $('#date_end').datepicker({
 $('#due_date').datepicker({
   type: 'datetime',
   placeholder: 'Please enter the date',
-  align: 'left'
+  align: 'left' // Setting a center alignment breaks the edit page.
+
 });
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
