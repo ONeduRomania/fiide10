@@ -90,6 +90,10 @@
 
             // Ask before deleting the homework.
             window.$(document).on("submit", "form", function () {
+                if (window.$('#homeworkModal').is(':visible')) {
+                    // We don't want to ask the user when creating new homework.
+                    return true;
+                }
                 return confirm("Ești sigur că vrei să ștergi această temă?");
             });
         });

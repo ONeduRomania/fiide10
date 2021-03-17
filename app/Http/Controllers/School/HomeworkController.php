@@ -264,7 +264,7 @@ class HomeworkController extends Controller
                 $submission = new SubmittedHomework();
                 $submission->student_id = $studentEntity->id;
                 $submission->homework_id = $homework->id;
-                $submission->uploaded_urls = [];
+                $submission->uploaded_urls = "[]";
             }
 
             $uploadedUrls = json_decode($submission->uploaded_urls, true);
