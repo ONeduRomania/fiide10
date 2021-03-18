@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Homework\DeleteFileFromSubmission;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
 use App\Http\Requests\SubmitHomeworkRequest;
+use App\Mail\HomeworkDueDateChanged;
+use App\Mail\NewHomework;
 use App\School;
 use App\Student;
 use App\Subject;
@@ -58,6 +60,18 @@ class HomeworkController extends Controller
                 ->withInput();
         }
 
+        try {
+            $students = Student::where('class_id', $classroom->id)->get();
+            foreach ($students as $student) {
+                $studUser = $student->user;
+                \Mail::to($studUser)->send(new NewHomework($homework, $subject));
+            }
+            unset($student);
+
+        } catch (\Exception $e) {
+            // TODO: Log failure
+        }
+
         return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([
             'success' => __('Tema a fost adăugată cu succes.')
         ]);
@@ -65,10 +79,11 @@ class HomeworkController extends Controller
 
     public function updateHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, StoreHomeworkRequest $request)
     {
+        $shouldSendMail = false;
         try {
             if ($request->due_date != null) {
                 $homework->due_date = $request->due_date;
-                // TODO: Trimite notificare pentru data schimbată dacă e cazul
+                $shouldSendMail = true;
             }
 
             if ($request->name != null) {
@@ -86,6 +101,20 @@ class HomeworkController extends Controller
                 ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
                 ->withErrors($exception->getMessage())
                 ->withInput();
+        }
+
+        if ($shouldSendMail) {
+            try {
+                $students = Student::where('class_id', $classroom->id)->get();
+                foreach ($students as $student) {
+                    $studUser = $student->user;
+                    \Mail::to($studUser)->send(new HomeworkDueDateChanged($homework, $subject));
+                }
+                unset($student);
+
+            } catch (\Exception $e) {
+                // TODO: Log failure
+            }
         }
 
         return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([

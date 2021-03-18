@@ -13,8 +13,6 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * App\User
  *
- * @method static create(array $only)
- * @method static paginate($perpage)
  * @property int $id
  * @property string $name
  * @property string $email
