@@ -70,7 +70,11 @@
     <script>
         window.addEventListener('load', function () {
             // Announce to the user that the download will start
-            window.$(document).on("submit", "form", function () {
+            window.$(document).on("submit", "form", function (e) {
+                if (e.target.method !== "get") {
+                    // Don't show this when updating the homework itself.
+                    return true;
+                }
                 const snackbarRef = window.$('#snackbar');
                 snackbarRef.addClass('show');
                 setTimeout(function () {

@@ -51,7 +51,7 @@
                     });
 
                     uploadedFiles.forEach(function (mockFile) {
-                        thDr.displayExistingFile(mockFile, 'https://img.icons8.com/ios/50/000000/placeholder-thumbnail-document.png');
+                        thDr.displayExistingFile(mockFile, "{{ URL::asset('images/placeholder-thumbnail-document.png')  }}");
                     })
                 },
             }

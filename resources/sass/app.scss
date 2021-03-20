@@ -154,3 +154,8 @@ body {
 small.text-muted {
     float: left;
 }
+
+.dz-size {
+    // We do not store the file size, so we should hide it so it will not be shown as 0 bytes on page refreshes.
+    display: none;
+}

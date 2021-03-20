@@ -16,9 +16,9 @@
         <label for="due_date" class="text-md-left">Introdu data până când trebuie trimisă
             tema:</label>
 
-        <input id="due_date" type="date"
+        <input id="due_date" type="datetime-local"
                class="form-control @error('due_date') is-invalid @enderror" name="due_date"
-               value="{{ $homework != null ? $homework->due_date : old('due_date') }}"
+               value="{{ $homework != null ? (new DateTime($homework->due_date))->format("Y-m-d\TH:i") : old('due_date') }}"
                placeholder="{{ __('Enter the due date...') }}"
                required>
         @error('due_date')

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $due_date
  * @property string|null $name
+ * @property string|null filetypes
  * @property int $teacher_id
  * @property int $subject_id
  * @property int $class_id
