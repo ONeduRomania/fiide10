@@ -7,7 +7,7 @@ use App\SubmittedHomework;
 class SubmittedHomeworkObserver
 {
     /**
-     * Handle the User "deleted" event.
+     * Handle the SubmittedHomework "deleted" event.
      *
      * @param SubmittedHomework $submission
      * @return void
