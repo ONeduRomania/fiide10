@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h5>Verifică temele trimise</h5>
-                        <p class="text-muted">De aici poți vedea temele trimise de elevi până în prezent.</p>
+                        <p class="text-muted">De aici poți vedea temele trimise de elevi până în prezent. Temele marcate cu roșu au fost trimise după data limită.</p>
 
                         @foreach($homework->submissions as $submittedHomework)
                             <div class="card shadow-lg my-1">
@@ -40,7 +40,7 @@
                                         @endif
                                         <br/>
                                         <small class="text-muted">Data trimiterii:
-                                            <strong>{{ $submittedHomework->created_at  }}</strong></small>
+                                            <strong style="{{ strtotime($submittedHomework->created_at) > strtotime($homework->due_date) ? "color: red" : "" }}">{{ $submittedHomework->created_at }}</strong></small>
                                         <br/>
                                         <small
                                             class="text-muted"><strong>{{ count(json_decode($submittedHomework->uploaded_urls, true)) }}</strong>

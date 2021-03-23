@@ -33,8 +33,6 @@
                 <hr class="my-3"/>
                 <div class="row">
                     <div class="col-12 text-center">
-{{--                        <h5>Verifică temele</h5>--}}
-{{--                        <p class="text-muted">De aici poți vedea temele create pentru această clasă până în prezent.</p>--}}
                         @foreach ($homeworks as $homework)
                             <div class="card shadow-lg my-1">
                                 <div class="card-body d-flex justify-content-between align-items-center">
@@ -42,7 +40,7 @@
                                         {{ $homework->name }}
                                         <br/>
                                         <small class="text-muted">Dată limită:
-                                            <strong>{{ $homework->due_date  }}</strong></small>
+                                            <strong style="{{ !$shouldShowAll && strtotime('now') > strtotime($homework->due_date) ? "color: red" : "" }}">{{ $homework->due_date  }}</strong></small>
                                         <br/>
                                         <small class="text-muted">Materie: <strong>{{ $homework->subject->name }}</strong></small>
                                     </div>

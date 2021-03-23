@@ -12,15 +12,13 @@
                     <div class="col-12">
                         <div class="card shadow-lg">
                             <div class="card-body">
+                                <p>Apasă pe caseta de mai jos pentru a adăuga fișiere.</p>
                                 <form method="POST" class="dropzone" id="homework-submit-form"
                                       action="{{ route('homework.submit_post', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}">
                                     @csrf
                                 </form>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
                     </div>
                 </div>
             </div>
