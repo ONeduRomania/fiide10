@@ -366,8 +366,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">ADRESĂ Fii de 10</span>
-                                <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+                                <span class="apple-link">Fii de 10, Bld. Siderurgiștilor, nr. 22, bl. SD8A, apt. 6, Mun. Galați, Jud. Galați</span>
                             </td>
                         </tr>
                     </table>
