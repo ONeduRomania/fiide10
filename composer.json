@@ -16,12 +16,18 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "spatie/laravel-permission": "^3.17"
+        "matthewbdaly/laravel-azure-storage": "^1.6",
+        "spatie/laravel-permission": "^3.17",
+        "ext-json": "*",
+        "ext-zip": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
+        "barryvdh/laravel-ide-helper": "^2.9",
+        "doctrine/dbal": "^2.12.1",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
+        "laravel/sail": "^1.3",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.0"

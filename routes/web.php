@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\School\HomeworkController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +52,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
     });
 
     Route::namespace('School')->prefix('/school')->group(function () {
-        // Rutele pentru a adauga clase noi + modulul de catalog.
+        //region Rutele pentru a adauga clase noi + modulul de catalog.
         Route::get('/{school}/classes', 'ClassController@showClasses')->name('classes.index');
         Route::post('/{school}/classes', 'ClassController@submitClass')->name('classes.submit');
         Route::delete('/{school}/classes/{class}', 'ClassController@removeClass')->name('classes.destroy');
@@ -65,8 +67,9 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::delete('/{school}/classes/{class}/studentDelete/{student}', 'LogController@removeStudent')->name('classes.student.destroy');
         Route::get('/{school}/classes/{class}/student/{student}', 'LogController@studentShow')->name('classes.student.show');
         Route::delete('/{school}/classes/{class}/log/{log}', 'LogController@deleteLog')->name('log.delete');
+        //endregion
 
-        // Rutele de a putea adauga profesori si de a selecta o materie
+        //region Rutele de a putea adauga profesori si de a selecta o materie
         Route::get('/{school}/teachers', 'TeacherController@index')->name('teachers.index');
         Route::delete('/{school}/teachers/{teacher}', 'TeacherController@removeTeacher')->name('teachers.destroy');
         Route::get('/{school}/teachers/{teacher}/show', 'TeacherController@teacherDetails')->name('teachers.show');
@@ -74,19 +77,35 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::match(['PUT', 'PATCH'], '/{school}/teachers/{teacher}/update', 'TeacherController@teacherUpdate')->name('teachers.update');
         Route::delete('/{school}/teacher/{request}/request', 'TeacherController@removeRequest')->name('teachers.removerequest');
         Route::match(['PUT', 'PATCH'], '/{school}/teacher/{request}/request', 'TeacherController@acceptRequest')->name('teachers.acceptrequest');
+        //endregion
 
-        // Rutele de a putea crea o materie noua
+        //region Rutele de a putea crea o materie noua
         Route::get('/{school}/subjects', 'SubjectsController@showSubjects')->name('subjects.index');
         Route::post('/{school}/subjects', 'SubjectsController@submitSubject')->name('subjects.submit');
         Route::get('/{school}/subjects/{subject}/show', 'SubjectsController@showSubject')->name('subjects.show');
         Route::delete('/{school}/subjects/{subject}/destroy', 'SubjectsController@destroySubject')->name('subjects.destroy');
         Route::match(['PUT', 'PATCH'], '/{school}/subjects/{subject}/update', 'SubjectsController@updateSubject')->name('subjects.update');
+        //endregion
 
-        // Rutele de orar
+        //region Rutele de orar
         Route::get('/{school}/classes/{class}/timetable', 'TimetableController@showTimetable')->name('timetable.show');
         Route::post('/{school}/classes/{class}/timetable', 'TimetableController@createTimetable')->name('timetable.create');
         Route::delete('/{school}/classes/{class}/timetable/{timetable}', 'TimetableController@deleteTimetable')->name('timetable.delete');
         Route::get('/{school}/classes/{class}/timetable/{timetable}/show', 'TimetableController@checkTimetable')->name('timetable.check');
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/timetable/{timetable}', 'TimetableController@updateTimetable')->name('timetable.update');
+        //endregion
+
+        //region Rutele de teme
+        Route::get('/{school}/classes/{classroom}/homework', [HomeworkController::class, 'getHomeworkForStudent'])->name('homework.show_student_homework');
+        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'getHomeworkForSubject'])->name('homework.show_all');
+        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'createHomeworkForSubject'])->name('homework.create');
+        Route::delete('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'deleteHomework'])->name('homework.delete');
+        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'checkHomework'])->name('homework.check');
+        Route::match(['PUT', 'PATCH'],'/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'updateHomework'])->name('homework.update');
+        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submissions/{submission}/download', [HomeworkController::class, 'downloadHomeworkFiles'])->name('homework.download_submission');
+        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'submitHomework'])->name('homework.submit_get');
+        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'turnIn'])->name('homework.submit_post');
+        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit/delete', [HomeworkController::class, 'deleteFileFromSubmission'])->name('homework.submit_delete_file');
+        //endregion
     });
 });

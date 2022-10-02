@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\SubmittedHomeworkObserver;
+use App\SubmittedHomework;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -33,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         // OBSERVERS
         User::observe(UsersObserver::class);
+        SubmittedHomework::observe(SubmittedHomeworkObserver::class);
 
         // VALIDATORS
         Validator::extend('alpha_space', 'App\Rules\AlphaSpaceRule@passes');

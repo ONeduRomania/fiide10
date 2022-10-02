@@ -13,6 +13,12 @@
 // another
 @import '~gemini-datepicker/dist/css/jquery.datepicker.min.css';
 
+// Dropzone
+@import '~dropzone/dist/min/dropzone.min.css';
+
+// Snackbar
+@import 'snackbar';
+
 //BDF
 /* width */
 ::-webkit-scrollbar {
@@ -143,4 +149,13 @@ body {
     .card-footer {
         border: none;
     }
+}
+
+small.text-muted {
+    float: left;
+}
+
+.dz-size {
+    // We do not store the file size, so we should hide it so it will not be shown as 0 bytes on page refreshes.
+    display: none;
 }

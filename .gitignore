@@ -13,3 +13,5 @@ yarn-error.log
 .idea
 public/js/helpers.js
 public/js/app.js
+/supervisord.log
+/supervisord.pid

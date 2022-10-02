@@ -26,8 +26,16 @@ class StoreTimetableRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject_id' => ['required', 'numeric', 'exists:subjects,id'],
+            'subject' => ['required', 'numeric', 'exists:subjects,id'],
             'class_id' => ['required', 'numeric', 'exists:classrooms,id'],
         ];
+    }
+
+    public function all($keys = null)
+    {
+        $data = parent::all($keys);
+        $data['class_id'] = $this->route('class.id');
+
+        return $data;
     }
 }

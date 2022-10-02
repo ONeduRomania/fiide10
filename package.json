@@ -27,6 +27,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
         "clipboard": "^2.0.6",
+        "dropzone": "^5.8.1",
         "gemini-datepicker": "^1.0.16",
         "moment": "^2.29.1",
         "react-select": "^3.1.0",

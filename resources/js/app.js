@@ -14,3 +14,8 @@ require('./bootstrap');
 
 require('./components/Timetable');
 require('./components/Catalog');
+
+/**
+ * Import Dropzone for file uploads
+ */
+import Dropzone from 'dropzone';
