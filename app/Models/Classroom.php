@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
  * @property int $master_teacher DIRIGINTE CLASA
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\User $masterTeacher
+ * @property-read \App\Models\User $masterTeacher
  * @method static \Illuminate\Database\Eloquent\Builder|Classroom newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Classroom newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Classroom query()
@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Cache;
 class Classroom extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['name', 'master_teacher', 'school_id'];
 
     public static function allWithCache(Carbon $datetime, int $perpage, int $whichpage, int $schoolId) {
@@ -41,6 +41,6 @@ class Classroom extends Model
     }
 
     public function masterTeacher() {
-        return $this->belongsTo('App\User', 'master_teacher');
+        return $this->belongsTo('App\Models\User', 'master_teacher');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Cache;
  * @property int $school_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\User $user
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher query()
@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Cache;
 class Teacher extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'user_id', 'school_id'
     ];
@@ -43,6 +43,6 @@ class Teacher extends Model
     }
 
     public function user() {
-        return $this->belongsTo('App\User')->whereNull('users.deleted_at');;
+        return $this->belongsTo('App\Models\User')->whereNull('users.deleted_at');;
     }
 }

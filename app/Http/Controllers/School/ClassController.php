@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers\School;
 
-/** @models section */
-use App\School;
-use App\Classroom;
-use App\Teacher;
-use App\Invite;
-use App\Student;
-use App\Request as InviteRequest;
-
-/** @utilities section */
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Classroom\StoreClassRequest;
-
-/** @framework section */
-use Illuminate\Http\Request;
+use App\Models\Classroom;
+use App\Models\Invite;
+use App\Models\Request as InviteRequest;
+use App\Models\School;
+use App\Models\Student;
+use App\Models\Teacher;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 

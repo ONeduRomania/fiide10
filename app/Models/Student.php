@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
  * @property int $class_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\User $user
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Student newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Student query()
@@ -41,6 +41,6 @@ class Student extends Model
     }
 
     public function user() {
-        return $this->belongsTo('App\User')->whereNull('users.deleted_at');
+        return $this->belongsTo('App\Models\User')->whereNull('users.deleted_at');
     }
 }

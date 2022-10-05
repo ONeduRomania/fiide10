@@ -3,12 +3,11 @@ version: '3'
 services:
     laravel.test:
         build:
-            context: ./docker/7.4
+            context: ./vendor/laravel/sail/runtimes/8.1
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-                XDEBUG: '${APP_DEBUG}'
-        image: sail-7.4/app
+        image: sail-8.1/app
         ports:
             - '${APP_PORT:-80}:80'
         environment:
@@ -20,15 +19,7 @@ services:
             - sail
         depends_on:
             - mysql
-            # - pgsql
-#            - redis
-            # - selenium
-    # selenium:
-    #     image: 'selenium/standalone-chrome'
-    #     volumes:
-    #         - '/dev/shm:/dev/shm'
-    #     networks:
-    #         - sail
+            - selenium
     mysql:
         image: 'mysql:8.0'
         ports:
@@ -45,37 +36,6 @@ services:
             - sail
         healthcheck:
           test: ["CMD", "mysqladmin", "ping"]
-#    pgsql:
-#        image: postgres:13
-#        ports:
-#            - '${FORWARD_DB_PORT:-5432}:5432'
-#        environment:
-#            PGPASSWORD: '${DB_PASSWORD:-secret}'
-#            POSTGRES_DB: '${DB_DATABASE}'
-#            POSTGRES_USER: '${DB_USERNAME}'
-#            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-#        volumes:
-#            - 'sailpostgresql:/var/lib/postgresql/data'
-#        networks:
-#            - sail
-#        healthcheck:
-#          test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
-#    redis:
-#        image: 'redis:alpine'
-#        ports:
-#            - '${FORWARD_REDIS_PORT:-6379}:6379'
-#        volumes:
-#            - 'sailredis:/data'
-#        networks:
-#            - sail
-#        healthcheck:
-#          test: ["CMD", "redis-cli", "ping"]
-    memcached:
-        image: 'memcached:alpine'
-        ports:
-            - '11211:11211'
-        networks:
-            - sail
     mailhog:
         image: 'mailhog/mailhog:latest'
         ports:
@@ -83,13 +43,15 @@ services:
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
+    selenium:
+       image: 'selenium/standalone-chrome'
+       volumes:
+            - '/dev/shm:/dev/shm'
+       networks:
+           - sail
 networks:
     sail:
         driver: bridge
 volumes:
     sailmysql:
-        driver: local
-#    sailpostgresql:
-#        driver: local
-    sailredis:
         driver: local

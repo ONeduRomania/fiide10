@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\SubmittedHomework;
+use App\Models\SubmittedHomework;
 
 class SubmittedHomeworkObserver
 {

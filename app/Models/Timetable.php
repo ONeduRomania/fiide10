@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Timetable
@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property mixed $data
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Classroom $classes
- * @property-read \App\Subject $subjects
+ * @property-read \App\Models\Classroom $classes
+ * @property-read \App\Models\Subject $subjects
  * @method static \Illuminate\Database\Eloquent\Builder|Timetable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Timetable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Timetable query()
@@ -42,10 +42,10 @@ class Timetable extends Model
     }
 
     public function classes() {
-        return $this->belongsTo('App\Classroom', 'class_id');
+        return $this->belongsTo('App\Models\Classroom', 'class_id');
     }
 
     public function subjects() {
-        return $this->belongsTo('App\Subject', 'subject_id');
+        return $this->belongsTo('App\Models\Subject', 'subject_id');
     }
 }

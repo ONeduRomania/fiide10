@@ -5,22 +5,27 @@ namespace App\Http\Controllers\School;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Log\StoreAbsRequest;
 use App\Http\Requests\Log\StoreMarkRequest;
+use App\Models\Classroom;
+use App\Models\Log;
+use App\Models\School;
+use App\Models\Student;
+use App\Models\Subject;
 
 class LogController extends Controller
 {
     private const ABSENCE_CONST = 1;
     private const MARK_CONST = 2;
 
-    public function showLogs(\App\School $school, \App\Classroom $class) {
-        $students = \App\Student::where('class_id', $class->id)->get();
-        $subjects = \App\Subject::allCached(\Carbon\Carbon::now()->addMinutes(5), $school->id);
+    public function showLogs(School $school, Classroom $class) {
+        $students = Student::where('class_id', $class->id)->get();
+        $subjects = Subject::allCached(\Carbon\Carbon::now()->addMinutes(5), $school->id);
 
         return view('dashboard.school.class.log', compact('students', 'school', 'class', 'subjects'));
     }
 
-    public function createAbsenceLog(\App\School $school, \App\Classroom $class, StoreAbsRequest $request) {
+    public function createAbsenceLog(School $school, Classroom $class, StoreAbsRequest $request) {
         try {
-            \App\Log::create([
+            Log::create([
                 'subject' => $request->subject,
                 'type' => self::ABSENCE_CONST,
                 'student' => $request->student,
@@ -36,9 +41,9 @@ class LogController extends Controller
         ]);
     }
 
-    public function createMarkLog(\App\School $school, \App\Classroom $class, StoreMarkRequest $request) {
+    public function createMarkLog(School $school, Classroom $class, StoreMarkRequest $request) {
         try {
-            \App\Log::create([
+            Log::create([
                 'subject' => $request->subject,
                 'type' => self::MARK_CONST,
                 'student' => $request->student,
@@ -54,7 +59,7 @@ class LogController extends Controller
         ]);
     }
 
-    public function removeStudent(\App\School $school, \App\Classroom $class, \App\Student $student) {
+    public function removeStudent(School $school, Classroom $class, Student $student) {
         try {
             $student->delete();
         } catch (\Exception $exception) {
@@ -65,7 +70,7 @@ class LogController extends Controller
         ]);
     }
 
-    public function deleteLog(\App\School $school, \App\Classroom $class, \App\Log $log) {
+    public function deleteLog(School $school, Classroom $class, Log $log) {
         $student_id = $log->student;
 
         try {
@@ -86,9 +91,9 @@ class LogController extends Controller
         return response()->json(['message' => 'Ok']);
     }
 
-    public function studentShow(\App\School $school, \App\Classroom $class, \App\Student $student) {
-        $logs = \App\Log::where('student', $student->user_id)->get();
-        $subjects = \App\Subject::allCached(\Carbon\Carbon::now()->addMinutes(5), $school->id);
+    public function studentShow(School $school, Classroom $class, Student $student) {
+        $logs = Log::where('student', $student->user_id)->get();
+        $subjects = Subject::allCached(\Carbon\Carbon::now()->addMinutes(5), $school->id);
 
         return view('dashboard.school.class.student', compact('logs', 'student', 'school', 'class', 'subjects'));
     }

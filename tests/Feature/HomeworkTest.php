@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Teacher;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Teacher;
 use Tests\TestCase;
 
 class HomeworkTest extends TestCase

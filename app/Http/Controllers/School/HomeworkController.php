@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\School;
 
-use App\Classroom;
-use App\Homework;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Homework\DeleteFileFromSubmission;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
 use App\Http\Requests\SubmitHomeworkRequest;
 use App\Mail\HomeworkDueDateChanged;
 use App\Mail\NewHomework;
-use App\School;
-use App\Student;
-use App\Subject;
-use App\SubmittedHomework;
-use App\Teacher;
-use App\User;
+use App\Models\Classroom;
+use App\Models\Homework;
+use App\Models\School;
+use App\Models\Student;
+use App\Models\Subject;
+use App\Models\SubmittedHomework;
+use App\Models\Teacher;
+use App\Models\User;
 use GuzzleHttp\Psr7\MimeType;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\RedirectResponse;
@@ -27,7 +27,7 @@ class HomeworkController extends Controller
 {
     public function getHomeworkForSubject(School $school, Classroom $classroom, Subject $subject, Request $request)
     {
-        $homeworks = \App\Homework::withCount('submissions')->where('subject_id', $subject->id)->where('class_id', $classroom->id)->orderBy('id', 'DESC')->get();
+        $homeworks = \App\Models\Homework::withCount('submissions')->where('subject_id', $subject->id)->where('class_id', $classroom->id)->orderBy('id', 'DESC')->get();
 
         return view('dashboard.school.class.homework.index', compact('school', 'classroom', 'homeworks', 'subject'));
 

@@ -2,14 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\SubmittedHomework;
+use App\Models\User;
 use App\Observers\SubmittedHomeworkObserver;
-use App\SubmittedHomework;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\ServiceProvider;
-
-use App\User;
 use App\Observers\UsersObserver;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Invite;
-use App\Teacher;
-use App\Request;
-use App\Student;
+use App\Models\Invite;
+use App\Models\Request;
+use App\Models\Student;
+use App\Models\Teacher;
 use Carbon\Carbon;
 
 class InviteController extends Controller

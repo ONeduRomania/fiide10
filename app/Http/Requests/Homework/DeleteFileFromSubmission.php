@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Homework;
 
-use App\Student;
-use App\SubmittedHomework;
-use App\User;
+use App\Models\Student;
+use App\Models\SubmittedHomework;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

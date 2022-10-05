@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SchoolsStoreRequest;
+use App\Models\Invite;
+use App\Models\School;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\SchoolsStoreRequest;
-use App\Http\Controllers\Controller;
-use App\School;
-use App\Invite;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class SchoolsController extends Controller
 {

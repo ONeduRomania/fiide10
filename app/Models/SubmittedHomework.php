@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $homework_id
  * @property mixed $uploaded_urls
  * @property string|null $additional_info
- * @property-read \App\Homework $forHomework
+ * @property-read \App\Models\Homework $forHomework
  * @method static \Illuminate\Database\Eloquent\Builder|SubmittedHomework newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SubmittedHomework newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SubmittedHomework query()

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\School\SubjectStoreRequest;
-use Illuminate\Http\Request;
-use App\School;
-use App\Subject;
+use App\Models\School;
+use App\Models\Subject;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class SubjectsController extends Controller 
+class SubjectsController extends Controller
 {
     public const PER_PAGE = 5;
     public const DELETED_PER_PAGE = 10;
@@ -17,12 +17,12 @@ class SubjectsController extends Controller
     public function showSubjects(School $school, Request $request) {
         $school_id = $school->id;
         $subjects = Subject::allWithCache(
-            Carbon::now()->addMinutes(5), 
-            SubjectsController::PER_PAGE, 
-            $request->get('page', '1'), 
+            Carbon::now()->addMinutes(5),
+            SubjectsController::PER_PAGE,
+            $request->get('page', '1'),
             $school->id
         );
-        
+
         return view('dashboard.school.subject.index', compact('school_id', 'subjects'));
     }
 

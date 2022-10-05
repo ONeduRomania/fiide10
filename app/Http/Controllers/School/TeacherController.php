@@ -4,18 +4,16 @@ namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\TeacherSubjectRequest;
-
-use App\Teacher;
-use App\School;
-use App\Request as InviteRequest;
-use App\Invite;
-use App\Subject;
-use App\TeacherSubject;
-
-use Illuminate\Support\Str;
+use App\Models\Invite;
+use App\Models\Request as InviteRequest;
+use App\Models\School;
+use App\Models\Subject;
+use App\Models\Teacher;
+use App\Models\TeacherSubject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class TeacherController extends Controller
 {

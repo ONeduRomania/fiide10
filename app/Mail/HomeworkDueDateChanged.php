@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
-use App\Homework;
-use App\Subject;
+use App\Models\Homework;
+use App\Models\Subject;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

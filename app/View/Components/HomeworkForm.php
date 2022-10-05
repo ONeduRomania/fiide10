@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Homework;
+use App\Models\Homework;
 use Illuminate\View\Component;
 
 class HomeworkForm extends Component
