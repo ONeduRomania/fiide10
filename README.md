@@ -9,3 +9,4 @@
 3. Launch the containers by running `./vendor/bin/sail up -d`
 4. Run the database migrations by running `./vendor/bin/sail artisan migrate`
 5. Run the database seeder by running `./vendor/bin/sail artisan db:seed`
+6. Update the project assets by running `./vendor/bin/sail npm run watch` while developing
