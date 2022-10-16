@@ -159,3 +159,18 @@ small.text-muted {
     // We do not store the file size, so we should hide it so it will not be shown as 0 bytes on page refreshes.
     display: none;
 }
+
+// Post-import
+// TODO: Delete this comment once import is completed and the styles above are checked.
+
+nav {
+    background-color: $primary;
+}
+
+.nav-item, .nav-item .nav-link {
+    color: $white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.3em 0 0.3em 0;
+}

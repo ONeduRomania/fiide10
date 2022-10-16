@@ -7,6 +7,7 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
+$primary: #00385b;
 $blue: #3490dc;
 $royal-blue: #1853db; // 24, 83, 219
 $lte: #343a40;
@@ -23,6 +24,7 @@ $theme-colors: (
     "royal": $royal-blue,
     "white": #fff,
     "gray": $lte,
+    "primary": $primary
 );
 $breadcrumb-divider: quote('>');
 

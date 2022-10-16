@@ -36,53 +36,29 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-    <x-navbar-component class="navbar navbar-expand-md navbar-dark bg-royal">
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}">{{ __('Panou de control') }}</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ __('Panou de control Admin') }} <span class="caret"></span>
-            </a>
+<div id="app" class="container-fluid">
+    <div class="row">
+        <x-navbar-component class="col-sm-12 col-md-3 nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}">{{ __('Noutăți') }}</a>
+            </li>
+            @role('admin')
+                <x-navbar.admin />
+            @endrole
+            @role('student')
+                <x-navbar.student />
+            @endrole
+            @role('teacher')
+            <x-navbar.teacher />
+            @endrole
+        </x-navbar-component>
+        <div class="col">
+            <x-breadcrumb-component/>
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
-                @can('manage-users')
-                    <a class="dropdown-item text-md-center" href="{{ route('users.index') }}">
-                        {{ __('Administrează toți utilizatorii') }} <i class="fas fa-users-cog"></i>
-                    </a>
-                @endcan
-
-                <a class="dropdown-item text-md-center" href="{{ route('schools.index') }}">
-                    {{ __('Administrează toate școlile') }} <i class="fas fa-address-book"></i>
-                </a>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a id="schoolDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ __('Panou de control Școală') }} <span class="caret"></span>
-            </a>
-
-
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="schoolDropdown">
-                @can('manage-users')
-                    <a class="dropdown-item text-md-center" href="{{ route('users.index') }}">
-                        {{ __('Administrează toți utilizatorii') }} <i class="fas fa-users-cog"></i>
-                    </a>
-                @endcan
-
-                <a class="dropdown-item text-md-center" href="{{ route('schools.index') }}">
-                    {{ __('Administrează toate școlile') }} <i class="fas fa-address-book"></i>
-                </a>
-            </div>
-        </li>
-    </x-navbar-component>
-    <x-breadcrumb-component/>
-
-    @yield('content')
-    <x-footer-component/>
+            @yield('content')
+            <x-footer-component/>
+        </div>
+    </div>
 </div>
 
 @yield('scripts')
