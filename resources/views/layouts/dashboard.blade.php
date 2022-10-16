@@ -38,7 +38,7 @@
 <body>
 <div id="app" class="container-fluid">
     <div class="row">
-        <x-navbar-component class="col-sm-12 col-md-3 nav flex-column">
+        <x-navbar-component class="col-sm-12 col-md-2 nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">{{ __('Noutăți') }}</a>
             </li>
@@ -53,10 +53,7 @@
             @endrole
         </x-navbar-component>
         <div class="col">
-            <x-breadcrumb-component/>
-
             @yield('content')
-            <x-footer-component/>
         </div>
     </div>
 </div>

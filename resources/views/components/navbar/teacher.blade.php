@@ -13,6 +13,6 @@
 {{--        <a class="nav-link" href="{{ route('timetable.show') }}">{{ __('Orar') }}</a>--}}
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="https://onedu.ro/voluntarizaza">{{ __('Voluntariat') }}</a>
+        <a class="nav-link" href="https://onedu.ro/voluntariaza">{{ __('Voluntariat') }}</a>
     </li>
 </div>

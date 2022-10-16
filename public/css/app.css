@@ -17609,14 +17609,6 @@ body {
   font-family: "PT Sans", sans-serif;
 }
 
-.navbar-toggler {
-  border: 0;
-}
-
-.navbar-toggler:focus {
-  outline: none;
-}
-
 .btn {
   border-radius: 0;
 }
@@ -17624,11 +17616,6 @@ body {
 .btn:focus {
   outline: none;
   box-shadow: none;
-}
-
-.dropdown-item:focus {
-  color: #000;
-  background: transparent;
 }
 
 .dismissible {
@@ -17664,13 +17651,6 @@ body {
 
 .section-usage .section-text {
   transform: skewY(2.5deg);
-}
-
-.footer {
-  min-height: 35vh;
-  min-width: 100%;
-  background: #1853db no-repeat center;
-  background-size: cover;
 }
 
 .login-section {
@@ -17730,5 +17710,11 @@ nav {
   font-weight: bold;
   text-align: center;
   padding: 0.3em 0 0.3em 0;
+  transition: 0.3s;
+}
+
+.nav-item:hover,
+.nav-item .nav-link:hover {
+  color: #1853db;
 }
 

@@ -59,25 +59,11 @@ body {
 }
 
 // Override Bootstrap's Elements
-.navbar-toggler {
-    border: 0;
-    &:focus {
-        outline: none;
-    }
-}
-
 .btn {
     border-radius: 0;
     &:focus {
         outline: none;
         box-shadow: none;
-    }
-}
-
-.dropdown-item {
-    &:focus {
-        color: #000;
-        background: transparent;
     }
 }
 
@@ -100,15 +86,11 @@ body {
 }
 
 .section-usage {
-    @include format-section(35vh, 100%, false, $royal-blue);
+    @include format-section(35vh, 100%, false, $accent);
     transform: skewY(-2.5deg);
     .section-text {
         transform: skewY(2.5deg);
     }
-}
-
-.footer {
-    @include format-section(35vh, 100%, false, $royal-blue);
 }
 
 .login-section {
@@ -138,8 +120,8 @@ body {
 .page-item {
     &.active {
         .page-link {
-            background-color: $royal-blue;
-            border-color: $royal-blue;
+            background-color: $accent;
+            border-color: $accent;
         }
     }
 }
@@ -173,4 +155,8 @@ nav {
     font-weight: bold;
     text-align: center;
     padding: 0.3em 0 0.3em 0;
+    transition: 0.3s;
+    &:hover {
+        color: $accent;
+    }
 }
