@@ -10,6 +10,9 @@
             <x-alert />
                 <div class="col">
                     <div class="row d-flex justify-content-center mb-3">
+                        <a href="{{ route('schools.create') }}" class="btn btn-link text-royal">
+                            {{__("Creează școală nouă")}} <i class="fas fa-plus"></i>
+                        </a>
                         <a href="{{ route('schools.deleted') }}" class="btn btn-link text-royal">
                             Vezi școli șterse <i class="fas fa-user-times"></i>
                         </a>

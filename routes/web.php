@@ -45,7 +45,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::match(['PUT', 'PATCH'], '/users/restore/{id}', 'UsersController@restore')->name('users.restore');
 
         Route::get('/schools/deleted', 'SchoolsController@deleted')->name('schools.deleted');
-        Route::resource('/schools', 'SchoolsController')->except(['create', 'edit']);
+        Route::resource('/schools', 'SchoolsController')->except(['edit']);
 
         Route::delete('/schools/force/{id}', 'SchoolsController@forceDelete')->name('schools.force');
         Route::match(['PUT', 'PATCH'], '/schools/restore/{id}', 'SchoolsController@restore')->name('schools.restore');

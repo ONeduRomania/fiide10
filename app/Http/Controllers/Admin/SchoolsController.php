@@ -46,10 +46,7 @@ class SchoolsController extends Controller
             return back()->withError($exception->getMessage())->withInput();
         }
 
-        return back()->with([
-            'success' => __('Școala a fost creată cu succes.'),
-            'school' => $school
-        ]);
+        return redirect()->route('schools.index')->with(['success' => __('Școala a fost creată cu succes.')]);
     }
 
     /**
@@ -82,6 +79,15 @@ class SchoolsController extends Controller
      */
     public function show(School $school) {
         return view('dashboard.admin.schools.show', compact('school'));
+    }
+
+    /**
+     * The page to create a new school
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create() {
+        return view('dashboard.admin.schools.new');
     }
 
     /**
