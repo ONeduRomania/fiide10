@@ -8,7 +8,7 @@
     <div class="section-info">
         <div class="container-fluid">
             <x-alert />
-            <div class="container">
+            <div class="col">
                 <p class="text-muted">Poți să restaurezi școala sau să o ștergi definitiv. Nu uita, ai doar 30 de zile să te răzgândești.</p>
 
                 <table class="table">
