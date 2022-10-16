@@ -1,24 +1,20 @@
 <div>
     @if (session('success'))
-        <div class="alert" role="alert">
-            <button type="button" class="btn btn-royal dismissible" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+        <div class="alert alert-dismissible fade show" role="alert">
+            <p>{{ session('success') }}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="{{__('Închide alerta')}}">
+                <span aria-hidden="true">&times;</span>
             </button>
-            <div class="my-1 text-center">
-                <p class="text-white">{{ session('success') }}</p>
-            </div>
         </div>
     @endif
 
     @if (session('error'))
         <div class="alert" role="alert">
-            <button type="button" class="btn btn-danger dismissible" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="fas fa-times"></i></span>
-            </button>
-            <div class="my-1 text-center">
-                <p class="text-white">
-                    <strong>Eroare: </strong> {{ session('error') }}
-                </p>
+            <div class="alert alert-dismissible fade show" role="alert">
+                <p>{{ session('error') }}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="{{__('Închide alerta')}}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
     @endif

@@ -17673,9 +17673,8 @@ body {
 }
 
 .alert {
-  background-color: #343a40;
+  background-color: #00385b;
   color: #fff;
-  border-radius: 30px;
 }
 
 .page-item.active .page-link {

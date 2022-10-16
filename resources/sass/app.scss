@@ -112,9 +112,8 @@ body {
 }
 
 .alert {
-    background-color: #343a40;
+    background-color: $primary;
     color: #fff;
-    border-radius: 30px;
 }
 
 .page-item {
