@@ -38,22 +38,14 @@
 <body>
 <div id="app" class="container-fluid">
     <div class="row">
-        <x-navbar-component class="col-sm-12 col-md-2 nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">{{ __('Noutăți') }}</a>
-            </li>
-            @role('admin')
-                <x-navbar.admin />
-            @endrole
-            @role('student')
-                <x-navbar.student />
-            @endrole
-            @role('teacher')
-            <x-navbar.teacher />
-            @endrole
-        </x-navbar-component>
-        <div class="col">
-            @yield('content')
+        <x-navbar-component class="col-sm-12 col-md-2 nav flex-column" />
+        <div class="col my-3 mx-5">
+            <div class="row">
+                <h1 id="page-name">@yield('pageName')</h1>
+            </div>
+            <div class="row">
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>

@@ -145,6 +145,7 @@ small.text-muted {
 // Post-import
 // TODO: Delete this comment once import is completed and the styles above are checked.
 
+//#region Sidebar
 nav {
     background-color: $primary;
 }
@@ -154,9 +155,34 @@ nav {
     font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
-    padding: 0.3em 0 0.3em 0;
+    padding: 0.5em 0 0.5em 0;
     transition: 0.3s;
     &:hover {
         color: $accent;
     }
 }
+
+// Use screen's full height
+html, body, #app, #app > .row {
+    height: 100%;
+}
+
+#logo {
+    margin-top: 1em;
+    margin-bottom: 3em;
+    border-radius: 50%;
+    height: 8em;
+    width: 8em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+//#endregion
+
+//#region Global page name
+#page-name {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+//#endregion
