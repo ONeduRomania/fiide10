@@ -8,3 +8,4 @@
 2. Check the `.env` file (or create it if it does not exist by copying the .env.example file) and change required settings, if any (such as the `SAIL_XDEBUG_CONFIG` option required for using Xdebug)
 3. Launch the containers by running `./vendor/bin/sail up -d`
 4. Run the database migrations by running `./vendor/bin/sail artisan migrate`
+5. Run the database seeder by running `./vendor/bin/sail artisan db:seed`

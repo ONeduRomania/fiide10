@@ -53,6 +53,13 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, SoftDeletes, HasRoles;
 
+    static array $dbRoles = [
+        'admin',
+        'teacher',
+        'student',
+        'Basic'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
