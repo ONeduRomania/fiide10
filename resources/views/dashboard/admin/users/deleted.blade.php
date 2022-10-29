@@ -1,62 +1,58 @@
 @extends('layouts.dashboard')
 
+@section('pageName')
+    {{__('Utilizatori șterși')}}
+@endsection
+
 @section('content')
-    <div class="section-info d-flex align-items-center my-5">
+    <div class="section-info">
         <div class="container-fluid">
-            @if (session('success'))
-                <div class="alert" role="alert">
-                    <button type="button" class="btn btn-royal dismissible" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="my-1 text-center">
-                        <p class="text-white">{{ session('success') }}</p>
-                    </div>
+            <x-alert/>
+            @if($users->isEmpty())
+                <p>Nu există utilizatori șterși momentan. Poți accesa lista de utilizatori activi <a
+                        href="{{ route('users.index') }}" class="text-royal">aici.</a></p>
+            @else
+                <div class="col">
+                    <p class="text-muted">Poți să restaurezi utilizatorul sau să îl ștergi definitiv. Nu uita, ai doar
+                        30 de
+                        zile să te răzgândești.</p>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Rol principal</th>
+                            <th>Acțiuni</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->roles[0]->name }}</td>
+                                <td>
+                                    <form action="{{ route('users.force', $user->id) }}" method="POST"
+                                          class="d-inline-flex">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                                class="btn btn-link text-danger">{{__('Șterge definitiv')}}</button>
+                                    </form>
+                                    <form action="{{ route('users.restore', $user->id) }}" method="POST"
+                                          class="d-inline-flex">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                                class="btn btn-link text-royal">{{__('Restaurează')}}</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    {{ $users->links() }}
                 </div>
             @endif
-
-            @if (session('error'))
-                <div class="alert" role="alert">
-                    <button type="button" class="btn btn-danger dismissible" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="my-1 text-center">
-                        <p class="text-white">
-                            <strong>Eroare: </strong> {{ session('error') }}
-                        </p>
-                    </div>
-                </div>
-            @endif
-            <div class="container">
-                <h5>Utilizatori eliminați</h5>
-                <p class="text-muted">Ai doar 30 de zile la dispoziție să restaurezi utilizatorii eliminați.</p>
-
-                @foreach ($users as $user)
-                    <div class="card shadow-lg my-1">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                {{ $user->name }}
-                                <br/>
-                                <small class="text-muted">Administrator</small>
-                            </div>
-                            <div>
-                                <form action="{{ route('users.force', $user->id) }}" method="POST" class="d-inline-flex mx-1">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Șterge definitiv</button>
-                                </form>
-
-                                <form action="{{ route('users.restore', $user->id) }}" method="POST" class="d-inline-flex mx-1">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-link text-royal text-decoration-none">Restarurează</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-                {{ $users->links() }}
-            </div>
         </div>
     </div>
 @endsection

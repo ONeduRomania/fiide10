@@ -14,8 +14,10 @@ class UsersController extends Controller
     public const PER_PAGE = 5;
     public const DELETED_PER_PAGE = 10;
 
-    public function __construct() {
-        $this->middleware('can:manage-users');
+    public function __construct()
+    {
+        // TODO: Figure out permissions
+//        $this->middleware('can:manage-users');
     }
 
     /**
@@ -24,7 +26,8 @@ class UsersController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $page = $request->get('page', '1');
 
         $users = User::allWithCache(Carbon::now()->addMinutes(5), UsersController::PER_PAGE, $page);
@@ -39,7 +42,8 @@ class UsersController extends Controller
      * @param UsersStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UsersStoreRequest $request) {
+    public function store(UsersStoreRequest $request)
+    {
         try {
             $user = User::create($request->only(['name', 'email', 'password']));
         } catch (\Exception $exception) {
@@ -47,10 +51,7 @@ class UsersController extends Controller
         }
         $user->assignRole($request->role);
 
-        return back()->with([
-                'success' => __('The user has been created with success, congrats.'),
-                'user' => $user
-            ]);
+        return redirect()->route('users.index')->with(['success' => __('Utilizatorul a fost creat cu succes.')]);
     }
 
     /**
@@ -59,7 +60,8 @@ class UsersController extends Controller
      * @param UsersStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UsersStoreRequest $request, User $user) {
+    public function update(UsersStoreRequest $request, User $user)
+    {
         try {
             $userUpdated = $user->update($request->only(['name', 'email', 'password']));
         } catch (\Exception $exception) {
@@ -67,22 +69,44 @@ class UsersController extends Controller
         }
         $user->assignRole($request->role);
 
-        return back()->with([
-                'success' => __('The user has been created with success, congrats.'),
-                'user' => $userUpdated
-            ]);
+        return redirect()->route('users.index')->with(['success' => __('Utilizatorul a fost actualizat cu succes.')]);
     }
 
     /**
-     * The page to show the user's details and edit them...
+     * The page to show the user's details
      *
      * @param User $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(User $user) {
+    public function show(User $user)
+    {
         $roles = Role::allWithCache();
         return view('dashboard.admin.users.show', compact('user', 'roles'));
     }
+
+    /**
+     * The page where the user can edit user details
+     *
+     * @param User $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(User $user)
+    {
+        $roles = Role::allWithCache();
+        return view('dashboard.admin.users.edit', compact('user', 'roles'));
+    }
+
+    /**
+     * The page to create a new user
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        $roles = Role::allWithCache();
+        return view('dashboard.admin.users.new', compact('roles'));
+    }
+
 
     /**
      * The destroy method to delete the user...
@@ -90,7 +114,9 @@ class UsersController extends Controller
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(User $user) {
+    public function destroy(User $user)
+    {
+        // TODO: Prevent deleting own account
         try {
             $user->delete();
         } catch (\Exception $exception) {
@@ -107,7 +133,8 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function deleted() {
+    public function deleted()
+    {
         $users = User::onlyTrashed()->paginate(UsersController::DELETED_PER_PAGE);
 
         return view('dashboard.admin.users.deleted', compact('users'));
@@ -119,7 +146,8 @@ class UsersController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function forceDelete(int $id) {
+    public function forceDelete(int $id)
+    {
         try {
             $user = User::withTrashed()->findOrFail($id);
         } catch (\Exception $exception) {
@@ -139,7 +167,8 @@ class UsersController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function restore(int $id) {
+    public function restore(int $id)
+    {
         try {
             $user = User::withTrashed()->findOrFail($id);
         } catch (\Exception $exception) {

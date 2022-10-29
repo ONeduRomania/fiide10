@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UsersStoreRequest extends FormRequest
 {
@@ -13,9 +14,10 @@ class UsersStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        // @todo when done with permissions update this...
-    $user->givePermissionTo('manage-users', 'delete articles');
-     //  return true;
+        // TODO: Limit permissions
+        //@todo when done with permissions update this...
+        //    $user->givePermissionTo('manage-users', 'delete articles');
+        return true;
     }
 
     /**
@@ -28,7 +30,7 @@ class UsersStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'alpha_space', 'string', 'between:7,32'],
-            'email' => ['required', 'email', 'unique:users,email', 'between:8,64'],
+            'email' => ['required', 'email', 'between:8,64', Rule::unique('users')->ignore($this->route('user'), 'email')],
             'password' => ['required', 'string', 'between:6,32', 'confirmed'],
             'role' => ['required', 'string', 'exists:roles,name'],
         ];

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SchoolsStoreRequest extends FormRequest
 {
@@ -26,9 +27,9 @@ class SchoolsStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'between:7,128'],
-            'email_contact' => ['required', 'email', 'unique:schools,email_contact', 'between:8,64'],
-            'phone_number' => ['sometimes', 'nullable', 'numeric', 'digits:10'],
-            'address_type' => ['sometimes', 'nullable', 'string', 'between:16,128'],
+            'email_contact' => ['required', 'email', 'between:8,64', Rule::unique('schools')->ignore($this->route('school'), 'email_contact')],
+            'phone_number' => ['sometimes', 'nullable', 'string', 'digits:10'],
+            'address' => ['sometimes', 'nullable', 'string', 'between:16,128'],
         ];
     }
 }

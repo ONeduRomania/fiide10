@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('pageName')
-    {{__('Adaugă o școală nouă')}}
+    {{__('Editează școala')}}
 @endsection
 
 @section('content')
@@ -9,13 +9,14 @@
         <x-alert/>
 
         <div class="col">
-            <form method="POST" action="{{ route('schools.store') }}">
+            <form method="POST" action="{{ route('schools.update', $school->id) }}">
                 @csrf
+                @method('patch')
                 <div class="form-group">
                     <label for="name" class="text-md-left">Numele unității de învățământ:</label>
 
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                           value="{{ old('name', $school->name) }}" required autocomplete="name" autofocus>
                     @error('name')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +29,8 @@
 
                     <input id="email_contact" type="email"
                            class="form-control @error('email_contact') is-invalid @enderror" name="email_contact"
-                           value="{{ old('email_contact') }}" required autocomplete="email_contact" autofocus>
+                           value="{{ old('email_contact', $school->email_contact) }}" required
+                           autocomplete="email_contact" autofocus>
                     @error('email_contact')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,7 +43,8 @@
 
                     <input id="address" type="text"
                            class="form-control @error('address') is-invalid @enderror" name="address"
-                           value="{{ old('address') }}" autocomplete="address" autofocus>
+                           value="{{ old('address', $school->address) }}" autocomplete="address"
+                           autofocus>
                     @error('address')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -54,14 +57,15 @@
 
                     <input id="phone_number" type="text"
                            class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                           value="{{ old('phone_number') }}" autocomplete="phone_number" autofocus>
+                           value="{{ old('phone_number', $school->phone_number) }}" autocomplete="phone_number"
+                           autofocus>
                     @error('phone_number')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Adaugă</button>
+                <button type="submit" class="btn btn-primary">Salvează</button>
             </form>
         </div>
     </div>

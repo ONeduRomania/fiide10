@@ -19,8 +19,8 @@ Route::view('/', 'welcome')
     ->name('welcome');
 
 Route::prefix('/legal')->group(function () {
-   Route::view('/terms', 'legal.terms')
-       ->name('legal.terms');
+    Route::view('/terms', 'legal.terms')
+        ->name('legal.terms');
 
     Route::view('/privacy', 'legal.privacy')
         ->name('legal.privacy');
@@ -39,13 +39,13 @@ Route::middleware(['verified', 'auth'])->group(function () {
 
     Route::namespace('Admin')->prefix('/admin')->group(function () {
         Route::get('/users/deleted', 'UsersController@deleted')->name('users.deleted');
-        Route::resource('/users', 'UsersController')->except(['create', 'edit']);
+        Route::resource('/users', 'UsersController');
 
         Route::delete('/users/force/{id}', 'UsersController@forceDelete')->name('users.force');
         Route::match(['PUT', 'PATCH'], '/users/restore/{id}', 'UsersController@restore')->name('users.restore');
 
         Route::get('/schools/deleted', 'SchoolsController@deleted')->name('schools.deleted');
-        Route::resource('/schools', 'SchoolsController')->except(['edit']);
+        Route::resource('/schools', 'SchoolsController');
 
         Route::delete('/schools/force/{id}', 'SchoolsController@forceDelete')->name('schools.force');
         Route::match(['PUT', 'PATCH'], '/schools/restore/{id}', 'SchoolsController@restore')->name('schools.restore');
@@ -101,7 +101,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'createHomeworkForSubject'])->name('homework.create');
         Route::delete('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'deleteHomework'])->name('homework.delete');
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'checkHomework'])->name('homework.check');
-        Route::match(['PUT', 'PATCH'],'/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'updateHomework'])->name('homework.update');
+        Route::match(['PUT', 'PATCH'], '/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'updateHomework'])->name('homework.update');
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submissions/{submission}/download', [HomeworkController::class, 'downloadHomeworkFiles'])->name('homework.download_submission');
         Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'submitHomework'])->name('homework.submit_get');
         Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'turnIn'])->name('homework.submit_post');

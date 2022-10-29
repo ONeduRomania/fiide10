@@ -32,22 +32,36 @@ use Illuminate\Support\Facades\Cache;
  * @method static \Illuminate\Database\Query\Builder|School withTrashed()
  * @method static \Illuminate\Database\Query\Builder|School withoutTrashed()
  * @mixin \Eloquent
+ * @property string $phone_number
+ * @method static \Illuminate\Database\Eloquent\Builder|School wherePhoneNumber($value)
  */
 class School extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'email_contact', 'address'
+        'name', 'email_contact', 'address', 'phone_number'
     ];
 
     protected $casts = [
         'address' => 'array',
     ];
 
-    public static function allWithCache(Carbon $datetime, int $perpage, int $whichpage) {
+    public static function allWithCache(Carbon $datetime, int $perpage, int $whichpage)
+    {
         return Cache::tags('schools')->remember('schools_page_' . $whichpage, $datetime, function () use ($perpage) {
             return self::paginate($perpage);
+        });
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function (School $school) {
+            $invites = Invite::whereSchoolId($school->id)->get();
+            foreach ($invites as $invite) {
+                $invite->delete();
+            }
         });
     }
 
