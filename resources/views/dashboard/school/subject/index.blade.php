@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+@extends('dashboard.admin.schools.show')
 
-@section('content')
+@section('subcontent')
     <div class="section-info d-flex align-items-center my-5">
         <div class="container-fluid">
             @if (session('success'))
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     @endforeach
-                    
+
                     {{ $subjects->links() }}
                 </div>
             </div>

@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+@extends('dashboard/admin/schools/show')
 
-@section('content')
+@section('subcontent')
 <div class="section-info d-flex align-items-center my-5">
         <div class="container-fluid">
             @if (session('success'))
@@ -49,7 +49,7 @@
                                     @enderror
                                 </div>
 
-                                
+
                                 <div class="form-group">
                                     <label for="master_teacher" class="text-md-left">Selectează dirigintele clasei:</label>
                                     <select id="master_teacher" name="master_teacher" class="form-control @error('master_teacher') is-invalid @enderror" required autofocus>
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                     @endforeach
-                    
+
                     {{ $classes->links() }}
                 </div>
             </div>

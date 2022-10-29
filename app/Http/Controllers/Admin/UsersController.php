@@ -45,7 +45,11 @@ class UsersController extends Controller
     public function store(UsersStoreRequest $request)
     {
         try {
-            $user = User::create($request->only(['name', 'email', 'password']));
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => \Hash::make($request->password)
+            ]);
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
@@ -63,7 +67,14 @@ class UsersController extends Controller
     public function update(UsersStoreRequest $request, User $user)
     {
         try {
-            $userUpdated = $user->update($request->only(['name', 'email', 'password']));
+            $updateParams = [
+                'name' => $request->name,
+                'email' => $request->email
+            ];
+            if (isset($request->password)) {
+                $updateParams['password'] = \Hash::make($request->password);
+            }
+            $user->update($updateParams);
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
