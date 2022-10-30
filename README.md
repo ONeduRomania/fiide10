@@ -10,3 +10,10 @@
 4. Run the database migrations by running `./vendor/bin/sail artisan migrate`
 5. Run the database seeder by running `./vendor/bin/sail artisan db:seed`
 6. Update the project assets by running `./vendor/bin/sail npm run watch` while developing
+
+## Added features
+TODO: Remove this after merging
+1. Redesign
+2. Clean up code so it can be more consistent
+3. Fix glaring security bugs (password stored plaintext)
+4. UX improvements (eg: class create page is useless without any teachers)

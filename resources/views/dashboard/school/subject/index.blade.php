@@ -35,7 +35,7 @@
 
                 <div class="col-md-12 col-lg-6">
                     <div class="card shadow-lg">
-                        <form method="POST" action="{{ route('subjects.submit', $school_id) }}">
+                        <form method="POST" action="{{ route('subjects.submit', $school->id) }}">
                             <div class="card-body">
                                 @csrf
                                 <div class="form-group">
@@ -69,13 +69,13 @@
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>{{ $subject->name }}</div>
                                 <div>
-                                    <form action="{{ route('subjects.destroy', ['school' => $school_id, 'subject' => $subject->id]) }}" method="POST" class="d-inline-flex mx-1">
+                                    <form action="{{ route('subjects.destroy', ['school' => $school->id, 'subject' => $subject->id]) }}" method="POST" class="d-inline-flex mx-1">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
                                     </form>
 
-                                    <a class="text-royal text-decoration-none mx-1" href="{{ route('subjects.show', ['school' => $school_id, 'subject' => $subject->id]) }}">{{ __('Edit') }}</a>
+                                    <a class="text-royal text-decoration-none mx-1" href="{{ route('subjects.show', ['school' => $school->id, 'subject' => $subject->id]) }}">{{ __('Edit') }}</a>
                                 </div>
                             </div>
                         </div>

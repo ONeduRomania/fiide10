@@ -19,7 +19,8 @@ class ClassController extends Controller
 {
     private const PER_PAGE = 5;
 
-    public function showClasses(School $school, Request $request) {
+    public function index(School $school, Request $request)
+    {
         $current_page = $request->get('page', '1');
         $classes = Classroom::allWithCache(Carbon::now()->addMinutes(5), self::PER_PAGE, $current_page, $school->id);
         $teachers = Teacher::with('user')->where(['school_id' => $school->id])->get();
@@ -27,20 +28,34 @@ class ClassController extends Controller
         return view('dashboard.school.class.index', compact('classes', 'school', 'teachers'));
     }
 
-    public function submitClass(School $school, StoreClassRequest $request) {
+    public function create(School $school)
+    {
+        $teachers = Teacher::with('user')->where(['school_id' => $school->id])->get();
+        // TODO: Redirect to teachers if array is empty
+        return view('dashboard.school.class.new', compact('school', 'teachers'));
+    }
+
+    public function store(School $school, StoreClassRequest $request)
+    {
         try {
             $class = Classroom::create(['name' => $request->name, 'master_teacher' => $request->master_teacher, 'school_id' => $school->id]);
-            Invite::create(['school_id' => $school->id, 'class_id' => $class->id, 'code' => Str::substr(Crypt::encryptString($school->name . 'student'), 0, 127), 'action' => 2]);
+            Invite::create([
+                'school_id' => $school->id,
+                'class_id' => $class->id,
+                'code' => Str::substr(Crypt::encryptString($school->name . 'student'), 0, 127),
+                'action' => 2
+            ]);
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
 
-        return back()->with([
-            'success' => __('Clasa a fost creată cu succes.'),
+        return redirect()->route('classes.show', ['class' => $class->id, 'school' => $school->id])->with([
+            'success' => __('Clasa a fost creată cu succes.')
         ]);
     }
 
-    public function removeClass(School $school, Classroom $class) {
+    public function destroy(School $school, Classroom $class)
+    {
         try {
             $class->delete();
         } catch (\Exception $exception) {
@@ -52,7 +67,8 @@ class ClassController extends Controller
         ]);
     }
 
-    public function classDetails(School $school, Classroom $class, Request $request) {
+    public function show(School $school, Classroom $class, Request $request)
+    {
         $current_page = $request->get('page', '1');
         $current_req_page = $request->get('request_page', '1');
 
@@ -64,16 +80,18 @@ class ClassController extends Controller
         return view('dashboard.school.class.show', compact('school', 'class', 'teachers', 'invite', 'requests', 'students'));
     }
 
-    public function updateCode(School $school, Classroom $class) {
+    public function updateCode(School $school, Classroom $class)
+    {
         $invite = Invite::where(['school_id' => $school->id, 'class_id' => $class->id, 'action' => 2])->firstOrFail();
         $invite->update(['code' => Str::substr(Crypt::encryptString($school->name . 'student'), 0, 127)]);
 
-        return redirect()->route('classes.show',  ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('Codul a fost reînoit.')
+        return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
+            'success' => __('Codul a fost reînnoit.')
         ]);
     }
 
-    public function updateClass(School $school, Classroom $class, StoreClassRequest $request) {
+    public function update(School $school, Classroom $class, StoreClassRequest $request)
+    {
         try {
             $class->update(['name' => $request->name, 'master_teacher' => $request->master_teacher]);
         } catch (\Exception $exception) {
@@ -85,7 +103,8 @@ class ClassController extends Controller
         ]);
     }
 
-    public function removeRequest(School $school, Classroom $class, InviteRequest $request) {
+    public function removeRequest(School $school, Classroom $class, InviteRequest $request)
+    {
         try {
             $request->update(['declined' => Carbon::now()]);
         } catch (\Exception $exception) {
@@ -97,7 +116,8 @@ class ClassController extends Controller
         ]);
     }
 
-    public function acceptRequest(School $school, Classroom $class, InviteRequest $request) {
+    public function acceptRequest(School $school, Classroom $class, InviteRequest $request)
+    {
         try {
             $request->delete();
         } catch (\Exception $exception) {

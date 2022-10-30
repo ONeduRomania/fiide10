@@ -15,7 +15,6 @@ class SubjectsController extends Controller
     public const DELETED_PER_PAGE = 10;
 
     public function showSubjects(School $school, Request $request) {
-        $school_id = $school->id;
         $subjects = Subject::allWithCache(
             Carbon::now()->addMinutes(5),
             SubjectsController::PER_PAGE,
@@ -23,7 +22,7 @@ class SubjectsController extends Controller
             $school->id
         );
 
-        return view('dashboard.school.subject.index', compact('school_id', 'subjects'));
+        return view('dashboard.school.subject.index', compact('school', 'subjects'));
     }
 
     public function submitSubject(School $school, SubjectStoreRequest $request) {

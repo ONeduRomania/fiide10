@@ -52,12 +52,8 @@ Route::middleware(['verified', 'auth'])->group(function () {
     });
 
     Route::namespace('School')->prefix('/school')->group(function () {
-        //region Rutele pentru a adauga clase noi + modulul de catalog.
-        Route::get('/{school}/classes', 'ClassController@showClasses')->name('classes.index');
-        Route::post('/{school}/classes', 'ClassController@submitClass')->name('classes.submit');
-        Route::delete('/{school}/classes/{class}', 'ClassController@removeClass')->name('classes.destroy');
-        Route::get('/{school}/classes/{class}/show', 'ClassController@classDetails')->name('classes.show');
-        Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/show', 'ClassController@updateClass')->name('classes.update');
+        //region Rutele pentru a adăuga clase noi + modulul de catalog.
+        Route::resource('/{school}/classes', 'ClassController');
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/renew', 'ClassController@updateCode')->name('classes.renew');
         Route::delete('/{school}/classes/{class}/request/{request}', 'ClassController@removeRequest')->name('classes.removerequest');
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/request/{request}', 'ClassController@acceptRequest')->name('classes.acceptrequest');
