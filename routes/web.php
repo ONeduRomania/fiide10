@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\School\ClassController;
 use App\Http\Controllers\School\HomeworkController;
+use App\Http\Controllers\School\SubjectsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +42,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
 
     Route::namespace('Admin')->prefix('/admin')->group(function () {
         Route::get('/users/deleted', 'UsersController@deleted')->name('users.deleted');
-        Route::resource('/users', 'UsersController');
+        Route::resource('/users', UsersController::class);
 
         Route::delete('/users/force/{id}', 'UsersController@forceDelete')->name('users.force');
         Route::match(['PUT', 'PATCH'], '/users/restore/{id}', 'UsersController@restore')->name('users.restore');
@@ -53,7 +56,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
 
     Route::namespace('School')->prefix('/school')->group(function () {
         //region Rutele pentru a adăuga clase noi + modulul de catalog.
-        Route::resource('/{school}/classes', 'ClassController');
+        Route::resource('/{school}/classes', ClassController::class);
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/renew', 'ClassController@updateCode')->name('classes.renew');
         Route::delete('/{school}/classes/{class}/request/{request}', 'ClassController@removeRequest')->name('classes.removerequest');
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/request/{request}', 'ClassController@acceptRequest')->name('classes.acceptrequest');
@@ -76,11 +79,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //endregion
 
         //region Rutele de a putea crea o materie noua
-        Route::get('/{school}/subjects', 'SubjectsController@showSubjects')->name('subjects.index');
-        Route::post('/{school}/subjects', 'SubjectsController@submitSubject')->name('subjects.submit');
-        Route::get('/{school}/subjects/{subject}/show', 'SubjectsController@showSubject')->name('subjects.show');
-        Route::delete('/{school}/subjects/{subject}/destroy', 'SubjectsController@destroySubject')->name('subjects.destroy');
-        Route::match(['PUT', 'PATCH'], '/{school}/subjects/{subject}/update', 'SubjectsController@updateSubject')->name('subjects.update');
+        Route::resource('/{school}/subjects', SubjectsController::class);
         //endregion
 
         //region Rutele de orar

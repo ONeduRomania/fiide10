@@ -1,7 +1,7 @@
 @extends('dashboard.admin.schools.show')
 
 @section('pageName')
-    {{__('Gestionează clasele')}}
+    {{$school->name}} - {{__('Clase')}}
 @endsection
 
 @section('subcontent')
