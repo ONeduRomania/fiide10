@@ -35,6 +35,13 @@ class ClassController extends Controller
         return view('dashboard.school.class.new', compact('school', 'teachers'));
     }
 
+    public function edit(School $school, Classroom $class)
+    {
+        $teachers = Teacher::with('user')->where(['school_id' => $school->id])->get();
+        // TODO: Redirect to teachers if array is empty
+        return view('dashboard.school.class.edit', compact('school', 'teachers', 'class'));
+    }
+
     public function store(School $school, StoreClassRequest $request)
     {
         try {

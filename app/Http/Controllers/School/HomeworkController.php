@@ -28,7 +28,6 @@ class HomeworkController extends Controller
     public function getHomeworkForSubject(School $school, Classroom $classroom, Subject $subject, Request $request)
     {
         $homeworks = \App\Models\Homework::withCount('submissions')->where('subject_id', $subject->id)->where('class_id', $classroom->id)->orderBy('id', 'DESC')->get();
-
         return view('dashboard.school.class.homework.index', compact('school', 'classroom', 'homeworks', 'subject'));
 
     }

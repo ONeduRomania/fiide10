@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+require('laravel-mix-bundle-analyzer');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,6 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
+if (!mix.inProduction() && !mix.isWatching()) {
+    mix.bundleAnalyzer({
+        analyzerMode: "static"
+    });
+}
+
+mix.js('resources/js/app.js', 'public/js').react()
     .sass('resources/sass/app.scss', 'public/css');
-mix.react('resources/js/helpers.js', 'public/js');
+mix.js('resources/js/helpers.js', 'public/js').react();
+
+// Remove these module once Axios drops them.
+mix.webpackConfig({
+    resolve: {
+        fallback: {
+            https: require.resolve("https-browserify"),
+            stream: require.resolve("stream-browserify"),
+            http: require.resolve("stream-http"),
+            zlib: require.resolve("browserify-zlib")
+        },
+    },
+})

@@ -2,220 +2,124 @@
 
 @section('pageName')
     {{ $class->name }}
+    <span><a href="{{ route('classes.edit', ['school' => $school->id, 'class' => $class->id]) }}" class="btn btn-link">
+                    {{__("Editează")}}
+                </a></span>
 @endsection
 
 @section('subcontent')
-    <div class="section-info d-flex align-items-center my-5">
+    <div class="section-info">
         <div class="container-fluid">
-            @if (session('success'))
-                <div class="alert" role="alert">
-                    <button type="button" class="btn btn-royal dismissible" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+            <div class="col">
+                <div class="row d-flex justify-content-center mb-3">
+                    <button href="#" data-target="#linkModal" data-toggle="modal" class="btn btn-link text-royal">
+                        {{__("Invită un elev nou")}} <i class="fas fa-plus"></i>
                     </button>
-                    <div class="my-1 text-center">
-                        <p class="text-white">{{ session('success') }}</p>
-                    </div>
+                    <a class="btn btn-link text-royal"
+                       href="{{ route('timetable.index', ['school' => $school->id, 'class' => $class->id]) }}">Editează orarul <i
+                            class="fas fa-edit"></i></a>
+                    <a
+                        class="btn btn-link text-royal"
+                        href="{{ route('classes.log', ['school' => $school->id, 'class' => $class->id]) }}">Adaugă intrare în catalog <i class="fas fa-link"></i></a>
                 </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert" role="alert">
-                    <button type="button" class="btn btn-danger dismissible" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="my-1 text-center">
-                        <p class="text-white">
-                            <strong>Eroare:</strong> {{ session('error') }}
-                        </p>
+                @if(!$requests->isEmpty())
+                    <div class="row">
+                        <h4>Cereri în așteptare</h4>
                     </div>
-                </div>
-            @endif
-            <div class="container">
-                <h5>Clasa: {{ $class->name }}</h5>
-
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card shadow-lg">
-                            <form method="POST"
-                                  action="{{ route('classes.update', ['school' => $school->id, 'class' => $class->id]) }}">
-                                <div class="card-body">
-                                    @method('PATCH')
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="name" class="text-md-left">Clasa: </label>
-
-                                        <input id="name" type="text"
-                                               class="form-control @error('name') is-invalid @enderror" name="name"
-                                               value="{{ old('name') }}"
-                                               placeholder="Introdu numărul și litera clasei..." required
-                                               autocomplete="name" autofocus>
-                                        @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="master_teacher" class="text-md-left">Selectează dirigintele:</label>
-
-                                        <select id="master_teacher" name="master_teacher"
-                                                class="form-control @error('master_teacher') is-invalid @enderror"
-                                                required autofocus>
-                                            @foreach($teachers as $teacher)
-                                                <option
-                                                    value="{{ $teacher->user->id }}">{{ $teacher->user->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('master_teacher')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-gray">Editează</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card shadow-lg">
-                            <div class="card-body d-flex justify-content-center">
-                                <small class="text-muted">Dacă vrei să editezi orarul profesorului, o poți face de aici:
-                                    <a class="text-decoration-none text-primary"
-                                       href="{{ route('timetable.show', ['school' => $school->id, 'class' => $class->id]) }}">Editează<i
-                                            class="fas fa-edit"></i></a></small>
-                            </div>
-                        </div>
-
-                        <div class="my-3 card shadow-lg">
-                            <div class="card-body d-flex justify-content-center">
-                                <small class="text-muted">Dacă dorești să inserezi un jurnal nou: <a
-                                        class="text-decoration-none text-primary"
-                                        href="{{ route('classes.log', ['school' => $school->id, 'class' => $class->id]) }}">click
-                                        aici <i class="fas fa-link"></i></a></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="my-3"/>
-
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 text-center">
-                        <h5>Invită un elev să se alăture!</h5>
-                        <p class="text-muted">Aici poți invita elevii să se alăture clasei.</p>
-                        <button type="button" class="btn btn-block btn-royal" data-toggle="modal"
-                                data-target="#linkModal">Obține un link de invitație <i class="fas fa-link"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <hr class="my-3"/>
-                <div class="row">
-                    <div class="col-md-12 col-lg-6">
-                        <h5>Sunt elevi la tine în clasă?</h5>
-                        <p class="text-muted">Aici elevii așteaptă aprobarea ta.</p>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6">
-                        @foreach ($requests as $request)
-                            <div class="card shadow-lg my-1">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>{{ $request->user->name }}</div>
-                                    <div>
-                                        <form
-                                            action="{{ route('classes.removerequest', ['school' => $school->id, 'class' => $class->id, 'request' => $request->id]) }}"
-                                            method="POST" class="d-inline-flex mx-1">
+                    <div class="row">
+                        <p class="text-muted">Dacă un elev a accesat link-ul de invitație, îi vei putea aproba cererea de aici.</p>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nume</th>
+                                <th>Acțiuni</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($requests as $request)
+                                <tr>
+                                    <td>{{ $request->user->name }}</td>
+                                    <td>
+                                        <form action="{{ route('classes.removerequest', ['school' => $school->id, 'class' => $class->id, 'request' => $request->id]) }}" method="POST"
+                                              class="d-inline-flex">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Nu este la mine în clasă
-                                            </button>
+                                            <button type="submit" class="btn btn-link text-danger">Nu îl recunosc.</button>
                                         </form>
-
-                                        <form
-                                            action="{{ route('classes.acceptrequest', ['school' => $school->id, 'class' => $class->id, 'request' => $request->id]) }}"
-                                            method="POST" class="d-inline-flex mx-1">
+                                        <form action="{{ route('classes.acceptrequest', ['school' => $school->id, 'class' => $class->id, 'request' => $request->id]) }}" method="POST"
+                                              class="d-inline-flex">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-success">Permite</button>
+                                            <button type="submit" class="btn btn-link text-success">Permite</button>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
 
                         {{ $requests->links() }}
                     </div>
-                </div>
-
-                <hr class="my-3"/>
+                @endif
                 <div class="row">
-                    <div class="col-md-12 col-lg-6">
-                        <h5>Gestionează elevii</h5>
-                        <p class="text-muted">De aici poți gestiona elevii clasei tale.</p>
-                    </div>
-
-                    <div class="col-md-12 col-lg-6">
+                    <h4>Vezi elevii</h4>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Acțiuni</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         @foreach ($students as $student)
-                            <div class="card shadow-lg my-1">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>{{ $student->user->name }}</div>
-                                    <div>
-                                        <form
-                                            action="{{ route('classes.student.destroy', ['school' => $school->id, 'class' => $class->id, 'student' => $student->id]) }}"
-                                            method="POST" class="d-inline-flex mx-1">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Elimină elevul</button>
-                                        </form>
-
-                                        <a class="text-royal text-decoration-none mx-1"
-                                           href="{{ route('classes.student.show', ['school' => $school->id, 'class' => $class->id, 'student' => $student->id]) }}">Editează</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <tr>
+                                <td>{{ $student->user->name }}</td>
+                                <td>
+                                    <form action="{{ route('classes.student.destroy', ['school' => $school->id, 'class' => $class->id, 'student' => $student->id]) }}" method="POST"
+                                          class="d-inline-flex">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link text-danger">Șterge</button>
+                                    </form>
+                                    <a class="btn btn-link text-royal" href="{{ route('classes.student.show', ['school' => $school->id, 'class' => $class->id, 'student' => $student->id]) }}">Editează</a>
+                                </td>
+                            </tr>
                         @endforeach
+                        </tbody>
+                    </table>
 
-                        {{ $students->links() }}
-                    </div>
+                    {{ $students->links() }}
                 </div>
-
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="linkModal" tabindex="-1" aria-labelledby="linkModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Obține un link de invitație</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Invită elevii noi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <p>Trimite acest link elevilor pe care dorești să îî inviți, iar după ce aceștia se loghează în platformă vor apărea în lista de mai jos.</p>
                     <div class="input-group mb-3">
-                        <input id="link" type="text" value="{{ route('invite.link', $invite->code) }}" readonly
-                               class="form-control" placeholder="Copy invite link"
-                               aria-label="Copiază linkul invitației" aria-describedby="button-link">
-                        <button class="btn btn-royal" type="button" id="button-link" data-clipboard-target="#link">
-                            Copiază
-                        </button>
+                        <input id="link" type="text" value="{{ route('invite.link', $invite->code) }}" readonly class="form-control" placeholder="Copiază linkul" aria-label="Copiază linkul" aria-describedby="button-link">
+                        <div class="input-group-append">
+                            <button class="btn btn-royal" type="button" id="button-link" data-clipboard-target="#link">Copiază linkul</button>
+                        </div>
                     </div>
+                    <p class="text-muted">În caz că vrei să anulezi linkul de invitație și să generezi unul nou, apasă pe butonul de mai jos.</p>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <form action="{{ route('classes.renew', ['school' => $school->id, 'class' => $class->id]) }}"
-                      method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit" class="btn btn-royal">Generează alt link<i class="fas fa-link"></i></button>
-                </form>
+                <div class="modal-footer">
+                    <form action="{{ route('classes.renew', ['school' => $school->id, 'class' => $class->id]) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn btn-royal">Generează un nou link  <i class="fas fa-link"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

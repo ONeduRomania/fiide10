@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\School\ClassController;
 use App\Http\Controllers\School\HomeworkController;
 use App\Http\Controllers\School\SubjectsController;
+use App\Http\Controllers\School\TimetableController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -83,11 +84,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //endregion
 
         //region Rutele de orar
-        Route::get('/{school}/classes/{class}/timetable', 'TimetableController@showTimetable')->name('timetable.show');
-        Route::post('/{school}/classes/{class}/timetable', 'TimetableController@createTimetable')->name('timetable.create');
-        Route::delete('/{school}/classes/{class}/timetable/{timetable}', 'TimetableController@deleteTimetable')->name('timetable.delete');
-        Route::get('/{school}/classes/{class}/timetable/{timetable}/show', 'TimetableController@checkTimetable')->name('timetable.check');
-        Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/timetable/{timetable}', 'TimetableController@updateTimetable')->name('timetable.update');
+        Route::resource('/{school}/classes/{class}/timetable', TimetableController::class);
         //endregion
 
         //region Rutele de teme

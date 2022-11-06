@@ -97,12 +97,12 @@
                 <div class="modal-body">
                     <p>Trimite acest link profesorului pe care dorești să îl inviți, iar după ce acesta se loghează în platformă va apărea în lista de mai jos.</p>
                     <div class="input-group mb-3">
-                        <input id="link" type="text" value="{{ route('invite.link', $invite->code) }}" readonly class="form-control" placeholder="Copy invite link" aria-label="Copy invite link" aria-describedby="button-link">
+                        <input id="link" type="text" value="{{ route('invite.link', $invite->code) }}" readonly class="form-control" placeholder="Copiază linkul" aria-label="Copiază linkul" aria-describedby="button-link">
                         <div class="input-group-append">
                             <button class="btn btn-royal" type="button" id="button-link" data-clipboard-target="#link">Copiază linkul</button>
                         </div>
                     </div>
-                    <p class="text-muted">În caz că vrei să anulezi linkul de invitație și să generezi una nouă, apasă pe butonul de mai jos.</p>
+                    <p class="text-muted">În caz că vrei să anulezi linkul de invitație și să generezi unul nou, apasă pe butonul de mai jos.</p>
                 </div>
                 <div class="modal-footer">
                     <form action="{{ route('teachers.renew', ['school' => $school->id]) }}" method="POST">
