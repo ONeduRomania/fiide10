@@ -72,7 +72,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-link text-danger">Șterge</button>
                                     </form>
-                                    <a class="btn btn-link text-royal" href="{{ route('teachers.show', ['school' => $school->id, 'teacher' => $teacher->id]) }}">Editează</a>
+                                    <a class="btn btn-link text-royal" href="{{ route('teachers.edit', ['school' => $school->id, 'teacher' => $teacher->id]) }}">Editează</a>
                                 </td>
                             </tr>
                         @endforeach

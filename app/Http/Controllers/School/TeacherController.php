@@ -30,7 +30,7 @@ class TeacherController extends Controller
         return view('dashboard.school.teacher.index', compact('teachers', 'school', 'requests', 'invite'));
     }
 
-    public function removeTeacher(School $school, Teacher $teacher) {
+    public function destroy(School $school, Teacher $teacher) {
         try {
             $teacher->delete();
         } catch(\Exception $exception) {
@@ -51,35 +51,31 @@ class TeacherController extends Controller
         ]);
     }
 
-    public function teacherDetails(School $school, Teacher $teacher) {
-        $subjects = Subject::allCached(Carbon::now()->addMinutes(5), $school->id);
-        return view('dashboard.school.teacher.show', compact('school', 'teacher', 'subjects'));
+    public function edit(School $school, Teacher $teacher) {
+        $teacherSubjects = $teacher->subjects()->get();
+        $subjects = Subject::get();
+        foreach ($subjects as $subject) {
+            if($teacherSubjects->contains($subject)) {
+                // Show this subject as checked on the edit page.
+                $subject->thisTeacher = true;
+            }
+        }
+        return view('dashboard.school.teacher.edit', compact('school', 'teacher', 'subjects'));
     }
 
-    public function teacherUpdate(School $school, Teacher $teacher, TeacherSubjectRequest $request) {
+    public function update(School $school, Teacher $teacher, TeacherSubjectRequest $request) {
         try {
-            TeacherSubject::updateOrCreate(
-                ['teacher_id' => $teacher->id, 'subject_id' => $request->subject],
-                ['teacher_id' => $teacher->id, 'subject_id' => $request->subject]
-            );
+            if ($request->subjects != null) {
+                $teacher->subjects()->sync(array_keys($request->subjects));
+            } else {
+                $teacher->subjects()->sync([]);
+            }
         } catch (\Exception $exception) {
-            return redirect()->route('teachers.show', ['school' => $school->id, 'teacher' => $teacher->id])->withError($exception->getMessage())->withInput();
+            return redirect()->route('teachers.edit', ['school' => $school->id, 'teacher' => $teacher->id])->withError($exception->getMessage())->withInput();
         }
 
-        return redirect()->route('teachers.show', ['school' => $school->id, 'teacher' => $teacher->id])->with([
+        return redirect()->route('teachers.index', ['school' => $school->id])->with([
             'message' => __('Contul profesorului a fost actualizat cu succes.')
-        ]);
-    }
-
-    public function deleteTeacher(School $school, Teacher $teacher) {
-        try {
-            $teacher->delete();
-        } catch (\Exception $exception) {
-            return redirect()->route('teachers.index', $school->id)->withError($exception->getMessage())->withInput();
-        }
-
-        return redirect()->route('teachers.index',  $school->id)->with([
-            'success' => __('Profesorul a fost eliminat din școală.')
         ]);
     }
 

@@ -44,4 +44,9 @@ class Subject extends Model
             return self::where('school_id', $school_id)->paginate($perpage);
         });
     }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'teacher_subjects', 'subject_id', 'teacher_id');
+    }
 }

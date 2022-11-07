@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\School\ClassController;
 use App\Http\Controllers\School\HomeworkController;
 use App\Http\Controllers\School\SubjectsController;
+use App\Http\Controllers\School\TeacherController;
 use App\Http\Controllers\School\TimetableController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -70,13 +71,9 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //endregion
 
         //region Rutele de a putea adauga profesori si de a selecta o materie
-        Route::get('/{school}/teachers', 'TeacherController@index')->name('teachers.index');
-        Route::delete('/{school}/teachers/{teacher}', 'TeacherController@removeTeacher')->name('teachers.destroy');
-        Route::get('/{school}/teachers/{teacher}/show', 'TeacherController@teacherDetails')->name('teachers.show');
         Route::match(['PUT', 'PATCH'], '/{school}/teachers/renew', 'TeacherController@updateCode')->name('teachers.renew');
-        Route::match(['PUT', 'PATCH'], '/{school}/teachers/{teacher}/update', 'TeacherController@teacherUpdate')->name('teachers.update');
-        Route::delete('/{school}/teacher/{request}/request', 'TeacherController@removeRequest')->name('teachers.removerequest');
-        Route::match(['PUT', 'PATCH'], '/{school}/teacher/{request}/request', 'TeacherController@acceptRequest')->name('teachers.acceptrequest');
+        Route::match(['PUT', 'PATCH'], '/{school}/teachers/{request}/request', 'TeacherController@acceptRequest')->name('teachers.acceptrequest');
+        Route::resource('/{school}/teachers', TeacherController::class);
         //endregion
 
         //region Rutele de a putea crea o materie noua
