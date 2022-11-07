@@ -20,7 +20,7 @@
                             class="fas fa-edit"></i></a>
                     <a
                         class="btn btn-link text-royal"
-                        href="{{ route('classes.log', ['school' => $school->id, 'class' => $class->id]) }}">Adaugă intrare în catalog <i class="fas fa-link"></i></a>
+                        href="{{ route('log.create', ['school' => $school->id, 'class' => $class->id]) }}">Adaugă intrare în catalog <i class="fas fa-link"></i></a>
                 </div>
                 @if(!$requests->isEmpty())
                     <div class="row">

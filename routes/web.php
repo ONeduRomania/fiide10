@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\School\ClassController;
 use App\Http\Controllers\School\HomeworkController;
+use App\Http\Controllers\School\LogController;
 use App\Http\Controllers\School\SubjectsController;
 use App\Http\Controllers\School\TeacherController;
 use App\Http\Controllers\School\TimetableController;
@@ -62,12 +63,9 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/renew', 'ClassController@updateCode')->name('classes.renew');
         Route::delete('/{school}/classes/{class}/request/{request}', 'ClassController@removeRequest')->name('classes.removerequest');
         Route::match(['PUT', 'PATCH'], '/{school}/classes/{class}/request/{request}', 'ClassController@acceptRequest')->name('classes.acceptrequest');
-        Route::get('/{school}/classes/{class}/log', 'LogController@showLogs')->name('classes.log');
-        Route::post('/{school}/classes/{class}/absence', 'LogController@createAbsenceLog')->name('classes.absence');
-        Route::post('/{school}/classes/{class}/mark', 'LogController@createMarkLog')->name('classes.mark');
-        Route::delete('/{school}/classes/{class}/studentDelete/{student}', 'LogController@removeStudent')->name('classes.student.destroy');
+        Route::delete('/{school}/classes/{class}/studentDelete/{student}', 'ClassController@removeStudent')->name('classes.student.destroy');
         Route::get('/{school}/classes/{class}/student/{student}', 'LogController@studentShow')->name('classes.student.show');
-        Route::delete('/{school}/classes/{class}/log/{log}', 'LogController@deleteLog')->name('log.delete');
+        Route::resource('/{school}/classes/{class}/log', LogController::class);
         //endregion
 
         //region Rutele de a putea adauga profesori si de a selecta o materie

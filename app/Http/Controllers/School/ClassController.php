@@ -137,4 +137,15 @@ class ClassController extends Controller
             'success' => __('Felicitări! Ai un nou elev :)')
         ]);
     }
+
+    public function removeStudent(School $school, Classroom $class, Student $student) {
+        try {
+            $student->delete();
+        } catch (\Exception $exception) {
+            return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->withErrors($exception->getMessage())->withInput();
+        }
+        return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
+            'success' => __('The student has been deleted with success, congrats.')
+        ]);
+    }
 }

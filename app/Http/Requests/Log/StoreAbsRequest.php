@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Log;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreAbsRequest extends FormRequest
 {
@@ -25,9 +26,10 @@ class StoreAbsRequest extends FormRequest
     {
         return [
             'subject' => ['required', 'numeric', 'exists:subjects,id'],
-            'term' => ['required', 'numeric', 'between:1,2'],
+            'markSwitch' => ['required', 'string', Rule::in(['mark', 'absence'])],
+            'mark' => ['exclude_unless:markSwitch,mark', 'required', 'numeric', 'between:1,10'],
             'student' => ['required', 'numeric', 'exists:students,user_id'],
-            'date_absence' => ['required', 'date'],
+            'date' => ['required', 'date'],
         ];
     }
 }
