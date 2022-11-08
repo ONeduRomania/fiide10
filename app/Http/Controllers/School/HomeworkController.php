@@ -25,14 +25,24 @@ use Illuminate\Support\Str;
 
 class HomeworkController extends Controller
 {
-    public function getHomeworkForSubject(School $school, Classroom $classroom, Subject $subject, Request $request)
+    private const PER_PAGE = 5;
+
+    public function index(School $school, Classroom $class, Subject $subject, Request $request)
     {
-        $homeworks = \App\Models\Homework::withCount('submissions')->where('subject_id', $subject->id)->where('class_id', $classroom->id)->orderBy('id', 'DESC')->get();
-        return view('dashboard.school.class.homework.index', compact('school', 'classroom', 'homeworks', 'subject'));
+        $current_page = $request->get('page', '1');
+        $homeworks = Homework::withCount('submissions')->where('subject_id', $subject->id)->where('class_id', $class->id)->orderBy('id', 'DESC')->paginate(self::PER_PAGE, $current_page);
+        return view('dashboard.school.class.homework.index', compact('school', 'class', 'homeworks', 'subject'));
 
     }
 
-    public function createHomeworkForSubject(School $school, Classroom $classroom, Subject $subject, StoreHomeworkRequest $request): RedirectResponse
+    public function create(School $school, Classroom $class, Subject $subject, Request $request)
+    {
+        $filetypes = [];
+        return view('dashboard.school.class.homework.new', compact('school', 'class', 'filetypes', 'subject'));
+
+    }
+
+    public function store(School $school, Classroom $class, Subject $subject, StoreHomeworkRequest $request): RedirectResponse
     {
         try {
 
@@ -42,7 +52,7 @@ class HomeworkController extends Controller
             $teacher = Teacher::where('user_id', $currentUser->id)->get()->first();
 
             $homework = new Homework();
-            $homework->class_id = $classroom->id;
+            $homework->class_id = $class->id;
             $homework->subject_id = $subject->id;
             $homework->teacher_id = $teacher->id;
             $homework->due_date = $request->due_date;
@@ -54,13 +64,13 @@ class HomeworkController extends Controller
 
         } catch (\Exception $exception) {
             return redirect()
-                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->route('homework.create', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                 ->withErrors($exception->getMessage())
                 ->withInput();
         }
 
         try {
-            $students = Student::where('class_id', $classroom->id)->get();
+            $students = Student::where('class_id', $class->id)->get();
             foreach ($students as $student) {
                 $studUser = $student->user;
                 \Mail::to($studUser)->send(new NewHomework($homework, $subject));
@@ -71,12 +81,12 @@ class HomeworkController extends Controller
             // TODO: Log failure
         }
 
-        return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([
+        return redirect()->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])->with([
             'success' => __('Tema a fost adăugată cu succes.')
         ]);
     }
 
-    public function updateHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, StoreHomeworkRequest $request)
+    public function update(School $school, Classroom $class, Subject $subject, Homework $homework, StoreHomeworkRequest $request)
     {
         $shouldSendMail = false;
         try {
@@ -97,14 +107,14 @@ class HomeworkController extends Controller
             $homework->save();
         } catch (\Exception $exception) {
             return redirect()
-                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                 ->withErrors($exception->getMessage())
                 ->withInput();
         }
 
         if ($shouldSendMail) {
             try {
-                $students = Student::where('class_id', $classroom->id)->get();
+                $students = Student::where('class_id', $class->id)->get();
                 foreach ($students as $student) {
                     $studUser = $student->user;
                     \Mail::to($studUser)->send(new HomeworkDueDateChanged($homework, $subject));
@@ -116,41 +126,41 @@ class HomeworkController extends Controller
             }
         }
 
-        return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([
+        return redirect()->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])->with([
             'success' => __('Tema a fost editată cu succes.')
         ]);
     }
 
-    public function deleteHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
+    public function destroy(School $school, Classroom $class, Subject $subject, Homework $homework)
     {
         try {
             $homework->delete();
         } catch (\Exception $exception) {
             return redirect()
-                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                 ->withErrors($exception->getMessage())
                 ->withInput();
         }
 
-        return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->with([
+        return redirect()->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])->with([
             'success' => __('Tema a fost ștearsă cu succes.')
         ]);
     }
 
-    public function checkHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework)
+    public function show(School $school, Classroom $class, Subject $subject, Homework $homework)
     {
-        $submittedHomeworks = $homework->submissions;
-        foreach ($submittedHomeworks as $submission) {
+        $submissions = SubmittedHomework::with('student')->where('homework_id', '==', $homework->id)->get();
+        foreach ($submissions as $submission) {
             $submission->student = Student::whereId($submission->student_id)->first();
         }
-        return view('dashboard.school.class.homework.show', compact('school', 'classroom', 'homework', 'subject'));
+        return view('dashboard.school.class.homework.show', compact('school', 'class', 'homework', 'subject', 'submissions'));
     }
 
-    public function downloadHomeworkFiles(School $school, Classroom $classroom, Subject $subject, Homework $homework, SubmittedHomework $submission)
+    public function downloadHomeworkFiles(School $school, Classroom $class, Subject $subject, Homework $homework, SubmittedHomework $submission)
     {
         $urls = json_decode($submission->uploaded_urls, true);
         if (count($urls) == 0) {
-            return redirect()->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])->withErrors('Nu există niciun fișier de descărcat.');
+            return redirect()->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])->withErrors('Nu există niciun fișier de descărcat.');
         }
 
         if (count($urls) > 1) {
@@ -166,7 +176,7 @@ class HomeworkController extends Controller
             if ($zip->open($fileName, \ZipArchive::CREATE) !== TRUE) {
                 // TODO: Report
                 return redirect()
-                    ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                    ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                     ->withErrors("A apărut o eroare în descărcarea temei. Te rugăm să contactezi echipa de suport.")
                     ->withInput();
             }
@@ -177,7 +187,7 @@ class HomeworkController extends Controller
                 } catch (FileNotFoundException $e) {
                     // TODO: Report
                     return redirect()
-                        ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                        ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                         ->withErrors("A apărut o eroare în descărcarea temei. Te rugăm să contactezi echipa de suport.")
                         ->withInput();
                 }
@@ -191,20 +201,16 @@ class HomeworkController extends Controller
 
     }
 
-    public function getHomeworkForStudent(School $school, Classroom $classroom, Request $request)
+    public function getHomeworkForStudent(School $school, Classroom $class, Request $request)
     {
         // This parameter controls whether we should show all the homeworks or only the unsubmitted ones.
         $shouldShowAll = $request->query('all');
 
         if ($shouldShowAll) {
-            $homeworks = Homework::where('class_id', $classroom->id)->get();
+            $homeworks = Homework::where('class_id', $class->id)->get();
         } else {
-            /** @var User|null $currentUser */
+            /** @var User $currentUser */
             $currentUser = $request->user();
-            if ($currentUser == null) {
-                return redirect('welcome');
-            }
-
             $studentEntity = Student::where('user_id', $currentUser->id)->first();
             if ($studentEntity == null) {
                 return redirect('welcome');
@@ -226,11 +232,11 @@ class HomeworkController extends Controller
         }
         unset($homework);
 
-        return view('dashboard.school.class.homework.student_index', compact('homeworks', 'school', 'classroom', 'shouldShowAll'));
+        return view('dashboard.school.class.homework.student_index', compact('homeworks', 'school', 'class', 'shouldShowAll'));
 
     }
 
-    public function submitHomework(School $school, Classroom $classroom, Subject $subject, Homework $homework, Request $request)
+    public function submitHomework(School $school, Classroom $class, Subject $subject, Homework $homework, Request $request)
     {
         $currentUser = $request->user();
         $studentEntity = Student::where('user_id', $currentUser->id)->first();
@@ -257,11 +263,11 @@ class HomeworkController extends Controller
         }
         $uploadedUrls = json_encode($uploadedUrls);
 
-        return view('dashboard.school.class.homework.submit', compact('school', 'classroom', 'homework', 'subject', 'mimeTypes', 'uploadedUrls'));
+        return view('dashboard.school.class.homework.submit', compact('school', 'class', 'homework', 'subject', 'mimeTypes', 'uploadedUrls'));
 
     }
 
-    public function turnIn(School $school, Classroom $classroom, Subject $subject, Homework $homework, SubmitHomeworkRequest $request)
+    public function turnIn(School $school, Classroom $class, Subject $subject, Homework $homework, SubmitHomeworkRequest $request)
     {
 
         /**
@@ -274,7 +280,7 @@ class HomeworkController extends Controller
         $file = $request->file('file');
         if ($file == null) {
             return redirect()
-                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                 ->withErrors(__("Te rugăm să te asiguri că ai încărcat fișierele și să încerci din nou."));
         }
         $fileName = $file->getClientOriginalName();
@@ -308,7 +314,7 @@ class HomeworkController extends Controller
         } catch (\Exception $e) {
             // TODO: Log
             return redirect()
-                ->route('homework.show_all', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id])
+                ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
                 ->withErrors("A apărut o eroare la încărcarea temei. Promitem că ne vom ocupa de ea și revenim!")
                 ->withInput();
         }
@@ -317,7 +323,7 @@ class HomeworkController extends Controller
 
     }
 
-    public function deleteFileFromSubmission(School $school, Classroom $classroom, Subject $subject, Homework $homework, DeleteFileFromSubmission $request)
+    public function deleteFileFromSubmission(School $school, Classroom $class, Subject $subject, Homework $homework, DeleteFileFromSubmission $request)
     {
         $currentValues = json_decode($request->submission->uploaded_urls, true);
         $valueToDelete = $request->file_name;
@@ -325,7 +331,7 @@ class HomeworkController extends Controller
         // Verify that the file exists
         if (!array_key_exists($valueToDelete, $currentValues)) {
             return redirect()
-                ->route('homework.sunmit', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $subject->id, 'homework' => $homework->id])
+                ->route('homework.sunmit', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id])
                 ->withErrors("Fișierul care a fost speicifcat nu există.");
         }
 

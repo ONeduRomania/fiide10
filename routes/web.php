@@ -83,16 +83,11 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //endregion
 
         //region Rutele de teme
-        Route::get('/{school}/classes/{classroom}/homework', [HomeworkController::class, 'getHomeworkForStudent'])->name('homework.show_student_homework');
-        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'getHomeworkForSubject'])->name('homework.show_all');
-        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework', [HomeworkController::class, 'createHomeworkForSubject'])->name('homework.create');
-        Route::delete('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'deleteHomework'])->name('homework.delete');
-        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'checkHomework'])->name('homework.check');
-        Route::match(['PUT', 'PATCH'], '/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}', [HomeworkController::class, 'updateHomework'])->name('homework.update');
-        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submissions/{submission}/download', [HomeworkController::class, 'downloadHomeworkFiles'])->name('homework.download_submission');
-        Route::get('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'submitHomework'])->name('homework.submit_get');
-        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'turnIn'])->name('homework.submit_post');
-        Route::post('/{school}/classes/{classroom}/subjects/{subject}/homework/{homework}/submit/delete', [HomeworkController::class, 'deleteFileFromSubmission'])->name('homework.submit_delete_file');
+        Route::resource('/{school}/classes/{class}/subjects/{subject}/homework', HomeworkController::class);
+        Route::get('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submissions/{submission}/download', [HomeworkController::class, 'downloadHomeworkFiles'])->name('homework.download_submission');
+        Route::get('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'submitHomework'])->name('homework.submit_get');
+        Route::post('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'turnIn'])->name('homework.submit_post');
+        Route::post('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submit/delete', [HomeworkController::class, 'deleteFileFromSubmission'])->name('homework.submit_delete_file');
         //endregion
     });
 });
