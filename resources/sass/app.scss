@@ -10,9 +10,6 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
-// another
-@import '~gemini-datepicker/dist/css/jquery.datepicker.min.css';
-
 // Dropzone
 @import '~dropzone/dist/min/dropzone.min.css';
 
@@ -183,5 +180,13 @@ html, body, #app, #app > .row {
     font-weight: bold;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+//#endregion
+
+//#region Student log
+.student-mark {
+    border: black 1px solid;
+    padding: 5px;
+    margin: 2px;
 }
 //#endregion

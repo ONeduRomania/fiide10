@@ -22,38 +22,6 @@ clipboard.on('success', function(e) {
     e.clearSelection();
 });
 
-// Datetime picker script
-require('gemini-datepicker');
-$('#date').datepicker({
-    type: 'date',
-    placeholder: 'Please enter the date',
-    align: 'center'
-});
-$('#date_absence').datepicker({
-    type: 'date',
-    placeholder: 'Please enter the date',
-    align: 'center'
-});
-$('#date_start').datepicker({
-    type: 'datetime',
-    placeholder: 'Please enter the date',
-    align: 'center',
-    format: 'yyyy-MM-ddTHH:mm', // Satisfy browser formatting requirements
-});
-$('#date_end').datepicker({
-    type: 'datetime',
-    placeholder: 'Please enter the date',
-    align: 'center',
-    format: 'yyyy-MM-ddTHH:mm', // Satisfy browser formatting requirements
-});
-$('#due_date').datepicker({
-    type: 'datetime',
-    placeholder: 'Please enter the date',
-    align: 'left', // Setting a center alignment breaks the edit page.
-    format: 'yyyy-MM-ddTHH:mm', // Satisfy browser formatting requirements
-    startDate: new Date()
-});
-
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
