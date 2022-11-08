@@ -35,11 +35,15 @@ class HomeworkController extends Controller
 
     }
 
-    public function create(School $school, Classroom $class, Subject $subject, Request $request)
+    public function create(School $school, Classroom $class, Subject $subject)
     {
-        $filetypes = [];
-        return view('dashboard.school.class.homework.new', compact('school', 'class', 'filetypes', 'subject'));
+        return view('dashboard.school.class.homework.new', compact('school', 'class', 'subject'));
+    }
 
+    public function edit(School $school, Classroom $class, Subject $subject, Homework $homework)
+    {
+        $filetypes = json_decode($homework->filetypes ?? '[]', true);
+        return view('dashboard.school.class.homework.edit', compact('school', 'class', 'subject', 'homework', 'filetypes'));
     }
 
     public function store(School $school, Classroom $class, Subject $subject, StoreHomeworkRequest $request): RedirectResponse
@@ -58,7 +62,7 @@ class HomeworkController extends Controller
             $homework->due_date = $request->due_date;
             $homework->name = $request->name;
 
-            $formats = $this->populateFormatArray($request, []);
+            $formats = $this->populateFormatArray($request);
             $homework->filetypes = json_encode($formats);
             $homework->save();
 
@@ -99,9 +103,7 @@ class HomeworkController extends Controller
                 $homework->name = $request->name;
             }
 
-            $formats = json_decode($homework->filetypes, true);
-            $formats = $this->populateFormatArray($request, $formats);
-
+            $formats = $this->populateFormatArray($request);
             $homework->filetypes = json_encode($formats);
 
             $homework->save();
@@ -348,12 +350,12 @@ class HomeworkController extends Controller
 
     /**
      * @param StoreHomeworkRequest $request
-     * @param array $formats
-     * @return mixed
+     * @return array|string[]
      * @throws \Exception
      */
-    public function populateFormatArray(StoreHomeworkRequest $request, array $formats)
+    public function populateFormatArray(StoreHomeworkRequest $request): array
     {
+        $formats = [];
         if ($request->accept_word_upload === "on") {
             $formats = array_merge($formats, ["doc", "docx", "odt"]);
         }
