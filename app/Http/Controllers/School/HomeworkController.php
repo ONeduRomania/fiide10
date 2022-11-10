@@ -149,12 +149,10 @@ class HomeworkController extends Controller
         ]);
     }
 
-    public function show(School $school, Classroom $class, Subject $subject, Homework $homework)
+    public function show(School $school, Classroom $class, Subject $subject, Homework $homework, Request $request)
     {
-        $submissions = SubmittedHomework::with('student')->where('homework_id', '==', $homework->id)->get();
-        foreach ($submissions as $submission) {
-            $submission->student = Student::whereId($submission->student_id)->first();
-        }
+        $current_page = $request->get('page', '1');
+        $submissions = SubmittedHomework::with('student')->where('homework_id', '==', $homework->id)->paginate(self::PER_PAGE, $current_page);
         return view('dashboard.school.class.homework.show', compact('school', 'class', 'homework', 'subject', 'submissions'));
     }
 

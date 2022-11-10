@@ -1,71 +1,49 @@
-@extends('layouts.dashboard')
+@extends('dashboard.admin.schools.show')
 
-@section('content')
-    <div class="section-info d-flex align-items-center my-5">
+@section('pageName')
+    {{$homework->name}}
+@endsection
+
+@section('subcontent')
+    <div class="section-info">
         <div class="container-fluid">
-            <x-alert></x-alert>
-            <div class="container">
-                <h5> Tema: {{ $homework->name }}</h5>
-                <p class="text-muted">De aici poți edita detaliile temei.</p>
-
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="card shadow-lg">
-                            <div class="card-body">
-                                <form method="POST"
-                                      action="{{ route('homework.update', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}">
-                                    @csrf
-                                    @method('PATCH')
-                                    <x-homework-form :homework="$homework"></x-homework-form>
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-gray">Editează</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr class="my-3"/>
-                <div class="row">
-                    <div class="col-12">
-                        <h5>Verifică temele trimise</h5>
-                        <p class="text-muted">De aici poți vedea temele trimise de elevi până în prezent. Temele marcate
-                            cu roșu au fost trimise după data limită.</p>
-
-                        @foreach($submissions as $submittedHomework)
-                            <div class="card shadow-lg my-1">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>
-                                        @if ($submittedHomework->student != null)
-                                            {{ $submittedHomework->student->user->name }}
-                                        @endif
-                                        <br/>
-                                        <small class="text-muted">Data trimiterii:
-                                            <strong
-                                                style="{{ strtotime($submittedHomework->created_at) > strtotime($homework->due_date) ? "color: red" : "" }}">{{ $submittedHomework->created_at }}</strong></small>
-                                        <br/>
-                                        <small
-                                            class="text-muted"><strong>{{ count(json_decode($submittedHomework->uploaded_urls, true)) }}</strong>
-                                            fișiere încărcate</small>
-                                    </div>
-                                    <div>
-                                        <form
+            <x-alert/>
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nume elev</th>
+                        <th>Data trimiterii</th>
+                        <th>Numar de fisiere</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($submissions as $submittedHomework)
+                        <tr>
+                            <!-- TODO: Color red if time is passed -->
+                            <td>{{ $submittedHomework->student?->user?->name ?? "Elev sters" }}</td>
+                            <td>{{ $submittedHomework->created_at }}</td>
+                            <td>{{ count(json_decode($submittedHomework->uploaded_urls, true)) }} }}</td>
+                            <td>
+                            <form
                                             action="{{ route('homework.download_submission', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id, 'submission' => $submittedHomework->id]) }}"
-                                            method="GET" class="d-inline-flex mx-1">
-                                            @csrf
-                                            <button type="submit" class="btn btn-primary">Descarcă</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+                                            method="GET" class="d-inline-flex">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link text-royal">Descarca</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+                {{ $submissions->links() }}
             </div>
         </div>
     </div>
-
     <div id="snackbar">Descărcarea fișierelor va începe în curând...</div>
+
 @endsection
 
 @section('scripts')
@@ -86,4 +64,3 @@
         });
     </script>
 @endsection
-
