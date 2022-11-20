@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UsersStoreRequest;
 use App\Models\Role;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,8 +31,19 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $page = $request->get('page', '1');
+        $type = $request->get('type', '');
 
-        $users = User::allWithCache(Carbon::now()->addMinutes(5), UsersController::PER_PAGE, $page);
+        if ($type === 'teachers') {
+            $users = Teacher::with('user')->get()->map(function (Teacher $t) {
+                return $t->user;
+            });
+        } else if ($type === 'student') {
+            $users = Student::with('user')->get()->map(function (Student $s) {
+                return $s->user;
+            });
+        } else {
+            $users = User::allWithCache(Carbon::now()->addMinutes(5), UsersController::PER_PAGE, $page);
+        }
         $roles = Role::allWithCache();
 
         return view('dashboard.admin.users.index', compact('users', 'roles'));

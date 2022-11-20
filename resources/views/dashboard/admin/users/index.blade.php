@@ -45,7 +45,9 @@
                     </tbody>
                 </table>
 
+                @if(isset($users->links))
                 {{ $users->links() }}
+                @endif
             </div>
         </div>
     </div>

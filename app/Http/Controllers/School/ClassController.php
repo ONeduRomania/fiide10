@@ -5,11 +5,13 @@ namespace App\Http\Controllers\School;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Classroom\StoreClassRequest;
 use App\Models\Classroom;
+use App\Models\Homework;
 use App\Models\Invite;
 use App\Models\Request as InviteRequest;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Timetable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -49,28 +51,35 @@ class ClassController extends Controller
             Invite::create([
                 'school_id' => $school->id,
                 'class_id' => $class->id,
-                'code' => Str::substr(Crypt::encryptString($school->name . 'student'), 0, 127),
-                'action' => 2
+                'code' => Str::substr(Crypt::encryptString($school->name.'student'), 0, 127),
+                'action' => 2,
             ]);
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
 
         return redirect()->route('classes.show', ['class' => $class->id, 'school' => $school->id])->with([
-            'success' => __('Clasa a fost creată cu succes.')
+            'success' => __('Clasa a fost creată cu succes.'),
         ]);
     }
 
     public function destroy(School $school, Classroom $class)
     {
         try {
-            $class->delete();
+            \DB::transaction(function () use ($class) {
+                Invite::whereClassId($class->id)->delete();
+                Homework::with('submitted_homework')->whereClassId($class->id)->delete();
+                Student::whereClassId($class->id)->delete();
+                Timetable::whereClassId($class->id)->delete();
+
+                $class->delete();
+            });
         } catch (\Exception $exception) {
             return redirect()->route('classes.index', $school->id)->withError($exception->getMessage())->withInput();
         }
 
         return redirect()->route('classes.index', $school->id)->with([
-            'success' => __('Clasa a fost ștearsă.')
+            'success' => __('Clasa a fost ștearsă.'),
         ]);
     }
 
@@ -84,16 +93,17 @@ class ClassController extends Controller
 
         $students = Student::allWithCache(Carbon::now()->addMinutes(5), self::PER_PAGE, $current_page, $class->id);
         $requests = InviteRequest::allWithCache(Carbon::now()->addMinutes(5), self::PER_PAGE, $current_req_page, $invite->id);
+
         return view('dashboard.school.class.show', compact('school', 'class', 'teachers', 'invite', 'requests', 'students'));
     }
 
     public function updateCode(School $school, Classroom $class)
     {
         $invite = Invite::where(['school_id' => $school->id, 'class_id' => $class->id, 'action' => 2])->firstOrFail();
-        $invite->update(['code' => Str::substr(Crypt::encryptString($school->name . 'student'), 0, 127)]);
+        $invite->update(['code' => Str::substr(Crypt::encryptString($school->name.'student'), 0, 127)]);
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('Codul a fost reînnoit.')
+            'success' => __('Codul a fost reînnoit.'),
         ]);
     }
 
@@ -106,7 +116,7 @@ class ClassController extends Controller
         }
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('Clasa a fost actualizată cu succes.')
+            'success' => __('Clasa a fost actualizată cu succes.'),
         ]);
     }
 
@@ -119,7 +129,7 @@ class ClassController extends Controller
         }
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('Solicitarea elevului de a se alătura clasei a fost eliminată definitiv.')
+            'success' => __('Solicitarea elevului de a se alătura clasei a fost eliminată definitiv.'),
         ]);
     }
 
@@ -134,18 +144,20 @@ class ClassController extends Controller
         Student::create(['user_id' => $request->user_id, 'class_id' => $class->id]);
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('Felicitări! Ai un nou elev :)')
+            'success' => __('Felicitări! Ai un nou elev :)'),
         ]);
     }
 
-    public function removeStudent(School $school, Classroom $class, Student $student) {
+    public function removeStudent(School $school, Classroom $class, Student $student)
+    {
         try {
             $student->delete();
         } catch (\Exception $exception) {
             return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->withErrors($exception->getMessage())->withInput();
         }
+
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
-            'success' => __('The student has been deleted with success, congrats.')
+            'success' => __('The student has been deleted with success, congrats.'),
         ]);
     }
 }

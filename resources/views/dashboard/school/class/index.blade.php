@@ -7,7 +7,6 @@
 @section('subcontent')
     <div class="section-info">
         <div class="container-fluid">
-            <x-alert/>
             <div class="col">
                 <div class="row d-flex justify-content-center mb-3">
                     <a href="{{ route('classes.create', $school->id) }}" class="btn btn-link text-royal">

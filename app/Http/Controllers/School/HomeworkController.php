@@ -313,10 +313,9 @@ class HomeworkController extends Controller
             $submission->save();
         } catch (\Exception $e) {
             // TODO: Log
-            return redirect()
-                ->route('homework.index', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id])
-                ->withErrors("A apărut o eroare la încărcarea temei. Promitem că ne vom ocupa de ea și revenim!")
-                ->withInput();
+            return \Response::json([
+                'error' => $e->getMessage()
+            ], 500);
         }
 
         return response("ok");
@@ -331,8 +330,8 @@ class HomeworkController extends Controller
         // Verify that the file exists
         if (!array_key_exists($valueToDelete, $currentValues)) {
             return redirect()
-                ->route('homework.sunmit', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id])
-                ->withErrors("Fișierul care a fost speicifcat nu există.");
+                ->route('homework.submit_get', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id])
+                ->withErrors("Fișierul care a fost specificat nu există.");
         }
 
         // Delete the file from storage
@@ -343,7 +342,11 @@ class HomeworkController extends Controller
         $request->submission->uploaded_urls = json_encode($currentValues);
         $request->submission->save();
 
-        return response("ok");
+        return redirect()
+        ->route('homework.submit_get', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id])
+        ->with([
+            'success' => __('Tema a fost ștearsă cu succes.')
+        ]);
     }
 
     /**
