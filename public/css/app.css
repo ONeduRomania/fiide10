@@ -15945,3 +15945,19 @@ html, body, #app, #app > .row {
   padding: 5px;
   margin: 2px;
 }
+
+#breadcrumbs {
+  background-color: transparent;
+}
+
+.breadcrumb {
+  background-color: #00385b;
+}
+
+.breadcrumb-item > a {
+  color: white;
+}
+
+.breadcrumb-item.active {
+  color: #1853db;
+}

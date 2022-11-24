@@ -190,3 +190,18 @@ html, body, #app, #app > .row {
     margin: 2px;
 }
 //#endregion
+
+//region Breadcrumbs
+#breadcrumbs {
+    background-color: transparent;
+}
+.breadcrumb {
+    background-color: $primary;
+}
+.breadcrumb-item > a {
+    color: white;
+}
+.breadcrumb-item.active {
+    color: map-get($theme-colors, royal);
+}
+//endregion

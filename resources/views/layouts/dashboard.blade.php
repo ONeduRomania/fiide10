@@ -44,6 +44,9 @@
                 <h1 id="page-name">@yield('pageName')</h1>
             </div>
             <div class="row">
+                {{ Breadcrumbs::render() }}
+            </div>
+            <div class="row">
                 @yield('content')
             </div>
         </div>

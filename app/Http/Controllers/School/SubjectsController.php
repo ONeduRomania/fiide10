@@ -4,8 +4,11 @@ namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\School\SubjectStoreRequest;
+use App\Models\Log;
 use App\Models\School;
 use App\Models\Subject;
+use App\Models\TeacherSubject;
+use App\Models\Timetable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -62,8 +65,12 @@ class SubjectsController extends Controller
     public function destroy(School $school, Subject $subject)
     {
         try {
-            // TODO: Handle teacher with this subject error
-            $subject->delete();
+            \DB::transaction(function() use ($subject) {
+                $logs = Log::whereSubject($subject)->delete();
+                $timetable = Timetable::whereSubjectId($subject->id)->delete();
+                $ts = TeacherSubject::whereSubjectId($subject->id)->delete();
+                $subject->delete();
+            });
         } catch (\Exception $exception) {
             return redirect()->route('subjects.index', $school->id)->withError($exception->getMessage())->withInput();
         }
