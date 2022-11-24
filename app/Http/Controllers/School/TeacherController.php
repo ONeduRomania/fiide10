@@ -32,7 +32,11 @@ class TeacherController extends Controller
 
     public function destroy(School $school, Teacher $teacher) {
         try {
-            $teacher->delete();
+            \DB::transaction(function() use ($teacher) {
+                $teacher->user->removeRole('teacher');
+                $teacher->delete();
+            });
+
         } catch(\Exception $exception) {
             return redirect()->route('teachers.index', $school->id)->withError($exception->getMessage())->withInput();
         }
@@ -93,12 +97,14 @@ class TeacherController extends Controller
 
     public function acceptRequest(School $school, InviteRequest $request) {
         try {
-            $request->delete();
+            \DB::transaction(function() use ($request, $school) {
+                $request->delete();
+                $request->user->assignRole('teacher');
+                Teacher::create(['user_id' => $request->user_id, 'school_id' => $school->id]);
+            });
         } catch (\Exception $exception) {
             return redirect()->route('teachers.index', $school->id)->withError($exception->getMessage())->withInput();
         }
-
-        Teacher::create(['user_id' => $request->user_id, 'school_id' => $school->id]);
 
         return redirect()->route('teachers.index',  $school->id)->with([
             'success' => __('Felicitări! Un nou profesor s-a alăturat școlii.')

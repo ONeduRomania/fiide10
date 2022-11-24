@@ -13,7 +13,7 @@
                         <div>
 
                         </div>
-                        <form action="{{ route('homework.show_student_homework', ['school' => $school->id, 'classroom' => $classroom->id]) }}">
+                        <form action="{{ route('homework.show_student_homework', ['school' => $school->id, 'class' => $class->id]) }}">
                             @if (!$shouldShowAll)
                                 <input type="hidden" name="all" value="1" />
                             @endif
@@ -45,7 +45,7 @@
                                         <small class="text-muted">Materie: <strong>{{ $homework->subject->name }}</strong></small>
                                     </div>
                                     <div>
-                                        <a class="btn btn-primary" href="{{ route('homework.submit_get', ['school' => $school->id, 'classroom' => $classroom->id, 'subject' => $homework->subject->id, 'homework' => $homework->id]) }}">
+                                        <a class="btn btn-primary" href="{{ route('homework.submit_get', ['school' => $school->id, 'class' => $classroom->id, 'subject' => $homework->subject->id, 'homework' => $homework->id]) }}">
                                             Trimite
                                         </a>
                                     </div>

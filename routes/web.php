@@ -71,6 +71,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //region Rutele de a putea adauga profesori si de a selecta o materie
         Route::match(['PUT', 'PATCH'], '/{school}/teachers/renew', 'TeacherController@updateCode')->name('teachers.renew');
         Route::match(['PUT', 'PATCH'], '/{school}/teachers/{request}/request', 'TeacherController@acceptRequest')->name('teachers.acceptrequest');
+        Route::delete('/{school}/teachers/{request}/request', 'TeacherController@removeRequest')->name('teachers.removerequest');
         Route::resource('/{school}/teachers', TeacherController::class);
         //endregion
 
@@ -83,11 +84,12 @@ Route::middleware(['verified', 'auth'])->group(function () {
         //endregion
 
         //region Rutele de teme
-        Route::resource('/{school}/classes/{class}/subjects/{subject}/homework', HomeworkController::class);
         Route::get('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submissions/{submission}/download', [HomeworkController::class, 'downloadHomeworkFiles'])->name('homework.download_submission');
+        Route::get('/{school}/classes/{class}/homework/current', [HomeworkController::class, 'getHomeworkForStudent'])->name('homework.show_student_homework');
         Route::get('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'submitHomework'])->name('homework.submit_get');
         Route::post('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submit', [HomeworkController::class, 'turnIn'])->name('homework.submit_post');
         Route::post('/{school}/classes/{class}/subjects/{subject}/homework/{homework}/submit/delete', [HomeworkController::class, 'deleteFileFromSubmission'])->name('homework.submit_delete_file');
+        Route::resource('/{school}/classes/{class}/subjects/{subject}/homework', HomeworkController::class);
         //endregion
     });
 });

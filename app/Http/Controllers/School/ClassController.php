@@ -142,6 +142,7 @@ class ClassController extends Controller
         }
 
         Student::create(['user_id' => $request->user_id, 'class_id' => $class->id]);
+        $request->user->assignRole('student');
 
         return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->with([
             'success' => __('Felicitări! Ai un nou elev :)'),
@@ -151,6 +152,7 @@ class ClassController extends Controller
     public function removeStudent(School $school, Classroom $class, Student $student)
     {
         try {
+            $student->user->removeRole('student');
             $student->delete();
         } catch (\Exception $exception) {
             return redirect()->route('classes.show', ['school' => $school->id, 'class' => $class->id])->withErrors($exception->getMessage())->withInput();
