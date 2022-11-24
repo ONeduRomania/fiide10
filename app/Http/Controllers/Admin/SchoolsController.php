@@ -82,11 +82,11 @@ class SchoolsController extends Controller
      * The page to show the user's details
      *
      * @param School $school
-     * @return Application|Factory|View
+     * @return RedirectResponse
      */
     public function show(School $school)
     {
-        return view('dashboard.admin.schools.show', compact('school'));
+        return \Redirect::route('classes.index', ['school' => $school]);
     }
 
     /**

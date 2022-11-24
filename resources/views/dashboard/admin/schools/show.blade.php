@@ -12,22 +12,20 @@
         <div class="container-fluid">
             <x-alert/>
             <div class="col">
-                {{--                <div class="row">--}}
                 <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link @menuInactive('classes.index', 'text-royal') @menuActive('classes.index', 'active')"
+                        <a class="nav-link @menuInactive('classes', 'text-royal') @menuActive('classes', 'active')"
                            href="{{ route('classes.index', $school->id) }}">Clase</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @menuInactive('teachers.index', 'text-royal') @menuActive('teachers.index', 'active')"
+                        <a class="nav-link @menuInactive('teachers', 'text-royal') @menuActive('teachers', 'active')"
                            href="{{ route('teachers.index', $school->id) }}">Profesori</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @menuInactive('subjects.index', 'text-royal') @menuActive('subjects.index', 'active')"
+                        <a class="nav-link @menuInactive('subjects', 'text-royal') @menuActive('subjects', 'active')"
                            href="{{ route('subjects.index', $school->id) }}">Materii</a>
                     </li>
                 </ul>
-                {{--                </div>--}}
                 @yield('subcontent')
             </div>
         </div>

@@ -2,6 +2,9 @@
 
 @section('pageName')
     {{$school->name}} - {{__('Clase')}}
+    <span><a href="{{ route('schools.edit', $school->id) }}" class="btn btn-link">
+                    {{__("Editează")}}
+                </a></span>
 @endsection
 
 @section('subcontent')

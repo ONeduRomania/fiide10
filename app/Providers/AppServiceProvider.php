@@ -20,18 +20,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Blade::directive('menuActive',function($expression) {
-            //explode the '$expression' string to the varibles needed
+        Blade::directive('menuActive', function ($expression) {
+            //explode the '$expression' string to the variables needed
             list($route, $class) = explode(', ', $expression);
             //then we check if the route is the same as the one we are passing.
-            return "{{ request()->routeIs({$route}) ? {$class} : '' }}";
+            return "{{ str_contains(request()->route()->getName(), $route) ? {$class} : '' }}";
         });
 
-        Blade::directive('menuInactive',function($expression) {
-            //explode the '$expression' string to the varibles needed
+        Blade::directive('menuInactive', function ($expression) {
+            //explode the '$expression' string to the variables needed
             list($route, $class) = explode(', ', $expression);
             //then we check if the route is the same as the one we are passing.
-            return "{{ !request()->routeIs({$route}) ? {$class} : '' }}";
+            return "{{ !str_contains(request()->route()->getName(), $route) ? {$class} : '' }}";
         });
     }
 
