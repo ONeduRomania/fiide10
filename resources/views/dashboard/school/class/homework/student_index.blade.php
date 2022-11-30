@@ -1,23 +1,20 @@
-@extends('layouts.dashboard')
+@extends('dashboard.admin.schools.show')
 
-@section('content')
-    <div class="section-info d-flex align-items-center my-5">
+@section('pageName')
+    {{__('Teme')}}
+@endsection
+
+@section('subcontent')
+
+    <div class="section-info">
         <div class="container-fluid">
-            <x-alert></x-alert>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 text-center">
-                        <h5>Vezi temele tale</h5>
-                        <p class="text-muted">De aici poți vedea ce teme ai primit.</p>
-                        <div>
-
-                        </div>
+            <div class="col">
+                <div class="row d-flex justify-content-center mb-3">
                         <form action="{{ route('homework.show_student_homework', ['school' => $school->id, 'class' => $class->id]) }}">
                             @if (!$shouldShowAll)
                                 <input type="hidden" name="all" value="1" />
                             @endif
-                            <button type="submit" class="btn btn-block btn-royal">
+                            <button type="submit" class="btn btn-link text-royal">
                                 @if($shouldShowAll)
                                     Vezi doar temele noi
                                 @else
@@ -26,34 +23,32 @@
                                 <i class="fas fa-swatchbook"></i>
                             </button>
                         </form>
-
-                    </div>
                 </div>
-
-                <hr class="my-3"/>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        @foreach ($homeworks as $homework)
-                            <div class="card shadow-lg my-1">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>
-                                        {{ $homework->name }}
-                                        <br/>
-                                        <small class="text-muted">Dată limită:
-                                            <strong style="{{ !$shouldShowAll && strtotime('now') > strtotime($homework->due_date) ? "color: red" : "" }}">{{ $homework->due_date  }}</strong></small>
-                                        <br/>
-                                        <small class="text-muted">Materie: <strong>{{ $homework->subject->name }}</strong></small>
-                                    </div>
-                                    <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nume</th>
+                        <th>Dată limită</th>
+                        <th>Materie</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($homeworks as $homework)
+                        <tr>
+                            <td>{{ $homework->name }}</td>
+                            <td style="{{ !$shouldShowAll && strtotime('now') > strtotime($homework->due_date) ? "color: red" : "" }}">{{ $homework->due_date }}</td>
+                            <td>{{ $homework->subject->name }}</td>
+                            <td>
                                         <a class="btn btn-primary" href="{{ route('homework.submit_get', ['school' => $school->id, 'class' => $classroom->id, 'subject' => $homework->subject->id, 'homework' => $homework->id]) }}">
                                             Trimite
                                         </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

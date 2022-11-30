@@ -37,8 +37,9 @@
                     @endforeach
                     </tbody>
                 </table>
-
-                {{ $subjects->links() }}
+                @isset($subjects->links)
+                    {{ $subjects->links() }}
+                @endisset
             </div>
         </div>
     </div>

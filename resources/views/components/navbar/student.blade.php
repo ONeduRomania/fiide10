@@ -9,4 +9,8 @@
        href="{{ route('timetable.index', ['school' => $schoolId, 'class' => $classId]) }}">{{ __('Orar') }}</a>
 
     <a class="nav-item nav-link" href="https://onedu.ro/voluntariaza">{{ __('Voluntariat') }}</a>
+
+    <form method="POST" action="{{ route('logout') }}">
+        <a onclick="this.parentNode.submit()" class="nav-item nav-link">{{ __('Deconectare') }}</a>
+    </form>
 </div>

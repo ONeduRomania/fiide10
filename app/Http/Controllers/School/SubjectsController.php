@@ -7,6 +7,7 @@ use App\Http\Requests\School\SubjectStoreRequest;
 use App\Models\Log;
 use App\Models\School;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\TeacherSubject;
 use App\Models\Timetable;
 use Carbon\Carbon;
@@ -18,12 +19,28 @@ class SubjectsController extends Controller
     public const DELETED_PER_PAGE = 10;
 
     public function index(School $school, Request $request) {
-        $subjects = Subject::allWithCache(
-            Carbon::now()->addMinutes(5),
-            SubjectsController::PER_PAGE,
-            $request->get('page', '1'),
-            $school->id
-        );
+
+        /** @var User $current_user */
+        $current_user = $request->user();
+        if ($current_user->hasRole("admin")) {
+            $subjects = Subject::allWithCache(
+                Carbon::now()->addMinutes(5),
+                SubjectsController::PER_PAGE,
+                $request->get('page', '1'),
+                $school->id
+            );
+        } else if ($current_user->hasRole("teacher")) {
+            /** @var Teacher $teacher */ 
+            $teacher = Teacher::with('subjects')->whereUserId($current_user->id)->first();
+            if(null == $teacher) {
+                return redirect('welcome')->withErrors("Pagina nu a putut fi găsită");
+            }
+            $subjects = $teacher->subjects()->get();
+        } else {
+            // TODO: Translate
+            // Redirect the user if they don't have permissions to see all subjects.
+            return redirect('welcome')->withErrors("Pagina nu a putut fi găsită");
+        }
 
         return view('dashboard.school.subject.index', compact('school', 'subjects'));
     }

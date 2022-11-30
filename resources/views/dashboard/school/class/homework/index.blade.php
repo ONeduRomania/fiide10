@@ -31,7 +31,7 @@
                             <td>{{ $homework->submissions_count }}</td>
                             <td>
                                 <form
-                                    action="{{ route('classes.destroy', ['school' => $school->id, 'class' => $class->id]) }}"
+                                    action="{{ route('homework.destroy', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}]) }}"
                                     method="POST"
                                     class="d-inline-flex">
                                     @csrf
