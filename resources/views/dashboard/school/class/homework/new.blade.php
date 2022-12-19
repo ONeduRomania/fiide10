@@ -8,8 +8,22 @@
     <div class="container-fluid">
         <div class="col">
             <form method="POST"
-                  action="{{ route('homework.store', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id]) }}">
+                  action="{{ route('homework.store', ['school' => $school->id, 'class' => $class->id]) }}">
                 @csrf
+                <div class="form-group">
+                    <label for="subject" class="text-md-left">Selctează materia:</label>
+                    <select id="subject" name="subject"
+                            class="form-control @error('subject') is-invalid @enderror" required autofocus>
+                        @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('subject')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
                 <div class="form-group">
                     <label for="name" class="text-md-left">Introdu un nume sugestiv pentru temă:</label>
 

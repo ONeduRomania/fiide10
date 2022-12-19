@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="col">
                 <div class="row d-flex justify-content-center mb-3">
-                    <a href="{{ route('homework.create', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id]) }}"
+                    <a href="{{ route('homework.create', ['school' => $school->id, 'class' => $class->id]) }}"
                        class="btn btn-link text-royal">
                         {{__("Creează o temă nouă")}} <i class="fas fa-plus"></i>
                     </a>
@@ -31,7 +31,7 @@
                             <td>{{ $homework->submissions_count }}</td>
                             <td>
                                 <form
-                                    action="{{ route('homework.destroy', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}]) }}"
+                                    action="{{ route('homework.destroy', ['school' => $school->id, 'class' => $class->id, 'homework' => $homework->id]) }}]) }}"
                                     method="POST"
                                     class="d-inline-flex">
                                     @csrf
@@ -39,9 +39,9 @@
                                     <button type="submit" class="btn btn-link text-danger">Șterge</button>
                                 </form>
                                 <a class="btn btn-link text-royal"
-                                   href="{{ route('homework.edit', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}">Editează</a>
+                                   href="{{ route('homework.edit', ['school' => $school->id, 'class' => $class->id, 'homework' => $homework->id]) }}">Editează</a>
                                 <a class="btn btn-link text-royal"
-                                   href="{{ route('homework.show', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}">Vezi
+                                   href="{{ route('homework.show', ['school' => $school->id, 'class' => $class->id, 'homework' => $homework->id]) }}">Vezi
                                     teme</a>
                             </td>
                         </tr>

@@ -26,21 +26,14 @@ class ClassController extends Controller
     {
         /** @var User $current_user */
         $current_user = $request->user();
-        if ($current_user->hasRole("admin")) {
+        if ($current_user->hasRole('admin') || $current_user->hasRole('teacher')) {
             $current_page = $request->get('page', '1');
             $classes = Classroom::allWithCache(Carbon::now()->addMinutes(5), self::PER_PAGE, $current_page, $school->id);
             $teachers = Teacher::with('user')->where(['school_id' => $school->id])->get();
-        } else if ($current_user->hasRole("teacher")) {
-            $teacher = Teacher::whereUserId($current_user->id)->first();
-            if(null == $teacher) {
-                return redirect('welcome')->withErrors("Pagina nu a putut fi găsită");
-            }
-            $classes = Classroom::whereMasterTeacher($teacher->id)->get();
-            $teachers = [$teacher];
         } else {
             // TODO: Translate
             // Redirect the user if they don't have permissions to see all classes.
-            return redirect('welcome')->withErrors("Pagina nu a putut fi găsită");
+            return redirect('welcome')->withErrors('Pagina nu a putut fi găsită');
         }
 
         return view('dashboard.school.class.index', compact('classes', 'school', 'teachers'));

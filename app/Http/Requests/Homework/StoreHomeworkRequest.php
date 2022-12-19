@@ -7,8 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class StoreHomeworkRequest
- * @package App\Http\Requests\Homework
+ * Class StoreHomeworkRequest.
  *
  * @property string $name
  * @property string $due_date
@@ -22,8 +21,6 @@ class StoreHomeworkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -32,20 +29,19 @@ class StoreHomeworkRequest extends FormRequest
 
         /** @var User $currentUser */
         $currentUser = $this->user();
-        $isTeacher = Teacher::query()->where('user_id', $currentUser->id)->exists();
-        return $isTeacher;
+
+        return Teacher::query()->where('user_id', $currentUser->id)->exists();
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
             'name' => ['required', 'string'],
-            'due_date' => ['required', 'date', 'after_or_equal:today']
+            'due_date' => ['required', 'date', 'after_or_equal:today'],
+            'subject' => ['required', 'numeric', 'exists:subjects,id'],
         ];
     }
 }

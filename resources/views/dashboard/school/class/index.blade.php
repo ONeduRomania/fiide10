@@ -37,7 +37,9 @@
                                                                                                                                         <button type="submit" class="btn btn-link text-danger">Șterge</button>
                                         </form>
                                         <a class="btn btn-link text-royal" href="{{ route('classes.show', ['school' => $school->id, 'class' => $class->id]) }}">Vezi
-                                            detalii</a>
+                                            elevi</a>
+                                            <a class="btn btn-link text-royal" href="{{ route('homework.index', ['school' => $school->id, 'class' => $class->id]) }}">Vezi
+                                                teme</a>
                                     </td>
                                 </tr>
                             @endforeach

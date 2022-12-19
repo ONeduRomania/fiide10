@@ -7,38 +7,49 @@ use App\Http\Requests\Timetable\StoreTimetableRequest;
 use App\Models\Classroom;
 use App\Models\School;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\Timetable;
 use Illuminate\Support\Facades\Response;
 
 class TimetableController extends Controller
 {
-    public function index(School $school, Classroom $class) {
-        $timetables = Timetable::with('subjects')->where('class_id', $class->id)->orderBy('id', 'DESC')->get();
+    public function index(School $school, Classroom $class)
+    {
+        $timetables = Timetable::with('subjects')->with('teacher')->where('class_id', $class->id)->orderBy('id', 'DESC')->get();
         $subjects = Subject::where('school_id', $school->id)->get();
+        $teachers = Teacher::with('user')->where('school_id', $school->id)->get();
 
-        return view('dashboard.school.class.timetable.index', compact('school', 'class', 'timetables', 'subjects'));
+        return view('dashboard.school.class.timetable.index', compact('school', 'class', 'timetables', 'subjects', 'teachers'));
     }
 
-    public function show(School $school, Classroom $class, Timetable $timetable) {
+    public function show(School $school, Classroom $class, Timetable $timetable)
+    {
         $subjects = Subject::where('school_id', $school->id)->get();
+        $teachers = Teacher::with('user')->where('school_id', $school->id)->get();
 
-        return view('dashboard.school.class.timetable.show', compact('school', 'class', 'timetable', 'subjects'));
+        return view('dashboard.school.class.timetable.show', compact('school', 'class', 'timetable', 'subjects', 'teachers'));
     }
 
-    public function store(School $school, Classroom $class, StoreTimetableRequest $request) {
+    public function store(School $school, Classroom $class, StoreTimetableRequest $request)
+    {
         try {
             $timetable = Timetable::create([
                 'class_id' => $class->id,
                 'subject_id' => $request->subject,
-                'data' => json_encode(['startTime' => $request->date_start, 'endTime' => $request->date_end])
+                'teacher_id' => $request->teacher_id,
+                'data' => json_encode(['startTime' => $request->date_start, 'endTime' => $request->date_end]),
             ]);
+
             return Response::json($timetable);
         } catch (\Exception $exception) {
-            return Response::noContent(500);
+            return Response::json([
+                'error' => $exception->getMessage(),
+            ], 500);
         }
     }
 
-    public function update(School $school, Classroom $class, Timetable $timetable, StoreTimetableRequest $request) {
+    public function update(School $school, Classroom $class, Timetable $timetable, StoreTimetableRequest $request)
+    {
         try {
             $timetable->update([
                 'subject_id' => $request->subject,
@@ -51,14 +62,16 @@ class TimetableController extends Controller
         return Response::noContent();
     }
 
-    public function destroy(School $school, Classroom $class, Timetable $timetable) {
+    public function destroy(School $school, Classroom $class, Timetable $timetable)
+    {
         try {
             $timetable->delete();
         } catch (\Exception $exception) {
             return redirect()
                 ->route('timetable.show', ['school' => $school->id, 'class' => $class->id])
                 ->withErrors($exception->getMessage())
-                ->withInput();
+                ->withInput()
+            ;
         }
 
         return Response::noContent();

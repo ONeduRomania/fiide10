@@ -27,7 +27,7 @@
                             <td>{{ count(json_decode($submittedHomework->uploaded_urls, true)) }} }}</td>
                             <td>
                             <form
-                                            action="{{ route('homework.download_submission', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id, 'submission' => $submittedHomework->id]) }}"
+                                            action="{{ route('homework.download_submission', ['school' => $school->id, 'class' => $class->id, 'homework' => $homework->id, 'submission' => $submittedHomework->id]) }}"
                                             method="GET" class="d-inline-flex">
                                     @csrf
                                     <button type="submit" class="btn btn-link text-royal">Descarca</button>

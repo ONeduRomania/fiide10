@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="col">
             <form method="POST"
-                  action="{{ route('homework.update', ['school' => $school->id, 'class' => $class->id, 'subject' => $subject->id, 'homework' => $homework->id]) }}">
+                  action="{{ route('homework.update', ['school' => $school->id, 'class' => $class->id, 'homework' => $homework->id]) }}">
                 @csrf
                 @method('patch')
                 <div class="form-group">

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Requests\Timetable;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -28,6 +27,7 @@ class StoreTimetableRequest extends FormRequest
         return [
             'subject' => ['required', 'numeric', 'exists:subjects,id'],
             'class_id' => ['required', 'numeric', 'exists:classrooms,id'],
+            'teacher_id' => ['required', 'numeric', 'exists:teachers,id'],
         ];
     }
 
