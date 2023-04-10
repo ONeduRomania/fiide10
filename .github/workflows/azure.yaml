@@ -12,19 +12,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.1"
       - name: Check if composer.json exists
         id: check_files
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@v2
         with:
           files: "composer.json"
       - name: Cache dependencies
         if: steps.check_files.outputs.files_exists == 'true'
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ~/.composer/cache/files
           key: dependencies-composer-${{ hashFiles('composer.json') }}
@@ -35,11 +35,13 @@ jobs:
         run: npm install
       - name: Compile assets
         run: npm run production
+      - name: Archive files
+        run: zip app.zip ./* -r
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: php-app
-          path: .
+          path: app.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,9 +50,11 @@ jobs:
       name: "production"
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: php-app
+      - name: Unzip artifact
+        run: unzip app.zip
       - name: Sign in to Azure
         uses: azure/login@v1
         with:
