@@ -20,8 +20,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckForMaintenanceMode::class,
             \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
             \App\Http\Middleware\TrimStrings::class,
-            \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-            \Mondago\ApplicationInsights\Middleware\TrackRequest::class
+            \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class
     ];
 
     /**
@@ -31,6 +30,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+                \Mondago\ApplicationInsights\Middleware\TrackRequest::class,
                 \App\Http\Middleware\EncryptCookies::class,
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
                 \Illuminate\Session\Middleware\StartSession::class,
@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
+                \Mondago\ApplicationInsights\Middleware\TrackRequest::class,
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
