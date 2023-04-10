@@ -99,6 +99,11 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'app-insights' => [
+            'driver' => 'custom',
+            'via' => Mondago\ApplicationInsights\Logging\CreateApplicationInsightsLogger::class,
+        ],
     ],
 
 ];

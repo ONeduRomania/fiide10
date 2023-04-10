@@ -9,15 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-pdo": "*",
         "ext-zip": "*",
         "diglactic/laravel-breadcrumbs": "^8.0",
-        "fruitcake/laravel-cors": "^v2.2.0",
         "guzzlehttp/guzzle": "^7.5.0",
         "laravel/framework": "^9.0",
         "laravel/socialite": "^v5.5.5",
         "laravel/tinker": "^v2.7.2",
         "laravel/ui": "^v3.4.6",
         "matthewbdaly/laravel-azure-storage": "^2.0",
+        "mondago/laravel-application-insights": "^0.6.0",
         "spatie/laravel-permission": "^5.5.5"
     },
     "require-dev": {
@@ -31,6 +32,16 @@
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.0"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/mondago/ApplicationInsights-PHP"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/mondago/laravel-azure-application-insights"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
