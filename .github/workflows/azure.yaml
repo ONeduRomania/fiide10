@@ -22,9 +22,19 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "composer.json"
+      - name: Cache dependencies
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+      - name: Install NPM dependencies
+        run: npm install
+      - name: Compile assets
+        run: npm run production
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -36,7 +46,6 @@ jobs:
     needs: build
     environment:
       name: "production"
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
