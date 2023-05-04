@@ -4,6 +4,6 @@ Comunitatea ONedu România este o organizație de tineri care construiesc soluț
 
 ## Fii de 10 - Hubul de educație digitală din România
 
--[x] [Despre hubul de Educație Digitală](https://fiide10.ro/despre)
--[x] [Soluțiile din cadrul hubului](https://fiide10.ro/solutii)
--[x] [Devino acționar de fapte bune](https://fiide10.ro/actionar)
+- [x][Despre hubul de Educație Digitală](https://fiide10.ro/despre)
+- [x][Soluțiile din cadrul hubului](https://fiide10.ro/solutii)
+- [x][Devino acționar de fapte bune](https://fiide10.ro/actionar)
